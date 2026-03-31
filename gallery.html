@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,33 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Deco Preda — Full portfolio gallery. Microcement, resin systems, stone carpet across residential, commercial and industrial applications." />
   <title>Gallery — Deco Preda</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="style.css" />
   <style>
-
-    /* ── Gallery page specific ── */
     body { cursor: auto; }
     a, button { cursor: auto; }
-
     .gal-page {
       background: var(--ivory);
       min-height: 100vh;
       padding-top: calc(var(--nav-h) + clamp(40px, 5vw, 64px));
       padding-bottom: var(--s-2xl);
     }
-
-    /* Header */
     .gal-head {
       max-width: var(--max);
       margin-inline: auto;
       padding-inline: var(--gut);
       margin-bottom: clamp(40px, 5vw, 64px);
     }
-
     .gal-back {
       display: inline-flex;
       align-items: center;
@@ -46,9 +37,7 @@
       margin-bottom: clamp(24px, 3vw, 40px);
       transition: color var(--dur-fast), gap var(--dur-mid) var(--ease);
     }
-
     .gal-back:hover { color: var(--ink); gap: 12px; }
-
     .gal-head__title {
       font-family: var(--serif);
       font-weight: 300;
@@ -57,22 +46,14 @@
       color: var(--ink);
       margin-bottom: clamp(24px, 3vw, 36px);
     }
-
-    .gal-head__title em {
-      font-style: italic;
-      color: var(--stone);
-    }
-
-    /* Filter bar */
+    .gal-head__title em { font-style: italic; color: var(--stone); }
     .gal-filters {
       display: flex;
       align-items: center;
       gap: 0;
       flex-wrap: wrap;
       border-bottom: 1px solid var(--sand);
-      padding-bottom: 0;
     }
-
     .gal-filter {
       position: relative;
       padding: 12px 22px;
@@ -87,7 +68,6 @@
       transition: color var(--dur-fast);
       cursor: pointer;
     }
-
     .gal-filter::after {
       content: '';
       position: absolute;
@@ -98,17 +78,9 @@
       background: var(--ink);
       transition: width var(--dur-mid) var(--ease);
     }
-
     .gal-filter:hover { color: var(--ink); }
-
-    .gal-filter.active {
-      color: var(--ink);
-    }
-
-    .gal-filter.active::after {
-      width: 100%;
-    }
-
+    .gal-filter.active { color: var(--ink); }
+    .gal-filter.active::after { width: 100%; }
     .gal-count {
       margin-left: auto;
       font-family: var(--sans);
@@ -118,8 +90,6 @@
       color: var(--stone-l);
       padding: 12px 0;
     }
-
-    /* Grid */
     .gal-grid {
       max-width: var(--max);
       margin-inline: auto;
@@ -128,7 +98,6 @@
       columns: 3;
       column-gap: 3px;
     }
-
     .gal-item {
       break-inside: avoid;
       margin-bottom: 3px;
@@ -136,22 +105,14 @@
       overflow: hidden;
       cursor: pointer;
     }
-
-    .gal-item[data-hidden="true"] {
-      display: none;
-    }
-
+    .gal-item[data-hidden="true"] { display: none; }
     .gal-swatch {
       display: block;
       width: 100%;
+      height: auto;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     }
-
-    .gal-item:hover .gal-swatch {
-      transform: scale(1.04);
-    }
-
-    /* Overlay on hover */
+    .gal-item:hover .gal-swatch { transform: scale(1.04); }
     .gal-item__over {
       position: absolute;
       inset: 0;
@@ -162,11 +123,7 @@
       padding: 20px;
       transition: background var(--dur-mid) var(--ease);
     }
-
-    .gal-item:hover .gal-item__over {
-      background: rgba(15, 14, 12, 0.42);
-    }
-
+    .gal-item:hover .gal-item__over { background: rgba(15, 14, 12, 0.42); }
     .gal-item__name {
       font-family: var(--sans);
       font-weight: 300;
@@ -175,10 +132,8 @@
       text-transform: uppercase;
       color: rgba(246, 243, 238, 0);
       transform: translateY(8px);
-      transition: color var(--dur-mid) var(--ease),
-                  transform var(--dur-mid) var(--ease);
+      transition: color var(--dur-mid) var(--ease), transform var(--dur-mid) var(--ease);
     }
-
     .gal-item__mat {
       font-family: var(--sans);
       font-weight: 200;
@@ -187,22 +142,11 @@
       text-transform: uppercase;
       color: rgba(183, 174, 163, 0);
       transform: translateY(8px);
-      transition: color var(--dur-mid) var(--ease) 0.05s,
-                  transform var(--dur-mid) var(--ease) 0.05s;
+      transition: color var(--dur-mid) var(--ease) 0.05s, transform var(--dur-mid) var(--ease) 0.05s;
       margin-top: 4px;
     }
-
-    .gal-item:hover .gal-item__name {
-      color: rgba(246, 243, 238, 0.95);
-      transform: translateY(0);
-    }
-
-    .gal-item:hover .gal-item__mat {
-      color: rgba(183, 174, 163, 0.75);
-      transform: translateY(0);
-    }
-
-    /* Expand icon */
+    .gal-item:hover .gal-item__name { color: rgba(246, 243, 238, 0.95); transform: translateY(0); }
+    .gal-item:hover .gal-item__mat  { color: rgba(183, 174, 163, 0.75); transform: translateY(0); }
     .gal-item__expand {
       position: absolute;
       top: 16px;
@@ -217,23 +161,25 @@
       color: rgba(246, 243, 238, 0);
       transition: all var(--dur-mid) var(--ease);
     }
-
     .gal-item:hover .gal-item__expand {
       border-color: rgba(246, 243, 238, 0.5);
       color: rgba(246, 243, 238, 0.9);
     }
-
-    /* Responsive grid */
-    @media (max-width: 900px) {
-      .gal-grid { columns: 2; }
+    .gal-loading {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 80px 20px;
+      font-family: var(--sans);
+      font-weight: 200;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--stone-l);
     }
+    @media (max-width: 900px) { .gal-grid { columns: 2; } }
+    @media (max-width: 500px) { .gal-grid { columns: 1; } }
 
-    @media (max-width: 500px) {
-      .gal-grid { columns: 1; }
-    }
-
-
-    /* ── LIGHTBOX ── */
+    /* LIGHTBOX */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -246,47 +192,29 @@
       pointer-events: none;
       transition: background 0.4s var(--ease);
     }
-
-    .lightbox.open {
-      background: rgba(10, 9, 8, 0.92);
-      pointer-events: all;
-    }
-
+    .lightbox.open { background: rgba(10, 9, 8, 0.92); pointer-events: all; }
     .lb-inner {
       position: relative;
       max-width: 900px;
       width: 100%;
       opacity: 0;
       transform: scale(0.96);
-      transition: opacity 0.4s var(--ease),
-                  transform 0.4s var(--ease);
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
     }
-
-    .lightbox.open .lb-inner {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .lb-surface {
-      display: block;
-      width: 100%;
-      border: none;
-    }
-
+    .lightbox.open .lb-inner { opacity: 1; transform: scale(1); }
+    .lb-surface { display: block; width: 100%; border: none; }
     .lb-meta {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       padding: 16px 0 0;
     }
-
     .lb-name {
       font-family: var(--serif);
       font-weight: 300;
       font-size: clamp(20px, 2.5vw, 28px);
       color: var(--dark-text);
     }
-
     .lb-mat {
       font-family: var(--sans);
       font-weight: 200;
@@ -295,7 +223,6 @@
       text-transform: uppercase;
       color: var(--dark-muted);
     }
-
     .lb-close {
       position: fixed;
       top: 24px;
@@ -312,12 +239,7 @@
       transition: border-color var(--dur-fast), color var(--dur-fast);
       cursor: pointer;
     }
-
-    .lb-close:hover {
-      border-color: rgba(183, 174, 163, 0.6);
-      color: var(--dark-text);
-    }
-
+    .lb-close:hover { border-color: rgba(183, 174, 163, 0.6); color: var(--dark-text); }
     .lb-nav {
       position: fixed;
       top: 50%;
@@ -334,15 +256,9 @@
       transition: border-color var(--dur-fast), color var(--dur-fast);
       cursor: pointer;
     }
-
-    .lb-nav:hover {
-      border-color: rgba(183, 174, 163, 0.6);
-      color: var(--dark-text);
-    }
-
+    .lb-nav:hover { border-color: rgba(183, 174, 163, 0.6); color: var(--dark-text); }
     .lb-prev { left: 24px; }
     .lb-next { right: 24px; }
-
     .lb-counter {
       position: fixed;
       bottom: 24px;
@@ -354,12 +270,10 @@
       letter-spacing: 0.28em;
       color: var(--dark-muted);
     }
-
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="nav on-light" id="nav" aria-label="Primary">
     <a href="index.html" class="nav__wordmark" aria-label="Deco Preda home">
       DECO<span class="nav__wordmark-thin">PREDA</span>
@@ -368,18 +282,16 @@
       <span></span><span></span>
     </button>
     <div class="nav__panel" id="navPanel" aria-hidden="true">
-      <a href="index.html#who-we-are"           class="nav__item" data-cursor="link">Who We Are</a>
-      <a href="index.html#systems"              class="nav__item" data-cursor="link">Systems</a>
-      <a href="index.html#projects"             class="nav__item" data-cursor="link">Projects</a>
-      <a href="index.html#craft"                class="nav__item" data-cursor="link">Craft</a>
-      <a href="signature-series.html" class="nav__item" data-cursor="link">Signature Series</a>
-      <a href="index.html#contact"              class="nav__item nav__item--cta" data-cursor="link">Contact</a>
+      <a href="index.html#who-we-are"  class="nav__item" data-cursor="link">Who We Are</a>
+      <a href="index.html#systems"     class="nav__item" data-cursor="link">Systems</a>
+      <a href="index.html#projects"    class="nav__item" data-cursor="link">Projects</a>
+      <a href="index.html#craft"       class="nav__item" data-cursor="link">Craft</a>
+      <a href="signature-series.html"  class="nav__item" data-cursor="link">Signature Series</a>
+      <a href="index.html#contact"     class="nav__item nav__item--cta" data-cursor="link">Contact</a>
     </div>
   </nav>
 
-  <!-- Gallery page -->
   <main class="gal-page">
-
     <div class="gal-head">
       <a href="index.html" class="gal-back">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -393,164 +305,29 @@
         <em>Every surface. Every scale.</em>
       </h1>
 
-      <!-- Filters -->
-      <div class="gal-filters" role="tablist" aria-label="Filter by material">
-        <button class="gal-filter active" data-filter="all" role="tab" aria-selected="true" type="button">All</button>
-        <button class="gal-filter" data-filter="microcement" role="tab" aria-selected="false" type="button">Microcement</button>
-        <button class="gal-filter" data-filter="resin" role="tab" aria-selected="false" type="button">Resin Systems</button>
-        <button class="gal-filter" data-filter="stone" role="tab" aria-selected="false" type="button">Stone Carpet</button>
-        <button class="gal-filter" data-filter="industrial" role="tab" aria-selected="false" type="button">Industrial</button>
-        <span class="gal-count" id="galCount">0 projects</span>
+      <div class="gal-filters" role="tablist" aria-label="Filter by space">
+        <button class="gal-filter active" data-filter="all"        role="tab" aria-selected="true"  type="button">All</button>
+        <button class="gal-filter"        data-filter="residential" role="tab" aria-selected="false" type="button">Residential</button>
+        <button class="gal-filter"        data-filter="commercial"  role="tab" aria-selected="false" type="button">Commercial</button>
+        <button class="gal-filter"        data-filter="industrial"  role="tab" aria-selected="false" type="button">Industrial</button>
+        <button class="gal-filter"        data-filter="exterior"    role="tab" aria-selected="false" type="button">Exterior</button>
+        <button class="gal-filter"        data-filter="signature"   role="tab" aria-selected="false" type="button">Signature</button>
+        <span class="gal-count" id="galCount"></span>
       </div>
     </div>
 
-    <!-- Masonry grid -->
     <div class="gal-grid" id="galGrid" role="list">
-
-      <!-- MICROCEMENT -->
-      <div class="gal-item" data-mat="microcement" data-name="Bathroom Sanctuary" data-location="London" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:280px;background:linear-gradient(158deg,#cdc4b5 0%,#b5aa9a 60%,#c4bba8 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Bathroom Sanctuary</span>
-          <span class="gal-item__mat">Microcement · Ivory</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="microcement" data-name="Hotel Corridor" data-location="Dublin" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:360px;background:linear-gradient(158deg,#6e6860 0%,#54504a 60%,#636059 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Hotel Corridor</span>
-          <span class="gal-item__mat">Microcement · Slate</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="resin" data-name="Logistics Hub" data-location="Manchester" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:240px;background:linear-gradient(158deg,#8a8a8a 0%,#666666 60%,#808080 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Logistics Hub</span>
-          <span class="gal-item__mat">Epoxy Resin · Mid Grey</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="stone" data-name="Pool Terrace" data-location="Kent" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:320px;background:radial-gradient(ellipse 120% 100% at 40% 60%,#d8d0c4 0%,#c4bcb0 60%,#d0c8bc 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Pool Terrace</span>
-          <span class="gal-item__mat">Stone Carpet · Pearl</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="resin industrial" data-name="Distribution Centre" data-location="Birmingham" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:280px;background:linear-gradient(158deg,#3a3a3a 0%,#222222 60%,#333333 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Distribution Centre</span>
-          <span class="gal-item__mat">MMA Resin · Anthracite</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="microcement" data-name="Spa Retreat" data-location="Edinburgh" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:380px;background:linear-gradient(158deg,#b8b0a8 0%,#9e9890 60%,#b0a8a0 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Spa Retreat</span>
-          <span class="gal-item__mat">Microcement · Greige</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="resin industrial" data-name="Public Car Park" data-location="Dublin" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:260px;background:linear-gradient(158deg,#646464 0%,#484848 60%,#5a5a5a 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Public Car Park</span>
-          <span class="gal-item__mat">Polyester Resin · Dark Grey</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="stone" data-name="Garden Pathway" data-location="Surrey" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:300px;background:radial-gradient(ellipse 120% 100% at 40% 60%,#e0d8cc 0%,#ccc4b8 60%,#d8d0c4 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Garden Pathway</span>
-          <span class="gal-item__mat">Stone Carpet · Ivory</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="microcement" data-name="Office Reception" data-location="London" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:260px;background:linear-gradient(158deg,#d6cfc5 0%,#c0b8ae 60%,#cec6bc 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Office Reception</span>
-          <span class="gal-item__mat">Microcement · Sand</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="resin industrial" data-name="Manufacturing Floor" data-location="Leeds" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:340px;background:linear-gradient(158deg,#b0b8b0 0%,#909890 60%,#a8b0a8 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Manufacturing Floor</span>
-          <span class="gal-item__mat">PU Resin · Sage Grey</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="resin" data-name="Boutique Showroom" data-location="Dublin" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:280px;background:linear-gradient(158deg,#e2dcd2 0%,#cdc4ba 60%,#dbd3c9 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Boutique Showroom</span>
-          <span class="gal-item__mat">Epoxy Resin · Ivory</span>
-        </div>
-      </div>
-
-      <div class="gal-item" data-mat="microcement" data-name="Private Kitchen" data-location="London" role="listitem" tabindex="0">
-        <div class="gal-swatch" style="height:300px;background:linear-gradient(158deg,#e2dcd2 0%,#cdc4ba 60%,#dbd3c9 100%)">
-          <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E\");mix-blend-mode:multiply;opacity:0.8;pointer-events:none;"></div>
-        </div>
-        <div class="gal-item__over">
-          <div class="gal-item__expand"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
-          <span class="gal-item__name">Private Kitchen</span>
-          <span class="gal-item__mat">Microcement · Pearl</span>
-        </div>
-      </div>
-
-    </div><!-- /gal-grid -->
-
+      <div class="gal-loading" id="galLoading">Loading gallery&hellip;</div>
+    </div>
   </main>
 
-  <!-- ── LIGHTBOX ── -->
+  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image detail view">
     <div class="lb-inner" id="lbInner">
-      <div class="lb-surface" id="lbSurface" style="height:520px;"></div>
+      <img class="lb-surface" id="lbSurface" src="" alt="" />
       <div class="lb-meta">
         <span class="lb-name" id="lbName"></span>
-        <span class="lb-mat" id="lbMat"></span>
+        <span class="lb-mat"  id="lbMat"></span>
       </div>
     </div>
     <button class="lb-close" id="lbClose" aria-label="Close">
@@ -566,116 +343,205 @@
   </div>
 
   <script>
-    'use strict';
+  'use strict';
 
-    /* ── Filter logic ── */
-    const filterBtns = document.querySelectorAll('.gal-filter');
-    const items      = Array.from(document.querySelectorAll('.gal-item'));
-    const countEl    = document.getElementById('galCount');
+  const EXPAND_ICON = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>`;
 
-    function updateCount() {
-      const visible = items.filter(i => i.dataset.hidden !== 'true').length;
-      countEl.textContent = visible + ' project' + (visible !== 1 ? 's' : '');
-    }
+  let allItems = [];
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
+  /* ── Flatten JSON into a flat array of image objects ── */
+  function flattenData(data) {
+    const items = [];
 
-        const f = btn.dataset.filter;
-        items.forEach(item => {
-          const mats = item.dataset.mat || '';
-          const show = f === 'all' || mats.includes(f);
-          item.dataset.hidden = show ? 'false' : 'true';
+    function addItems(arr, filter) {
+      if (!Array.isArray(arr)) return;
+      arr.forEach(img => {
+        items.push({
+          src:      img.src,
+          name:     img.name     || '',
+          material: img.material || '',
+          location: img.location || '',
+          filter:   filter
         });
-        updateCount();
       });
-    });
-
-    updateCount();
-
-    /* ── Lightbox ── */
-    const lb       = document.getElementById('lightbox');
-    const lbSurf   = document.getElementById('lbSurface');
-    const lbName   = document.getElementById('lbName');
-    const lbMat    = document.getElementById('lbMat');
-    const lbClose  = document.getElementById('lbClose');
-    const lbPrev   = document.getElementById('lbPrev');
-    const lbNext   = document.getElementById('lbNext');
-    const lbCnt    = document.getElementById('lbCounter');
-
-    let visibleItems = [];
-    let lbCurrent    = 0;
-
-    function getVisible() {
-      return items.filter(i => i.dataset.hidden !== 'true');
     }
 
-    function openLightbox(item) {
-      visibleItems = getVisible();
-      lbCurrent    = visibleItems.indexOf(item);
+    /* residential */
+    if (data.residential) {
+      Object.values(data.residential).forEach(arr => addItems(arr, 'residential'));
+    }
+    /* commercial */
+    if (data.commercial) {
+      Object.values(data.commercial).forEach(arr => addItems(arr, 'commercial'));
+    }
+    /* industrial */
+    if (Array.isArray(data.industrial)) {
+      addItems(data.industrial, 'industrial');
+    }
+    /* exterior */
+    if (data.exterior) {
+      Object.values(data.exterior).forEach(arr => addItems(arr, 'exterior'));
+    }
+    /* signature */
+    if (Array.isArray(data.signature)) {
+      addItems(data.signature, 'signature');
+    }
+
+    return items;
+  }
+
+  /* ── Build a single gallery card ── */
+  function buildCard(img) {
+    const div = document.createElement('div');
+    div.className   = 'gal-item';
+    div.role        = 'listitem';
+    div.tabIndex    = 0;
+    div.dataset.filter   = img.filter;
+    div.dataset.hidden   = 'false';
+    div.dataset.name     = img.name;
+    div.dataset.material = img.material;
+    div.dataset.location = img.location;
+    div.dataset.src      = img.src;
+
+    div.innerHTML = `
+      <img
+        class="gal-swatch"
+        src="images/${img.src}"
+        alt="${img.name}"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="gal-item__over">
+        <div class="gal-item__expand">${EXPAND_ICON}</div>
+        <span class="gal-item__name">${img.name}</span>
+        <span class="gal-item__mat">${img.material}</span>
+      </div>`;
+
+    return div;
+  }
+
+  /* ── Render gallery from JSON ── */
+  async function initGallery() {
+    const grid    = document.getElementById('galGrid');
+    const loading = document.getElementById('galLoading');
+
+    try {
+      const res  = await fetch('images.json');
+      if (!res.ok) throw new Error('images.json not found');
+      const data = await res.json();
+
+      allItems = flattenData(data);
+
+      loading.remove();
+
+      allItems.forEach(img => {
+        const card = buildCard(img);
+        grid.appendChild(card);
+        card.addEventListener('click',   () => openLightbox(card));
+        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openLightbox(card); });
+      });
+
+      updateCount();
+
+    } catch (err) {
+      loading.textContent = 'Gallery unavailable — ' + err.message;
+      console.error(err);
+    }
+  }
+
+  /* ── Filter logic ── */
+  const filterBtns = document.querySelectorAll('.gal-filter');
+  const countEl    = document.getElementById('galCount');
+
+  function getItems() {
+    return Array.from(document.querySelectorAll('.gal-item'));
+  }
+
+  function updateCount() {
+    const visible = getItems().filter(i => i.dataset.hidden !== 'true').length;
+    countEl.textContent = visible + ' project' + (visible !== 1 ? 's' : '');
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const f = btn.dataset.filter;
+      getItems().forEach(item => {
+        const show = f === 'all' || item.dataset.filter === f;
+        item.dataset.hidden = show ? 'false' : 'true';
+      });
+      updateCount();
+    });
+  });
+
+  /* ── Lightbox ── */
+  const lb      = document.getElementById('lightbox');
+  const lbSurf  = document.getElementById('lbSurface');
+  const lbName  = document.getElementById('lbName');
+  const lbMat   = document.getElementById('lbMat');
+  const lbClose = document.getElementById('lbClose');
+  const lbPrev  = document.getElementById('lbPrev');
+  const lbNext  = document.getElementById('lbNext');
+  const lbCnt   = document.getElementById('lbCounter');
+
+  let visibleItems = [];
+  let lbCurrent    = 0;
+
+  function getVisible() {
+    return getItems().filter(i => i.dataset.hidden !== 'true');
+  }
+
+  function openLightbox(item) {
+    visibleItems = getVisible();
+    lbCurrent    = visibleItems.indexOf(item);
+    renderLb();
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderLb() {
+    const item = visibleItems[lbCurrent];
+    lbSurf.src = 'images/' + item.dataset.src;
+    lbSurf.alt = item.dataset.name;
+    lbName.textContent = item.dataset.name;
+    lbMat.textContent  = item.dataset.material + (item.dataset.location ? ' · ' + item.dataset.location : '');
+    lbCnt.textContent  = (lbCurrent + 1) + ' / ' + visibleItems.length;
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', () => { lbCurrent = (lbCurrent - 1 + visibleItems.length) % visibleItems.length; renderLb(); });
+  lbNext.addEventListener('click', () => { lbCurrent = (lbCurrent + 1) % visibleItems.length; renderLb(); });
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  { lbCurrent = (lbCurrent - 1 + visibleItems.length) % visibleItems.length; renderLb(); }
+    if (e.key === 'ArrowRight') { lbCurrent = (lbCurrent + 1) % visibleItems.length; renderLb(); }
+  });
+
+  let tsX = 0;
+  lb.addEventListener('touchstart', e => { tsX = e.changedTouches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tsX;
+    if (Math.abs(dx) > 50) {
+      lbCurrent = dx < 0
+        ? (lbCurrent + 1) % visibleItems.length
+        : (lbCurrent - 1 + visibleItems.length) % visibleItems.length;
       renderLb();
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
     }
+  }, { passive: true });
 
-    function closeLightbox() {
-      lb.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function renderLb() {
-      const item   = visibleItems[lbCurrent];
-      const swatch = item.querySelector('.gal-swatch');
-      lbSurf.style.cssText = swatch.style.cssText + ';border-radius:0;';
-      lbSurf.style.height  = 'clamp(300px, 55vh, 580px)';
-      lbName.textContent   = item.dataset.name;
-      lbMat.textContent    = item.dataset.mat.split(' ')[0].charAt(0).toUpperCase() +
-                             item.dataset.mat.split(' ')[0].slice(1) +
-                             ' · ' + item.dataset.location;
-      lbCnt.textContent    = (lbCurrent + 1) + ' / ' + visibleItems.length;
-    }
-
-    items.forEach(item => {
-      item.addEventListener('click', () => openLightbox(item));
-      item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openLightbox(item); });
-    });
-
-    lbClose.addEventListener('click', closeLightbox);
-
-    lbPrev.addEventListener('click', () => {
-      lbCurrent = (lbCurrent - 1 + visibleItems.length) % visibleItems.length;
-      renderLb();
-    });
-
-    lbNext.addEventListener('click', () => {
-      lbCurrent = (lbCurrent + 1) % visibleItems.length;
-      renderLb();
-    });
-
-    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
-
-    document.addEventListener('keydown', e => {
-      if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft')  { lbCurrent = (lbCurrent - 1 + visibleItems.length) % visibleItems.length; renderLb(); }
-      if (e.key === 'ArrowRight') { lbCurrent = (lbCurrent + 1) % visibleItems.length; renderLb(); }
-    });
-
-    /* Touch swipe in lightbox */
-    let tsX = 0;
-    lb.addEventListener('touchstart', e => { tsX = e.changedTouches[0].clientX; }, { passive: true });
-    lb.addEventListener('touchend',   e => {
-      const dx = e.changedTouches[0].clientX - tsX;
-      if (Math.abs(dx) > 50) {
-        lbCurrent = dx < 0
-          ? (lbCurrent + 1) % visibleItems.length
-          : (lbCurrent - 1 + visibleItems.length) % visibleItems.length;
-        renderLb();
-      }
-    }, { passive: true });
+  /* ── Init ── */
+  initGallery();
   </script>
 
 </body>
