@@ -116,16 +116,11 @@
     ]
   },
   "signature": [
-    { "src": "signature/mc-slate-sculptural-01.webp", "name": "Slate Monolith", "material": "Microcement · Slate · Signature", "location": "Private residence", "filter": "signature" },
-    { "src": "signature/resin-blackgold-01.webp", "name": "Black Gold", "material": "Design Resin · Black & Gold", "location": "Showroom", "filter": "signature" },
-    { "src": "signature/resin-blackgold-02.webp", "name": "Gold River", "material": "Design Resin · Black & Gold", "location": "Commercial", "filter": "signature" },
-    { "src": "signature/resin-blackgold-03.webp", "name": "Galaxy Floor", "material": "Design Resin · Black & Gold", "location": "Gallery", "filter": "signature" },
-    { "src": "signature/resin-blackgold-showroom-01.webp", "name": "Black Gold Showroom", "material": "Design Resin · Black & Gold", "location": "Gallery", "filter": "signature" },
-    { "src": "signature/resin-blackgray-01.webp", "name": "Dark Marble", "material": "Design Resin · Marble Effect", "location": "Signature", "filter": "signature" },
-    { "src": "signature/resin-geometric-01.webp", "name": "Geometric", "material": "Design Resin · Multicolour", "location": "Commercial", "filter": "signature" },
-    { "src": "signature/resin-multicolor-01.webp", "name": "Multicolour Field", "material": "Design Resin · Bespoke", "location": "Commercial", "filter": "signature" },
-    { "src": "signature/resin-whitegold-01.webp", "name": "White Gold Vein", "material": "Design Resin · White & Gold", "location": "Signature", "filter": "signature" }
-  ],
+  { "src": "signature/resin-blackgold-01.webp", "name": "Black Gold", "material": "Design Resin · Black & Gold", "location": "Showroom", "filter": "signature" },
+  { "src": "signature/resin-blackgray-01.webp", "name": "Dark Marble", "material": "Design Resin · Marble Effect", "location": "Signature", "filter": "signature" },
+  { "src": "signature/resin-multicolor-01.webp", "name": "Multicolour Field", "material": "Design Resin · Bespoke", "location": "Commercial", "filter": "signature" },
+  { "src": "signature/resin-whitegold-01.webp", "name": "White Gold Vein", "material": "Design Resin · White & Gold", "location": "Signature", "filter": "signature" }
+],
   "textures": {
     "microcement": [
       { "src": "textures/microcement/tex-mc-01.webp", "colour": "Charcoal", "finish": "Raw" },
