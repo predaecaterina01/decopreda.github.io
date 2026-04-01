@@ -21,92 +21,113 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
-  <style>
-    /* ── CAROUSEL FOOT — permanent veil + controls ── */
-    .pcs__foot {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 2.5rem 1.25rem 1.1rem;
-      background: linear-gradient(to top, rgba(10,9,8,0.72) 0%, transparent 100%);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      z-index: 10;
-      pointer-events: none;
-    }
-    .pcs__foot > * { pointer-events: auto; }
+ <style>
+  /* ── CAROUSEL SURFACE — layout complet ── */
 
-    /* Explore pill */
-    .pcs__explore {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4em;
-      font-family: var(--font-ui, 'Jost', sans-serif);
-      font-size: 0.68rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #ece6dd;
-      border: 0.5px solid rgba(236,230,221,0.5);
-      border-radius: 100px;
-      padding: 0.42em 1em;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: background 0.25s ease, border-color 0.25s ease;
-      flex-shrink: 0;
-    }
-    .pcs__explore:hover {
-      background: rgba(236,230,221,0.14);
-      border-color: rgba(236,230,221,0.8);
-    }
-    .pcs__explore svg {
-      width: 9px; height: 9px;
-      stroke: currentColor; stroke-width: 1.5;
-      fill: none; flex-shrink: 0;
-    }
+  /* Voal permanent — mai intens jos */
+  .pcs__track::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(10,9,8,0.82) 0%,
+      rgba(10,9,8,0.45) 35%,
+      transparent 65%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
 
-    /* Nav row: arrows only, no dots */
-    .pcs__nav-row {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-shrink: 0;
-    }
+  /* Numele sistemului — vizibil în colțul stânga sus */
+  .pcs__system-label {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(236,230,221,0.85);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    z-index: 3;
+    pointer-events: none;
+  }
 
-    /* Arrow buttons */
-    .pcs__arrow {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 0.5px solid rgba(236,230,221,0.45);
-      background: rgba(10,9,8,0.35);
-      color: #ece6dd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease;
-      padding: 0;
-      flex-shrink: 0;
-      /* Fix mobile jump: explicit positioning */
-      position: relative;
-    }
-    .pcs__arrow:hover {
-      background: rgba(236,230,221,0.15);
-      border-color: rgba(236,230,221,0.8);
-    }
-    .pcs__arrow svg {
-      width: 12px; height: 12px;
-      stroke: currentColor; stroke-width: 1.5;
-      fill: none; stroke-linecap: round; stroke-linejoin: round;
-      display: block;
-      /* Prevent any layout shift */
-      flex-shrink: 0;
-    }
-  </style>
+  /* Descriere slide — centru jos, deasupra controalelor */
+  .pcs__slide-desc {
+    position: absolute;
+    bottom: 52px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(236,230,221,0.70);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+    padding: 0 2rem;
+    z-index: 3;
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Footer: săgeată stânga — View Gallery centrat — săgeată dreapta */
+  .pcs__foot {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .pcs__foot > * { pointer-events: auto; }
+
+  .pcs__arrow {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 0.5px solid rgba(236,230,221,0.45);
+    background: rgba(10,9,8,0.45);
+    color: #ece6dd;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    padding: 0; flex-shrink: 0;
+  }
+  .pcs__arrow:hover {
+    background: rgba(236,230,221,0.18);
+    border-color: rgba(236,230,221,0.85);
+  }
+  .pcs__arrow svg {
+    width: 11px; height: 11px;
+    stroke: currentColor; stroke-width: 1.5;
+    fill: none; stroke-linecap: round; stroke-linejoin: round;
+    display: block;
+  }
+
+  .pcs__explore {
+    flex: 1;
+    text-align: center;
+    font-family: var(--sans, 'Jost', sans-serif);
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(236,230,221,0.88);
+    text-decoration: none;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+  .pcs__explore:hover { color: #fff; }
+</style>
 </head>
 <body>
 
@@ -325,21 +346,17 @@
                 <img src="images/residential/bathroom/mc-greige-bathroom-01.webp" alt="Microcement greige" style="width:100%;height:100%;object-fit:cover;">
               </div>
             </div>
-            <div class="pcs__foot">
-              <a href="gallery.html?filter=residential" class="pcs__explore" data-cursor="link">
-                <svg viewBox="0 0 10 10"><path d="M1 5h8M6 2l3 3-3 3"/></svg>
-                View projects
-              </a>
-              <div class="pcs__nav-row">
-                <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous image" type="button">
-                  <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
-                </button>
-                <button class="pcs__arrow pcs__arrow--next" aria-label="Next image" type="button">
-                  <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
+            <span class="pcs__system-label">Microcement</span>
+<span class="pcs__slide-desc">Continuous mineral membrane · Residential &amp; Commercial</span>
+           <div class="pcs__foot">
+  <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous" type="button">
+    <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
+  </button>
+  <a href="gallery.html?filter=residential" class="pcs__explore">View Gallery</a>
+  <button class="pcs__arrow pcs__arrow--next" aria-label="Next" type="button">
+    <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
+  </button>
+</div>
           <div class="panel__body">
             <span class="panel__idx" aria-hidden="true">I</span>
             <h3 class="panel__name">Microcement</h3>
@@ -403,21 +420,17 @@
                 <img src="images/exterior/driveway/ext-drv-05.webp" alt="Stone carpet ivory" style="width:100%;height:100%;object-fit:cover;">
               </div>
             </div>
-            <div class="pcs__foot">
-              <a href="gallery.html?filter=exterior" class="pcs__explore" data-cursor="link">
-                <svg viewBox="0 0 10 10"><path d="M1 5h8M6 2l3 3-3 3"/></svg>
-                View projects
-              </a>
-              <div class="pcs__nav-row">
-                <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous image" type="button">
-                  <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
-                </button>
-                <button class="pcs__arrow pcs__arrow--next" aria-label="Next image" type="button">
-                  <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
+            <span class="pcs__system-label">Stone Carpet</span>
+<span class="pcs__slide-desc">Natural aggregate in resin · Exterior &amp; Driveways</span>
+           <div class="pcs__foot">
+  <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous" type="button">
+    <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
+  </button>
+  <a href="gallery.html?filter=exterior" class="pcs__explore">View Gallery</a>
+  <button class="pcs__arrow pcs__arrow--next" aria-label="Next" type="button">
+    <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
+  </button>
+</div>
           <div class="panel__body">
             <span class="panel__idx" aria-hidden="true">II</span>
             <h3 class="panel__name">Stone Carpet</h3>
@@ -484,21 +497,17 @@
                 <img src="images/commercial/parking/com-park-03.webp" alt="Performance resin parking" style="width:100%;height:100%;object-fit:cover;">
               </div>
             </div>
-            <div class="pcs__foot">
-              <a href="gallery.html?filter=industrial" class="pcs__explore" data-cursor="link">
-                <svg viewBox="0 0 10 10"><path d="M1 5h8M6 2l3 3-3 3"/></svg>
-                View projects
-              </a>
-              <div class="pcs__nav-row">
-                <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous image" type="button">
-                  <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
-                </button>
-                <button class="pcs__arrow pcs__arrow--next" aria-label="Next image" type="button">
-                  <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
+            <span class="pcs__system-label">Performance Resin</span>
+<span class="pcs__slide-desc">High-resistance epoxy · Industrial &amp; Logistics</span>
+           <div class="pcs__foot">
+  <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous" type="button">
+    <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
+  </button>
+  <a href="gallery.html?filter=industrial" class="pcs__explore">View Gallery</a>
+  <button class="pcs__arrow pcs__arrow--next" aria-label="Next" type="button">
+    <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
+  </button>
+</div>
           <div class="panel__body">
             <span class="panel__idx" aria-hidden="true">III</span>
             <h3 class="panel__name">Performance Resin</h3>
@@ -562,21 +571,17 @@
                 <img src="images/commercial/showroom/resin-green-showroom-01.webp" alt="Design resin showroom" style="width:100%;height:100%;object-fit:cover;">
               </div>
             </div>
-            <div class="pcs__foot">
-              <a href="gallery.html?filter=signature" class="pcs__explore" data-cursor="link">
-                <svg viewBox="0 0 10 10"><path d="M1 5h8M6 2l3 3-3 3"/></svg>
-                View projects
-              </a>
-              <div class="pcs__nav-row">
-                <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous image" type="button">
-                  <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
-                </button>
-                <button class="pcs__arrow pcs__arrow--next" aria-label="Next image" type="button">
-                  <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
-                </button>
-              </div>
-            </div>
-          </div>
+            <span class="pcs__system-label">Design Resin</span>
+<span class="pcs__slide-desc">Bespoke metallic compositions · Architectural</span>
+           <div class="pcs__foot">
+  <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous" type="button">
+    <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
+  </button>
+  <a href="gallery.html?filter=signature" class="pcs__explore">View Gallery</a>
+  <button class="pcs__arrow pcs__arrow--next" aria-label="Next" type="button">
+    <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
+  </button>
+</div>
           <div class="panel__body">
             <span class="panel__idx" aria-hidden="true">IV</span>
             <h3 class="panel__name">Design Resin</h3>
