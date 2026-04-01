@@ -591,6 +591,116 @@ button {
   0%, 100% { transform: scaleY(1); opacity: 0.4; }
   50%       { transform: scaleY(1.2); opacity: 1; }
 }
+/* ============================================================
+   PANEL CAROUSEL SURFACE — FOOT
+   ============================================================ */
+
+.pcs__foot {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 1.5rem 1.25rem;
+  background: linear-gradient(to top, rgba(10,9,8,0.78) 0%, transparent 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.pcs__foot > * {
+  pointer-events: auto;
+}
+
+/* Explore pill link */
+.pcs__explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ece6dd;
+  border: 0.5px solid rgba(236,230,221,0.45);
+  border-radius: 100px;
+  padding: 0.45em 1em;
+  text-decoration: none;
+  transition: background var(--dur-mid) var(--ease),
+              border-color var(--dur-mid) var(--ease);
+  white-space: nowrap;
+}
+
+.pcs__explore:hover {
+  background: rgba(236,230,221,0.12);
+  border-color: rgba(236,230,221,0.75);
+}
+
+/* Nav row: dots + arrows */
+.pcs__nav-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Dots */
+.pcs__dots {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pcs__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(236,230,221,0.35);
+  transition: background var(--dur-mid) var(--ease),
+              transform var(--dur-mid) var(--ease);
+  cursor: pointer;
+}
+
+.pcs__dot--active {
+  background: #ece6dd;
+  transform: scale(1.35);
+}
+
+/* Arrow buttons */
+.pcs__arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(236,230,221,0.35);
+  background: transparent;
+  color: #ece6dd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--dur-mid) var(--ease),
+              border-color var(--dur-mid) var(--ease);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.pcs__arrow:hover {
+  background: rgba(236,230,221,0.12);
+  border-color: rgba(236,230,221,0.75);
+}
+
+.pcs__arrow svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+}
 
 @media (max-width: 600px) {
   .intro { min-height: 85svh; }
