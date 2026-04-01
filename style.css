@@ -431,8 +431,12 @@ button { font: inherit; background: none; border: none; cursor: none; }
 ────────────────────────────────────────── */
 .panel { background: var(--ivory-2); overflow: hidden; position: relative; transition: transform var(--dur-slow) var(--ease), box-shadow var(--dur-slow) var(--ease); }
 .panel:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(43,40,38,0.05); z-index: 2; }
-.panel__surface { position: relative; height: clamp(200px, 22vw, 320px); overflow: hidden; cursor: default; }
-.pcs__track { position: absolute; inset: 0; }
+.panel__surface {
+  position: relative;
+  height: clamp(200px, 22vw, 320px);
+  cursor: default;
+}
+.pcs__track { position: absolute; inset: 0; overflow: hidden; }
 .pcs__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1); will-change: opacity; }
 .pcs__slide--active { opacity: 1; }
 .pcs__grain { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.11'/%3E%3C/svg%3E"); mix-blend-mode: multiply; opacity: 0.8; pointer-events: none; }
@@ -489,7 +493,15 @@ button { font: inherit; background: none; border: none; cursor: none; }
 .panel__explore { display: none; } .panel__nav { display: none; } .panel__nav-dots { display: none; } .panel__nav-arrow { display: none; }
 
 .panel__idx { position: absolute; bottom: var(--s-md); right: var(--s-md); font-family: var(--serif); font-style: italic; font-size: clamp(40px,4vw,60px); color: rgba(43,40,38,0.12); line-height: 1; pointer-events: none; }
-.panel__body { padding: clamp(28px,3vw,44px) clamp(24px,2.5vw,36px) clamp(32px,3.5vw,52px); display: flex; flex-direction: column; gap: 0; }
+.panel__body {
+  position: relative;
+  z-index: 1;
+  background: var(--ivory-2);
+  padding: clamp(28px,3vw,44px) clamp(24px,2.5vw,36px) clamp(32px,3.5vw,52px);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
 .panel__name { font-family: var(--serif); font-weight: 400; font-size: clamp(22px,2.5vw,32px); color: var(--ink); margin-bottom: clamp(16px,1.8vw,24px); line-height: 1.1; }
 .panel__desc { font-size: var(--t-base); color: #3A3530; line-height: 2.0; margin-bottom: 1.5rem; }
 .panel__props { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
