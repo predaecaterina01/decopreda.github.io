@@ -4,26 +4,113 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Deco Preda — Specialist architectural surface contractor. Microcement, performance resin, design resin, stone carpet and hybrid surface systems. Dublin · Ireland." />
- <!-- Open Graph -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Deco Preda — Architectural Surface Contractor" />
-<meta property="og:description" content="Engineered surface systems across Ireland and Europe. Microcement, resin and stone carpet — residential, commercial and industrial." />
-<meta property="og:image" content="https://predaecaterina01.github.io/images/residential/bathroom/mc-ivory-bathroom-01.webp" />
-<meta property="og:url" content="https://predaecaterina01.github.io/" />
-<!-- Twitter / X -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Deco Preda — Architectural Surface Contractor" />
-<meta name="twitter:description" content="Engineered surface systems across Ireland and Europe. Microcement, resin and stone carpet." />
-<meta name="twitter:image" content="https://predaecaterina01.github.io/images/residential/bathroom/mc-ivory-bathroom-01.webp" />
- <title>Deco Preda — Architectural Surface Contractor</title>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Deco Preda — Architectural Surface Contractor" />
+  <meta property="og:description" content="Engineered surface systems across Ireland and Europe. Microcement, resin and stone carpet — residential, commercial and industrial." />
+  <meta property="og:image" content="https://predaecaterina01.github.io/images/residential/bathroom/mc-ivory-bathroom-01.webp" />
+  <meta property="og:url" content="https://predaecaterina01.github.io/" />
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Deco Preda — Architectural Surface Contractor" />
+  <meta name="twitter:description" content="Engineered surface systems across Ireland and Europe. Microcement, resin and stone carpet." />
+  <meta name="twitter:image" content="https://predaecaterina01.github.io/images/residential/bathroom/mc-ivory-bathroom-01.webp" />
+  <title>Deco Preda — Architectural Surface Contractor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ── CAROUSEL FOOT — permanent veil + controls ── */
+    .pcs__foot {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2.5rem 1.25rem 1.1rem;
+      background: linear-gradient(to top, rgba(10,9,8,0.72) 0%, transparent 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .pcs__foot > * { pointer-events: auto; }
+
+    /* Explore pill */
+    .pcs__explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      font-family: var(--font-ui, 'Jost', sans-serif);
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ece6dd;
+      border: 0.5px solid rgba(236,230,221,0.5);
+      border-radius: 100px;
+      padding: 0.42em 1em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.25s ease, border-color 0.25s ease;
+      flex-shrink: 0;
+    }
+    .pcs__explore:hover {
+      background: rgba(236,230,221,0.14);
+      border-color: rgba(236,230,221,0.8);
+    }
+    .pcs__explore svg {
+      width: 9px; height: 9px;
+      stroke: currentColor; stroke-width: 1.5;
+      fill: none; flex-shrink: 0;
+    }
+
+    /* Nav row: arrows only, no dots */
+    .pcs__nav-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    /* Arrow buttons */
+    .pcs__arrow {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(236,230,221,0.45);
+      background: rgba(10,9,8,0.35);
+      color: #ece6dd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+      padding: 0;
+      flex-shrink: 0;
+      /* Fix mobile jump: explicit positioning */
+      position: relative;
+    }
+    .pcs__arrow:hover {
+      background: rgba(236,230,221,0.15);
+      border-color: rgba(236,230,221,0.8);
+    }
+    .pcs__arrow svg {
+      width: 12px; height: 12px;
+      stroke: currentColor; stroke-width: 1.5;
+      fill: none; stroke-linecap: round; stroke-linejoin: round;
+      display: block;
+      /* Prevent any layout shift */
+      flex-shrink: 0;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="progress" id="progress" haria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true">
     <div class="cursor__ring"></div>
     <div class="cursor__dot"></div>
@@ -52,7 +139,7 @@
       <a href="#projects"             class="nav__item" data-cursor="link">Projects</a>
       <a href="#craft"                class="nav__item" data-cursor="link">Craft</a>
       <a href="signature-series.html" class="nav__item" data-cursor="link">Signature Series</a>
-      <a href="gallery.html" class="nav__item" data-cursor="link">Gallery</a>
+      <a href="gallery.html"          class="nav__item" data-cursor="link">Gallery</a>
       <a href="#contact"              class="nav__item nav__item--cta" data-cursor="link">Contact</a>
     </div>
   </nav>
@@ -212,7 +299,7 @@
           <span class="section-label">Systems</span>
         </header>
         <h2 class="systems__h reveal" id="systemsHeading">
-          Four engineered systems.<br><em id="systemsSubline">Infinite application.</em>
+          Four engineered surfaces.<br><em id="systemsSubline">Specified for you.</em>
         </h2>
       </div>
 
@@ -221,23 +308,38 @@
         <!-- SYSTEM I — Microcement -->
         <article class="panel reveal" aria-label="Microcement" data-domain="architectural">
           <div class="panel__surface" role="region" aria-label="Microcement gallery" data-carousel="microcement">
-           <div class="pcs__track">
-  <div class="pcs__slide pcs__slide--active">
-    <img src="images/residential/bathroom/mc-ivory-bathroom-01.webp" alt="Microcement ivory bathroom" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/residential/living/mc-gray-living-03.webp" alt="Microcement living" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/residential/bathroom/mc-gray-bathroom-01.webp" alt="Microcement slate" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/residential/staircase/mc-sand-staircase-01.webp" alt="Microcement staircase" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/residential/bathroom/mc-greige-bathroom-01.webp" alt="Microcement greige" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-</div>
+            <div class="pcs__track">
+              <div class="pcs__slide pcs__slide--active">
+                <img src="images/residential/bathroom/mc-ivory-bathroom-01.webp" alt="Microcement ivory bathroom" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/residential/living/mc-gray-living-03.webp" alt="Microcement living" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/residential/bathroom/mc-gray-bathroom-01.webp" alt="Microcement slate" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/residential/staircase/mc-sand-staircase-01.webp" alt="Microcement staircase" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/residential/bathroom/mc-greige-bathroom-01.webp" alt="Microcement greige" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+            </div>
+            <div class="pcs__foot">
+              <a href="gallery.html?filter=residential" class="pcs__explore" data-cursor="link">
+                <svg viewBox="0 0 10 10"><path d="M1 5h8M6 2l3 3-3 3"/></svg>
+                View projects
+              </a>
+              <div class="pcs__nav-row">
+                <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous image" type="button">
+                  <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
+                </button>
+                <button class="pcs__arrow pcs__arrow--next" aria-label="Next image" type="button">
+                  <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
           <div class="panel__body">
             <span class="panel__idx" aria-hidden="true">I</span>
             <h3 class="panel__name">Microcement</h3>
@@ -287,20 +389,35 @@
         <!-- SYSTEM II — Stone Carpet -->
         <article class="panel reveal" aria-label="Stone Carpet" data-domain="both">
           <div class="panel__surface" role="region" aria-label="Stone Carpet gallery" data-carousel="stone">
-           <div class="pcs__track">
-  <div class="pcs__slide pcs__slide--active">
-    <img src="images/exterior/driveway/sc-ivory-luxury-01.webp" alt="Stone carpet luxury driveway" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/exterior/driveway/ext-drv-01.webp" alt="Stone carpet driveway" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/exterior/terrace/ext-ter-01.webp" alt="Stone carpet terrace" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/exterior/driveway/ext-drv-05.webp" alt="Stone carpet ivory" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-</div>
+            <div class="pcs__track">
+              <div class="pcs__slide pcs__slide--active">
+                <img src="images/exterior/driveway/sc-ivory-luxury-01.webp" alt="Stone carpet luxury driveway" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/exterior/driveway/ext-drv-01.webp" alt="Stone carpet driveway" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/exterior/terrace/ext-ter-01.webp" alt="Stone carpet terrace" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/exterior/driveway/ext-drv-05.webp" alt="Stone carpet ivory" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+            </div>
+            <div class="pcs__foot">
+              <a href="gallery.html?filter=exterior" class="pcs__explore" data-cursor="link">
+                <svg viewBox="0 0 10 10"><path d="M1 5h8M6 2l3 3-3 3"/></svg>
+                View projects
+              </a>
+              <div class="pcs__nav-row">
+                <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous image" type="button">
+                  <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
+                </button>
+                <button class="pcs__arrow pcs__arrow--next" aria-label="Next image" type="button">
+                  <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
           <div class="panel__body">
             <span class="panel__idx" aria-hidden="true">II</span>
             <h3 class="panel__name">Stone Carpet</h3>
@@ -351,22 +468,37 @@
         <article class="panel reveal" aria-label="Performance Resin" data-domain="both">
           <div class="panel__surface" role="region" aria-label="Performance Resin gallery" data-carousel="resin-performance">
             <div class="pcs__track">
-  <div class="pcs__slide pcs__slide--active">
-    <img src="images/industrial/ind-white-warehouse-01.webp" alt="Performance resin warehouse" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/industrial/ind-yellow-01.webp" alt="Performance resin food grade" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/industrial/ind-04.webp" alt="Performance resin logistics" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/residential/garage/res-gar-03.webp" alt="Performance resin garage" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/commercial/parking/com-park-03.webp" alt="Performance resin parking" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-</div>
+              <div class="pcs__slide pcs__slide--active">
+                <img src="images/industrial/ind-white-warehouse-01.webp" alt="Performance resin warehouse" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/industrial/ind-yellow-01.webp" alt="Performance resin food grade" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/industrial/ind-04.webp" alt="Performance resin logistics" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/residential/garage/res-gar-03.webp" alt="Performance resin garage" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/commercial/parking/com-park-03.webp" alt="Performance resin parking" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+            </div>
+            <div class="pcs__foot">
+              <a href="gallery.html?filter=industrial" class="pcs__explore" data-cursor="link">
+                <svg viewBox="0 0 10 10"><path d="M1 5h8M6 2l3 3-3 3"/></svg>
+                View projects
+              </a>
+              <div class="pcs__nav-row">
+                <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous image" type="button">
+                  <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
+                </button>
+                <button class="pcs__arrow pcs__arrow--next" aria-label="Next image" type="button">
+                  <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
           <div class="panel__body">
             <span class="panel__idx" aria-hidden="true">III</span>
             <h3 class="panel__name">Performance Resin</h3>
@@ -416,20 +548,35 @@
         <!-- SYSTEM IV — Design Resin -->
         <article class="panel reveal" aria-label="Design Resin" data-domain="architectural">
           <div class="panel__surface" role="region" aria-label="Design Resin gallery" data-carousel="resin-design">
-           <div class="pcs__track">
-  <div class="pcs__slide pcs__slide--active">
-    <img src="images/signature/resin-whitegold-01.webp" alt="Design resin white gold" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/signature/resin-blackgold-01.webp" alt="Design resin black gold" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/signature/resin-multicolor-01.webp" alt="Design resin multicolor" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  <div class="pcs__slide">
-    <img src="images/commercial/showroom/resin-green-showroom-01.webp" alt="Design resin showroom" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-</div>
+            <div class="pcs__track">
+              <div class="pcs__slide pcs__slide--active">
+                <img src="images/signature/resin-whitegold-01.webp" alt="Design resin white gold" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/signature/resin-blackgold-01.webp" alt="Design resin black gold" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/signature/resin-multicolor-01.webp" alt="Design resin multicolor" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="pcs__slide">
+                <img src="images/commercial/showroom/resin-green-showroom-01.webp" alt="Design resin showroom" style="width:100%;height:100%;object-fit:cover;">
+              </div>
+            </div>
+            <div class="pcs__foot">
+              <a href="gallery.html?filter=signature" class="pcs__explore" data-cursor="link">
+                <svg viewBox="0 0 10 10"><path d="M1 5h8M6 2l3 3-3 3"/></svg>
+                View projects
+              </a>
+              <div class="pcs__nav-row">
+                <button class="pcs__arrow pcs__arrow--prev" aria-label="Previous image" type="button">
+                  <svg viewBox="0 0 12 12"><path d="M8 2L4 6l4 4"/></svg>
+                </button>
+                <button class="pcs__arrow pcs__arrow--next" aria-label="Next image" type="button">
+                  <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
           <div class="panel__body">
             <span class="panel__idx" aria-hidden="true">IV</span>
             <h3 class="panel__name">Design Resin</h3>
@@ -437,7 +584,7 @@
             <ul class="panel__props">
               <li>Bespoke pattern &amp; colour compositions</li>
               <li>Metallic pigments, glitter, translucent layers</li>
-              <li>Logo integration &amp; wayfinding systems</li>
+              <li>Logo integration &amp; wayfinding</li>
             </ul>
             <div class="panel__domain">
               <span class="panel__domain-tag">Architectural &amp; Living</span>
@@ -469,7 +616,7 @@
                 aria-expanded="false"
                 aria-controls="systemsMorePanel"
                 type="button">
-          <span class="systems__more-label" id="systemsMoreLabel">Explore Other Systems</span>
+          <span class="systems__more-label" id="systemsMoreLabel">Explore Further</span>
           <span class="systems__more-icon" aria-hidden="true">+</span>
         </button>
         <div class="systems__more-panel" id="systemsMorePanel" aria-hidden="true" role="region">
@@ -512,8 +659,8 @@
           <div class="project-row__text">
             <span class="project-row__num">02</span>
             <h3 class="project-row__title">Infrastructure &amp; Logistics</h3>
-            <p class="project-row__body">Warehouses, distribution centres, manufacturing facilities, public car parks and hospitals. Performance resin systems specified for extreme compressive loads, chemical resistance and continuous heavy-traffic environments — at project scales exceeding 10,000m².</p>
-            <p class="project-row__systems">Performance Resin · Epoxy · MMA · Polyurethane Systems</p>
+            <p class="project-row__body">Warehouses, distribution centres, manufacturing facilities, public car parks and hospitals. Performance resin specified for extreme compressive loads, chemical resistance and continuous heavy-traffic environments — at project scales exceeding 10,000m².</p>
+            <p class="project-row__systems">Performance Resin · Epoxy · MMA · Polyurethane</p>
             <a href="gallery.html?domain=infrastructure" class="link-arrow" data-cursor="link">View Infrastructure Projects</a>
           </div>
         </div>
@@ -542,8 +689,8 @@
               The precision<br>of specification.<br>
               <em>Applied by hand.</em>
             </h2>
-            <p class="craft__p reveal">Every surface system follows a strict multi-stage application protocol: substrate assessment and preparation, primer application, base coat, surface coat, and final protective layer. Each stage is documented, inspected and signed off before the next begins.</p>
-            <p class="craft__p reveal">Our specialist application teams operate to EN-standard protocols with full technical documentation, system warranties and post-installation support. The same team that assesses your specification applies your surface — no hand-offs, no subcontracted application.</p>
+            <p class="craft__p reveal">Every surface follows a strict multi-stage application protocol: substrate assessment and preparation, primer application, base coat, surface coat, and final protective layer. Each stage is documented, inspected and signed off before the next begins.</p>
+            <p class="craft__p reveal">Our specialist application teams operate to EN-standard protocols with full technical documentation, warranties and post-installation support. The same team that assesses your specification applies your surface — no hand-offs, no subcontracted application.</p>
             <a href="#contact" class="btn-line reveal" data-cursor="link" data-magnetic>
               <span class="btn-line__label">Begin a Specification</span>
               <span class="btn-line__line" aria-hidden="true"></span>
@@ -648,7 +795,7 @@
           <a href="#projects">Projects</a>
           <a href="#craft">Craft</a>
           <a href="signature-series.html">Signature Series</a>
-          <a href="gallery.html" class="nav__item" data-cursor="link">Gallery</a>
+          <a href="gallery.html">Gallery</a>
           <a href="#contact">Contact</a>
         </nav>
         <p class="foot__copy">&copy; <span id="yr"></span> Deco Preda Ltd. Dublin · Ireland &amp; Europe.</p>
