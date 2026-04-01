@@ -29,7 +29,7 @@ const dismissLoader = (() => {
 document.body.style.overflow = 'hidden';
 const _primaryTimer = setTimeout(dismissLoader, 1800);
 window.addEventListener('load', () => { clearTimeout(_primaryTimer); setTimeout(dismissLoader, 400); });
-setTimeout(dismissLoader, 3500);
+setTimeout(dismissLoader, 2200); // fallback mai rapid pentru local dev
 
 /* ── 2. HERO REVEAL ── */
 function revealHero() {
@@ -145,33 +145,52 @@ $$('[data-magnetic]').forEach(btn => {
 const burgerBtn = $('#navBurger');
 const navPanelEl = $('#navPanel');
 if (burgerBtn && navPanelEl) {
+
+  function openNav() {
+    navPanelEl.classList.add('open');
+    burgerBtn.setAttribute('aria-expanded', 'true');
+    burgerBtn.setAttribute('aria-label', 'Close menu');
+    navPanelEl.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    navPanelEl.classList.remove('open');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+    burgerBtn.setAttribute('aria-label', 'Open menu');
+    navPanelEl.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
   burgerBtn.addEventListener('click', () => {
-    const open = navPanelEl.classList.toggle('open');
-    burgerBtn.setAttribute('aria-expanded', String(open));
-    burgerBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    navPanelEl.setAttribute('aria-hidden', String(!open));
-    document.body.style.overflow = open ? 'hidden' : '';
+    const isOpen = navPanelEl.classList.contains('open');
+    isOpen ? closeNav() : openNav();
   });
+
+  /* Închide la click pe orice link din panel */
   $$('a', navPanelEl).forEach(a => {
-    a.addEventListener('click', () => {
-      navPanelEl.classList.remove('open');
-      burgerBtn.setAttribute('aria-expanded', 'false');
-      burgerBtn.setAttribute('aria-label', 'Open menu');
-      navPanelEl.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    });
+    a.addEventListener('click', closeNav);
   });
+
+  /* Închide la Escape */
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && navPanelEl.classList.contains('open')) {
-      navPanelEl.classList.remove('open');
-      burgerBtn.setAttribute('aria-expanded', 'false');
-      navPanelEl.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      closeNav();
       burgerBtn.focus();
     }
   });
-}
 
+  /* Închide la click în afara panel-ului (pe overlay) */
+  document.addEventListener('click', (e) => {
+    if (
+      navPanelEl.classList.contains('open') &&
+      !navPanelEl.contains(e.target) &&
+      !burgerBtn.contains(e.target)
+    ) {
+      closeNav();
+    }
+  });
+}
 /* ── 12. FORM ── */
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mkoqvqbw';
 const commissionForm = $('#commissionForm');
