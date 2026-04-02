@@ -3111,3 +3111,221 @@ button {
   .systems__h { margin-bottom: clamp(32px, 6vw, 48px); }
   .projects__h { margin-bottom: clamp(32px, 6vw, 48px); }
 }
+/* ════════════════════════════════════════════════════════════
+   DECO PREDA — style-additions.css
+   Adaugă aceste reguli la SFÂRȘITUL fișierului style.css
+   ─────────────────────────────────────────────────────────
+   Task 1  — .nav__item--sig: Signature Series exclusiv
+   Task 2  — .invite-strip: înlocuiește .sig-band
+   Task 3  — Testimonials nav/footer (folosesc clase existente,
+             nicio regulă nouă necesară dincolo de cele de mai jos)
+   Task 4  — Contrast & legibility (completează fix-urile v2
+             existente cu zonele rămase neacoperite)
+   ════════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────────────────
+   TASK 1 — nav__item--sig: Signature Series ca invitație
+   ───────────────────────────────────────────────────────── */
+
+/* Desktop: serif italic, border subțire, fără fill */
+.nav__item--sig {
+  font-family: var(--serif) !important;
+  font-style: italic !important;
+  font-weight: 300 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: none !important;
+  color: rgba(214, 204, 192, 0.80) !important;
+  border: 1px solid rgba(183, 174, 163, 0.38) !important;
+  padding: 6px 16px !important;
+  position: relative;
+  overflow: hidden;
+  transition: color var(--dur-mid) var(--ease),
+              border-color var(--dur-mid),
+              background var(--dur-mid) var(--ease) !important;
+}
+
+/* Suprascriem underline-ul standard al lui nav__item */
+.nav__item--sig::after {
+  display: none !important;
+}
+
+/* Shimmer la hover — desktop cu pointer */
+@media (hover: hover) {
+  .nav__item--sig::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 25%,
+      rgba(214, 196, 170, 0.18) 50%,
+      transparent 75%
+    );
+    background-size: 220% 100%;
+    background-position: 220% 0;
+    transition: background-position 0.6s var(--ease-slow);
+    pointer-events: none;
+  }
+  .nav__item--sig:hover::before {
+    background-position: -220% 0;
+  }
+  .nav__item--sig:hover {
+    color: var(--dark-text) !important;
+    border-color: rgba(183, 174, 163, 0.70) !important;
+  }
+}
+
+/* Pe fond light (scroll jos) */
+.nav.on-light .nav__item--sig {
+  color: var(--taupe-d) !important;
+  border-color: var(--sand) !important;
+}
+.nav.on-light .nav__item--sig:hover {
+  color: var(--ink) !important;
+  border-color: var(--taupe-d) !important;
+}
+
+/* Mobile nav — separator vizual înainte de Signature Series */
+@media (max-width: 900px) {
+  .nav__item--sig {
+    border: none !important;
+    border-top: 1px solid var(--sand) !important;
+    border-bottom: 1px solid var(--sand) !important;
+    padding: 14px 0 !important;
+    font-size: clamp(22px, 5.5vw, 36px) !important;
+    color: var(--taupe-d) !important;
+    margin-top: 8px !important;
+  }
+  .nav__item--sig::before {
+    display: none !important;
+  }
+  .nav__item--sig:hover {
+    color: var(--ink) !important;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   TASK 2 — .invite-strip: înlocuiește secțiunea .sig-band
+   Un singur band orizontal, dark, ~132–160px total height.
+   ───────────────────────────────────────────────────────── */
+
+.invite-strip {
+  background: var(--dark-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 48px);
+  padding: 0 var(--gut);
+  min-height: 140px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.invite-strip__line {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 200;
+  font-size: clamp(15px, 1.8vw, 20px);
+  color: var(--dark-text);
+  letter-spacing: 0.01em;
+  line-height: 1.55;
+  flex: 1;
+  max-width: 580px;
+}
+
+.invite-strip__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: var(--t-xs);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(183, 174, 163, 0.70);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(138, 129, 120, 0.45);
+  padding-bottom: 3px;
+  transition: color var(--dur-mid) var(--ease),
+              border-color var(--dur-mid),
+              gap var(--dur-mid) var(--ease);
+}
+
+.invite-strip__cta:hover {
+  color: var(--dark-text);
+  border-color: rgba(183, 174, 163, 0.60);
+  gap: 16px;
+}
+
+.invite-strip__arrow {
+  display: inline-block;
+  transition: transform var(--dur-mid) var(--ease);
+}
+
+.invite-strip__cta:hover .invite-strip__arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 700px) {
+  .invite-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    padding: 36px var(--gut);
+    min-height: auto;
+  }
+  .invite-strip__line {
+    font-size: clamp(14px, 4vw, 17px);
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────
+   TASK 4 — Contrast suplimentar (completează FIXES v2)
+   Acoperă zonele rămase: section-idx/label, domain tags,
+   estimate btn, project systems tag.
+   Restul (who__p, craft__p, etc.) deja corect în FIXES v2.
+   ───────────────────────────────────────────────────────── */
+
+/* section-idx și section-label: minim #5A5450 pe ivory */
+.section-idx  { color: #5A5450 !important; }
+.section-label { color: #5A5450 !important; }
+
+/* domain-tag default (Architectural & Living) */
+.panel__domain-tag {
+  color: #4A4540 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.28em;
+}
+
+/* domain-tag--infra (Infrastructure & Logistics) — mai întunecat */
+.panel__domain-tag--infra {
+  color: #3A3530 !important;
+}
+
+/* estimate btn — text suficient de vizibil */
+.panel__estimate-label {
+  color: #3A3530 !important;
+}
+.panel__estimate-btn:hover .panel__estimate-label {
+  color: #1E1B18 !important;
+}
+
+/* project-row__systems — tag-uri sisteme */
+.project-row__systems {
+  color: #5A5450 !important;
+  font-size: 10px !important;
+  letter-spacing: 0.22em;
+}
+
+/* Footer dark — asigurăm dark-text corect */
+.foot__nav a         { color: rgba(183, 174, 163, 0.70) !important; }
+.foot__nav a:hover   { color: var(--sand) !important; }
+.foot__wordmark      { color: var(--ivory) !important; }
+.foot__descriptor    { color: var(--taupe) !important; }
