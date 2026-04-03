@@ -4,13 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Deco Preda — Full portfolio gallery. Microcement, resin systems, stone carpet across residential, commercial and industrial applications." />
-  <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:title"       content="Gallery — Deco Preda" />
   <meta property="og:description" content="Portfolio of completed surface projects — residential, commercial, industrial and exterior." />
   <meta property="og:image"       content="https://predaecaterina01.github.io/images/residential/bathroom/mc-ivory-bathroom-01.webp" />
   <meta property="og:url"         content="https://predaecaterina01.github.io/gallery.html" />
-  <!-- Twitter / X -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="Gallery — Deco Preda" />
   <meta name="twitter:description" content="Portfolio of completed surface projects — residential, commercial, industrial and exterior." />
@@ -23,6 +21,8 @@
   <style>
     body { cursor: auto; }
     a, button { cursor: auto; }
+
+    /* ── Gallery page ── */
     .gal-page {
       background: var(--ivory);
       min-height: 100vh;
@@ -82,10 +82,8 @@
     .gal-filter::after {
       content: '';
       position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 0;
-      height: 1px;
+      bottom: -1px; left: 0;
+      width: 0; height: 1px;
       background: var(--ink);
       transition: width var(--dur-mid) var(--ease);
     }
@@ -124,60 +122,83 @@
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .gal-item:hover .gal-swatch { transform: scale(1.04); }
+    /* ── Overlay: gradient permanent jos — text ÎNTOTDEAUNA vizibil ── */
     .gal-item__over {
       position: absolute;
       inset: 0;
-      background: rgba(15, 14, 12, 0);
+      /* Gradient permanent, nu doar la hover */
+      background: linear-gradient(
+        to top,
+        rgba(8, 7, 6, 0.82) 0%,
+        rgba(8, 7, 6, 0.44) 28%,
+        rgba(8, 7, 6, 0.10) 55%,
+        transparent 80%
+      );
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 20px;
-      transition: background var(--dur-mid) var(--ease);
+      padding: 18px 20px 20px;
     }
-    .gal-item:hover .gal-item__over { background: rgba(15, 14, 12, 0.42); }
+    .gal-item:hover .gal-item__over {
+      background: linear-gradient(
+        to top,
+        rgba(8, 7, 6, 0.90) 0%,
+        rgba(8, 7, 6, 0.56) 35%,
+        rgba(8, 7, 6, 0.18) 65%,
+        transparent 86%
+      );
+    }
+
+    /* Titlul — alb clar, mereu vizibil */
     .gal-item__name {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(236, 230, 221, 0.96);
+      text-shadow:
+        0 1px 5px rgba(0,0,0,0.95),
+        0 2px 14px rgba(0,0,0,0.75);
+      line-height: 1.4;
+    }
+
+    /* Subtitlul — ivory cald, clar */
+    .gal-item__mat {
       font-family: var(--sans);
       font-weight: 300;
       font-size: 10px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(246, 243, 238, 0);
-      transform: translateY(8px);
-      transition: color var(--dur-mid) var(--ease), transform var(--dur-mid) var(--ease);
-    }
-    .gal-item__mat {
-      font-family: var(--sans);
-      font-weight: 200;
-      font-size: 9px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(183, 174, 163, 0);
-      transform: translateY(8px);
-      transition: color var(--dur-mid) var(--ease) 0.05s, transform var(--dur-mid) var(--ease) 0.05s;
-      margin-top: 4px;
+      color: rgba(214, 204, 192, 0.90);
+      text-shadow:
+        0 1px 4px rgba(0,0,0,0.90),
+        0 2px 10px rgba(0,0,0,0.70);
+      margin-top: 3px;
+      line-height: 1.4;
     }
-    .gal-item:hover .gal-item__name { color: rgba(246, 243, 238, 0.95); transform: translateY(0); }
-    .gal-item:hover .gal-item__mat  { color: rgba(183, 174, 163, 0.75); transform: translateY(0); }
+
+    /* Expand icon — mereu ușor vizibil */
     .gal-item__expand {
       position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 28px;
-      height: 28px;
-      border: 1px solid rgba(246, 243, 238, 0);
+      top: 12px; right: 12px;
+      width: 26px; height: 26px;
+      border: 1px solid rgba(236, 230, 221, 0.50);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(246, 243, 238, 0);
-      transition: all var(--dur-mid) var(--ease);
+      color: rgba(236, 230, 221, 0.75);
+      background: rgba(0, 0, 0, 0.32);
+      opacity: 0.60;
+      transition: opacity 0.25s ease, background 0.25s ease;
     }
     .gal-item:hover .gal-item__expand {
-      border-color: rgba(246, 243, 238, 0.5);
-      color: rgba(246, 243, 238, 0.9);
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.55);
+      border-color: rgba(236, 230, 221, 0.85);
     }
     .gal-loading {
-      grid-column: 1/-1;
       text-align: center;
       padding: 80px 20px;
       font-family: var(--sans);
@@ -190,101 +211,201 @@
     @media (max-width: 900px) { .gal-grid { columns: 2; } }
     @media (max-width: 500px) { .gal-grid { columns: 1; } }
 
-    /* LIGHTBOX */
+    /* ════════════════════════════════════════════════════
+       LIGHTBOX — redesign complet pentru mobile
+       Strategie:
+       - Overlay = backdrop dark, pointer-events:all
+       - .lb-stage = container centrat cu max-width
+       - .lb-img-wrap = relativ, contine imaginea + X + meta
+       - X = absolut colț dreapta-sus AL IMAGINII (nu al ecranului)
+       - Săgeți = fix pe ecran, centrate vertical, cu voal
+       ════════════════════════════════════════════════════ */
+
     .lightbox {
       position: fixed;
       inset: 0;
-      z-index: 9000;
+      z-index: 9500;
       background: rgba(10, 9, 8, 0);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: var(--s-lg);
       pointer-events: none;
-      transition: background 0.4s var(--ease);
+      transition: background 0.4s ease;
+      /* Padding = spatiu pentru sageti stanga/dreapta */
+      padding: 0 68px;
     }
-    .lightbox.open { background: rgba(10, 9, 8, 0.92); pointer-events: all; }
-    .lb-inner {
+    .lightbox.open {
+      background: rgba(10, 9, 8, 0.95);
+      pointer-events: all;
+    }
+
+    /* Stage — containerul principal, se scalează cu imaginea */
+    .lb-stage {
       position: relative;
-      max-width: 900px;
+      max-width: min(860px, 100%);
       width: 100%;
       opacity: 0;
       transform: scale(0.96);
-      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
-    .lightbox.open .lb-inner { opacity: 1; transform: scale(1); }
-    .lb-surface { display: block; width: 100%; border: none; }
+    .lightbox.open .lb-stage { opacity: 1; transform: scale(1); }
+
+    /* Wrapper imagine — position:relative pentru X */
+    .lb-img-wrap {
+      position: relative;
+      width: 100%;
+      line-height: 0; /* elimina spatiu sub imagine */
+    }
+
+    .lb-surface {
+      display: block;
+      width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      border: none;
+    }
+
+    /* ── X — colț dreapta-sus AL IMAGINII ──
+       position:absolute față de .lb-img-wrap.
+       Pe mobile: se vede clar pe colțul imaginii,
+       nu se suprapune cu nav-ul (care e sus la z-index:1000). */
+    .lb-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Voal dark pentru vizibilitate pe orice imagine */
+      background: rgba(10, 9, 8, 0.72);
+      border: 1px solid rgba(236, 230, 221, 0.45);
+      border-radius: 50%;
+      color: rgba(236, 230, 221, 0.95);
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      /* Touch target minim 44px */
+      -webkit-tap-highlight-color: transparent;
+    }
+    .lb-close:hover,
+    .lb-close:active {
+      background: rgba(236, 230, 221, 0.18);
+      border-color: rgba(236, 230, 221, 0.80);
+      color: #fff;
+    }
+
+    /* ── Meta (titlu + material) — sub imagine ── */
     .lb-meta {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding: 16px 0 0;
+      gap: 16px;
+      padding: 14px 0 0;
     }
+
     .lb-name {
       font-family: var(--serif);
       font-weight: 300;
-      font-size: clamp(20px, 2.5vw, 28px);
-      color: var(--dark-text);
+      font-size: clamp(18px, 2.2vw, 26px);
+      /* Culoare clară pe fond dark */
+      color: rgba(236, 230, 221, 0.96);
+      line-height: 1.2;
     }
+
+    /* Subtitlul (material · locatie) — vizibil clar */
     .lb-mat {
       font-family: var(--sans);
-      font-weight: 200;
-      font-size: 10px;
-      letter-spacing: 0.32em;
+      font-weight: 300;
+      font-size: clamp(10px, 1.1vw, 12px);
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--dark-muted);
+      /* Aceeași culoare clară, nu mai e transparent */
+      color: rgba(214, 204, 192, 0.88);
+      flex-shrink: 0;
+      line-height: 1.4;
     }
-    .lb-close {
-      position: fixed;
-      top: 24px;
-      right: 24px;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(183, 174, 163, 0.2);
-      border-radius: 50%;
-      color: var(--dark-muted);
-      background: transparent;
-      transition: border-color var(--dur-fast), color var(--dur-fast);
-      cursor: pointer;
-    }
-    .lb-close:hover { border-color: rgba(183, 174, 163, 0.6); color: var(--dark-text); }
-    .lb-nav {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(183, 174, 163, 0.2);
-      border-radius: 50%;
-      color: var(--dark-muted);
-      background: transparent;
-      transition: border-color var(--dur-fast), color var(--dur-fast);
-      cursor: pointer;
-    }
-    .lb-nav:hover { border-color: rgba(183, 174, 163, 0.6); color: var(--dark-text); }
-    .lb-prev { left: 24px; }
-    .lb-next { right: 24px; }
+
+    /* Counter */
     .lb-counter {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
+      display: block;
+      text-align: center;
+      margin-top: 10px;
       font-family: var(--sans);
       font-weight: 200;
       font-size: 10px;
       letter-spacing: 0.28em;
-      color: var(--dark-muted);
+      color: rgba(183, 174, 163, 0.50);
+    }
+
+    /* ── SĂGEȚI — fixed pe ecran, centrate vertical ──
+       Voal dark pentru vizibilitate garantată pe orice imagine.
+       Z-index mai mare decât nav (1000) → 9600. */
+    .lb-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Voal dark vizibil */
+      background: rgba(10, 9, 8, 0.70);
+      border: 1px solid rgba(183, 174, 163, 0.55);
+      border-radius: 50%;
+      color: rgba(236, 230, 221, 0.95);
+      cursor: pointer;
+      z-index: 9600;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      /* Ascunse când lightbox e închis */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, background 0.2s, border-color 0.2s;
+    }
+    .lightbox.open .lb-nav {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .lb-nav:hover,
+    .lb-nav:active {
+      background: rgba(183, 174, 163, 0.22);
+      border-color: rgba(236, 230, 221, 0.85);
+      color: #fff;
+    }
+    .lb-prev { left: 12px; }
+    .lb-next { right: 12px; }
+
+    /* Mobile: săgeți mai mici, mai aproape de margine */
+    @media (max-width: 600px) {
+      .lightbox { padding: 0 52px; }
+      .lb-nav {
+        width: 40px;
+        height: 40px;
+      }
+      .lb-prev { left: 6px; }
+      .lb-next { right: 6px; }
+      .lb-close {
+        top: 8px;
+        right: 8px;
+        width: 36px;
+        height: 36px;
+      }
+      .lb-name {
+        font-size: clamp(16px, 4vw, 20px);
+      }
+      .lb-mat {
+        font-size: 9px;
+        letter-spacing: 0.20em;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- ══ NAV ══ -->
   <nav class="nav on-light" id="nav" aria-label="Primary">
     <a href="index.html" class="nav__wordmark" aria-label="Deco Preda home">
       DECO<span class="nav__wordmark-thin">PREDA</span>
@@ -293,16 +414,17 @@
       <span></span><span></span>
     </button>
     <div class="nav__panel" id="navPanel" aria-hidden="true">
-      <a href="index.html#who-we-are"  class="nav__item" data-cursor="link">Who We Are</a>
-      <a href="index.html#systems"     class="nav__item" data-cursor="link">Systems</a>
-      <a href="index.html#projects"    class="nav__item" data-cursor="link">Projects</a>
-      <a href="index.html#craft"       class="nav__item" data-cursor="link">Craft</a>
-      <a href="signature-series.html"  class="nav__item" data-cursor="link">Signature Series</a>
-      <a href="gallery.html"           class="nav__item" data-cursor="link">Gallery</a>
-      <a href="index.html#contact"     class="nav__item nav__item--cta" data-cursor="link">Contact</a>
+      <a href="index.html#systems"    class="nav__item" data-cursor="link">Systems</a>
+      <a href="index.html#projects"   class="nav__item" data-cursor="link">Projects</a>
+      <a href="index.html#craft"      class="nav__item" data-cursor="link">Craft</a>
+      <a href="gallery.html"          class="nav__item" data-cursor="link">Gallery</a>
+      <a href="testimonials.html"     class="nav__item" data-cursor="link">Testimonials</a>
+      <a href="index.html#contact"    class="nav__item nav__item--contact" data-cursor="link">Contact</a>
+      <a href="signature-series.html" class="nav__item nav__item--sig" data-cursor="link" aria-label="Signature Series — exclusive commissions only">Signature Series</a>
     </div>
   </nav>
 
+  <!-- ══ GALLERY PAGE ══ -->
   <main class="gal-page">
     <div class="gal-head">
       <a href="index.html" class="gal-back">
@@ -311,14 +433,12 @@
         </svg>
         Back to studio
       </a>
-
       <h1 class="gal-head__title">
         The complete work.<br>
         <em>Every surface. Every scale.</em>
       </h1>
-
       <div class="gal-filters" role="tablist" aria-label="Filter by space">
-        <button class="gal-filter active" data-filter="all"        role="tab" aria-selected="true"  type="button">All</button>
+        <button class="gal-filter active" data-filter="all"         role="tab" aria-selected="true"  type="button">All</button>
         <button class="gal-filter"        data-filter="residential" role="tab" aria-selected="false" type="button">Residential</button>
         <button class="gal-filter"        data-filter="commercial"  role="tab" aria-selected="false" type="button">Commercial</button>
         <button class="gal-filter"        data-filter="industrial"  role="tab" aria-selected="false" type="button">Industrial</button>
@@ -333,26 +453,59 @@
     </div>
   </main>
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image detail view">
-    <div class="lb-inner" id="lbInner">
-      <img class="lb-surface" id="lbSurface" src="" alt="" />
+  <!-- ══ LIGHTBOX ══
+       Structura:
+       .lightbox (backdrop, fixed inset:0)
+         .lb-nav.lb-prev (fixed, z:9600)
+         .lb-nav.lb-next (fixed, z:9600)
+         .lb-stage (container centrat)
+           .lb-img-wrap (position:relative)
+             img.lb-surface
+             button.lb-close (absolut colț dreapta-sus)
+           .lb-meta
+             span.lb-name
+             span.lb-mat
+           span.lb-counter
+  ══ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image detail view" aria-hidden="true">
+
+    <!-- Săgeți: fixed față de viewport, z > nav -->
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next image">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M7 4L12 9L7 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Stage -->
+    <div class="lb-stage" id="lbStage">
+
+      <!-- Imagine + X -->
+      <div class="lb-img-wrap" id="lbImgWrap">
+        <!-- X: absolut față de .lb-img-wrap, colț dreapta-sus -->
+        <button class="lb-close" id="lbClose" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <img class="lb-surface" id="lbSurface" src="" alt="" />
+      </div>
+
+      <!-- Meta -->
       <div class="lb-meta">
         <span class="lb-name" id="lbName"></span>
         <span class="lb-mat"  id="lbMat"></span>
       </div>
-    </div>
-    <button class="lb-close" id="lbClose" aria-label="Close">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-    </button>
-    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <button class="lb-nav lb-next" id="lbNext" aria-label="Next">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-    <span class="lb-counter" id="lbCounter"></span>
-  </div>
+
+      <!-- Counter -->
+      <span class="lb-counter" id="lbCounter"></span>
+
+    </div><!-- /.lb-stage -->
+  </div><!-- /.lightbox -->
 
   <script>
   'use strict';
@@ -361,130 +514,85 @@
 
   let allItems = [];
 
-  /* ── Flatten JSON into a flat array of image objects ── */
+  /* ── Flatten manifest ── */
   function flattenData(data) {
     const items = [];
-
     function addItems(arr, filter) {
       if (!Array.isArray(arr)) return;
-      arr.forEach(img => {
-        items.push({
-          src:      img.src,
-          name:     img.name     || '',
-          material: img.material || '',
-          location: img.location || '',
-          filter:   filter
-        });
-      });
+      arr.forEach(img => items.push({
+        src:      img.src,
+        name:     img.name     || '',
+        material: img.material || '',
+        location: img.location || '',
+        filter
+      }));
     }
-
-    /* residential */
-    if (data.residential) {
-      Object.values(data.residential).forEach(arr => addItems(arr, 'residential'));
-    }
-    /* commercial */
-    if (data.commercial) {
-      Object.values(data.commercial).forEach(arr => addItems(arr, 'commercial'));
-    }
-    /* industrial */
-    if (Array.isArray(data.industrial)) {
-      addItems(data.industrial, 'industrial');
-    }
-    /* exterior */
-    if (data.exterior) {
-      Object.values(data.exterior).forEach(arr => addItems(arr, 'exterior'));
-    }
-    /* signature */
-    if (Array.isArray(data.signature)) {
-      addItems(data.signature, 'signature');
-    }
-
+    if (data.residential) Object.values(data.residential).forEach(a => addItems(a, 'residential'));
+    if (data.commercial)  Object.values(data.commercial).forEach(a => addItems(a, 'commercial'));
+    if (Array.isArray(data.industrial)) addItems(data.industrial, 'industrial');
+    if (data.exterior)    Object.values(data.exterior).forEach(a => addItems(a, 'exterior'));
+    if (Array.isArray(data.signature))  addItems(data.signature, 'signature');
     return items;
   }
 
-  /* ── Build a single gallery card ── */
+  /* ── Build card ── */
   function buildCard(img) {
     const div = document.createElement('div');
-    div.className   = 'gal-item';
-    div.role        = 'listitem';
-    div.tabIndex    = 0;
+    div.className        = 'gal-item';
+    div.role             = 'listitem';
+    div.tabIndex         = 0;
     div.dataset.filter   = img.filter;
     div.dataset.hidden   = 'false';
     div.dataset.name     = img.name;
     div.dataset.material = img.material;
     div.dataset.location = img.location;
     div.dataset.src      = img.src;
-
     div.innerHTML = `
-      <img
-        class="gal-swatch"
-        src="images/${img.src}"
-        alt="${img.name}"
-        loading="lazy"
-        decoding="async"
-      />
+      <img class="gal-swatch" src="images/${img.src}" alt="${img.name}" loading="lazy" decoding="async" />
       <div class="gal-item__over">
         <div class="gal-item__expand">${EXPAND_ICON}</div>
         <span class="gal-item__name">${img.name}</span>
         <span class="gal-item__mat">${img.material}</span>
       </div>`;
-
     return div;
   }
 
-  /* ── Render gallery from JSON ── */
+  /* ── Init gallery ── */
   async function initGallery() {
     const grid    = document.getElementById('galGrid');
     const loading = document.getElementById('galLoading');
-
     try {
       const res  = await fetch('images.json');
       if (!res.ok) throw new Error('images.json not found');
       const data = await res.json();
-
-      allItems = flattenData(data);
-
+      allItems   = flattenData(data);
       loading.remove();
-
       allItems.forEach(img => {
         const card = buildCard(img);
         grid.appendChild(card);
         card.addEventListener('click',   () => openLightbox(card));
         card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openLightbox(card); });
       });
-
       updateCount();
-
     } catch (err) {
       loading.textContent = 'Gallery unavailable — ' + err.message;
-      console.error(err);
     }
   }
 
-  /* ── Filter logic ── */
+  /* ── Filter ── */
   const filterBtns = document.querySelectorAll('.gal-filter');
   const countEl    = document.getElementById('galCount');
-
-  function getItems() {
-    return Array.from(document.querySelectorAll('.gal-item'));
-  }
-
+  function getItems() { return Array.from(document.querySelectorAll('.gal-item')); }
   function updateCount() {
-    const visible = getItems().filter(i => i.dataset.hidden !== 'true').length;
-    countEl.textContent = visible + ' project' + (visible !== 1 ? 's' : '');
+    const n = getItems().filter(i => i.dataset.hidden !== 'true').length;
+    countEl.textContent = n + ' project' + (n !== 1 ? 's' : '');
   }
-
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-
+      btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
       const f = btn.dataset.filter;
-      getItems().forEach(item => {
-        const show = f === 'all' || item.dataset.filter === f;
-        item.dataset.hidden = show ? 'false' : 'true';
-      });
+      getItems().forEach(item => { item.dataset.hidden = (f === 'all' || item.dataset.filter === f) ? 'false' : 'true'; });
       updateCount();
     });
   });
@@ -502,57 +610,99 @@
   let visibleItems = [];
   let lbCurrent    = 0;
 
-  function getVisible() {
-    return getItems().filter(i => i.dataset.hidden !== 'true');
-  }
+  function getVisible() { return getItems().filter(i => i.dataset.hidden !== 'true'); }
 
   function openLightbox(item) {
     visibleItems = getVisible();
     lbCurrent    = visibleItems.indexOf(item);
     renderLb();
     lb.classList.add('open');
+    lb.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
 
   function closeLightbox() {
     lb.classList.remove('open');
+    lb.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
 
   function renderLb() {
     const item = visibleItems[lbCurrent];
+    if (!item) return;
     lbSurf.src = 'images/' + item.dataset.src;
     lbSurf.alt = item.dataset.name;
     lbName.textContent = item.dataset.name;
-    lbMat.textContent  = item.dataset.material + (item.dataset.location ? ' · ' + item.dataset.location : '');
+    lbMat.textContent  = item.dataset.material
+      + (item.dataset.location ? ' · ' + item.dataset.location : '');
     lbCnt.textContent  = (lbCurrent + 1) + ' / ' + visibleItems.length;
   }
 
+  function prevImg() { lbCurrent = (lbCurrent - 1 + visibleItems.length) % visibleItems.length; renderLb(); }
+  function nextImg() { lbCurrent = (lbCurrent + 1) % visibleItems.length; renderLb(); }
+
   lbClose.addEventListener('click', closeLightbox);
-  lbPrev.addEventListener('click', () => { lbCurrent = (lbCurrent - 1 + visibleItems.length) % visibleItems.length; renderLb(); });
-  lbNext.addEventListener('click', () => { lbCurrent = (lbCurrent + 1) % visibleItems.length; renderLb(); });
+  lbPrev.addEventListener('click',  prevImg);
+  lbNext.addEventListener('click',  nextImg);
   lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
 
   document.addEventListener('keydown', e => {
     if (!lb.classList.contains('open')) return;
     if (e.key === 'Escape')     closeLightbox();
-    if (e.key === 'ArrowLeft')  { lbCurrent = (lbCurrent - 1 + visibleItems.length) % visibleItems.length; renderLb(); }
-    if (e.key === 'ArrowRight') { lbCurrent = (lbCurrent + 1) % visibleItems.length; renderLb(); }
+    if (e.key === 'ArrowLeft')  prevImg();
+    if (e.key === 'ArrowRight') nextImg();
   });
 
+  /* Touch swipe */
   let tsX = 0;
   lb.addEventListener('touchstart', e => { tsX = e.changedTouches[0].clientX; }, { passive: true });
   lb.addEventListener('touchend',   e => {
     const dx = e.changedTouches[0].clientX - tsX;
-    if (Math.abs(dx) > 50) {
-      lbCurrent = dx < 0
-        ? (lbCurrent + 1) % visibleItems.length
-        : (lbCurrent - 1 + visibleItems.length) % visibleItems.length;
-      renderLb();
-    }
+    if (Math.abs(dx) > 45) { dx < 0 ? nextImg() : prevImg(); }
   }, { passive: true });
 
-  /* ── Init ── */
+  /* ── Nav burger (inline, fără script.js) ── */
+  const burgerBtn  = document.getElementById('navBurger');
+  const navPanelEl = document.getElementById('navPanel');
+  if (burgerBtn && navPanelEl) {
+    burgerBtn.addEventListener('click', () => {
+      const open = navPanelEl.classList.toggle('open');
+      burgerBtn.setAttribute('aria-expanded', String(open));
+      burgerBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      navPanelEl.setAttribute('aria-hidden', String(!open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    Array.from(navPanelEl.querySelectorAll('a')).forEach(a => {
+      a.addEventListener('click', () => {
+        navPanelEl.classList.remove('open');
+        burgerBtn.setAttribute('aria-expanded', 'false');
+        navPanelEl.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && navPanelEl.classList.contains('open')) {
+        navPanelEl.classList.remove('open');
+        burgerBtn.setAttribute('aria-expanded', 'false');
+        navPanelEl.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        burgerBtn.focus();
+      }
+    });
+  }
+
+  /* URL filter param */
+  (function() {
+    const p = new URLSearchParams(window.location.search);
+    const f = p.get('filter') || p.get('domain');
+    if (!f || f === 'all') return;
+    const btn = document.querySelector(`.gal-filter[data-filter="${f}"]`);
+    if (btn) btn.click();
+  })();
+
+  const yrEl = document.getElementById('yr');
+  if (yrEl) yrEl.textContent = new Date().getFullYear();
+
   initGallery();
   </script>
 
