@@ -4329,3 +4329,257 @@ document.querySelectorAll('.panel').forEach(panel => {
   }
 
 })();
+/* ════════════════════════════════════════════════════════════
+   DECO PREDA — FINAL ADDITIONS v4
+   Adaugă la SFÂRȘITUL fișierului style.css
+   ════════════════════════════════════════════════════════════
+
+   1. .systems__panels — position:relative (ancorare sigiliu)
+   2. nav__wordmark hover
+   3. nav__item--contact — text pur, fără border
+   4. nav__item--sig — dark near-black + border aurie
+   5. Nav mobil — scroll complet, fără tăiere, hint vizibil
+   ════════════════════════════════════════════════════════════ */
+
+
+/* ── 1. SYSTEMS PANELS — ancorare sigiliu ── */
+.systems__panels {
+  position: relative !important;
+}
+
+
+/* ── 2. WORDMARK hover ── */
+.nav__wordmark {
+  transition: opacity var(--dur-fast);
+}
+.nav__wordmark:hover { opacity: 0.68; }
+
+
+/* ── 3. nav__item--contact — Contact text pur ── */
+.nav__item--contact {
+  border: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+  font-family: var(--sans) !important;
+  font-weight: 300 !important;
+  font-size: var(--t-xs) !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: rgba(214, 204, 192, 0.65) !important;
+  position: relative;
+}
+.nav__item--contact::after {
+  content: '' !important;
+  display: block !important;
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--taupe-d);
+  transition: width var(--dur-mid) var(--ease);
+}
+.nav__item--contact:hover {
+  color: var(--dark-text) !important;
+  background: transparent !important;
+  border: none !important;
+}
+.nav__item--contact:hover::after { width: 100% !important; }
+.nav.on-light .nav__item--contact {
+  color: var(--stone) !important;
+  border: none !important;
+  background: transparent !important;
+}
+.nav.on-light .nav__item--contact:hover { color: var(--ink) !important; }
+
+@media (max-width: 900px) {
+  .nav__item--contact {
+    font-family: var(--serif) !important;
+    font-size: clamp(24px, 6vw, 40px) !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: none !important;
+    color: rgba(43, 40, 38, 0.50) !important;
+    padding: 14px 0 !important;
+    border-bottom: 1px solid rgba(217, 209, 197, 0.4) !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  .nav__item--contact::after { display: none !important; }
+  .nav__item--contact:hover { color: var(--ink) !important; }
+}
+
+
+/* ── 4. nav__item--sig — dark near-black + border aurie ── */
+.nav__item--sig {
+  font-family: var(--serif) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: 13.5px !important;
+  letter-spacing: 0.04em !important;
+  text-transform: none !important;
+  background: #a1a09e !important;
+  color: rgba(237, 234, 230, 0.92) !important;
+  border: 1px solid rgba(28, 24, 18, 0.55) !important;
+  padding: 7px 18px !important;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--dur-mid) var(--ease),
+              border-color var(--dur-mid),
+              color var(--dur-mid) !important;
+}
+.nav__item--sig::after { display: none !important; }
+
+@media (hover: hover) {
+  .nav__item--sig::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(105deg, transparent 20%, rgba(214,196,150,0.12) 50%, transparent 80%);
+    background-size: 250% 100%;
+    background-position: 250% 0;
+    transition: background-position 0.65s var(--ease-slow);
+    pointer-events: none;
+  }
+  .nav__item--sig:hover::before { background-position: -250% 0; }
+}
+
+.nav__item--sig:hover {
+  background: #221E19 !important;
+  color: rgba(236, 224, 200, 1) !important;
+  border-color: rgba(183, 158, 110, 0.85) !important;
+}
+.nav.on-light .nav__item--sig {
+  background: #1A1714 !important;
+  color: rgba(214, 200, 178, 0.92) !important;
+  border-color: rgba(183, 158, 110, 0.55) !important;
+}
+.nav.on-light .nav__item--sig:hover {
+  background: #221E19 !important;
+  color: rgba(236, 224, 200, 1) !important;
+  border-color: rgba(183, 158, 110, 0.85) !important;
+}
+
+@media (max-width: 900px) {
+  .nav__item--sig {
+    font-family: var(--serif) !important;
+    font-size: clamp(22px, 5.5vw, 36px) !important;
+    font-weight: 400 !important;
+    font-style: italic !important;
+    background: transparent !important;
+    border: none !important;
+    border-top: 2px solid rgba(183, 158, 110, 0.60) !important;
+    border-bottom: 1px solid rgba(217, 209, 197, 0.5) !important;
+    padding: 16px 0 !important;
+    color: #7A5F3A !important;
+    margin-top: 6px !important;
+  }
+  .nav__item--sig::before { display: none !important; }
+  .nav__item--sig:hover {
+    color: #5A4028 !important;
+    background: transparent !important;
+  }
+}
+
+
+/* ════════════════════════════════════════════════════
+   5. NAV MOBIL — meniu complet vizibil cu scroll
+   ════════════════════════════════════════════════════
+
+   Problema: meniul părea incomplet — Signature tăiat.
+   Cauze posibile:
+   a) overflow:hidden pe .nav__panel sau pe body
+   b) max-height prea mic
+   c) padding-bottom insuficient
+
+   Fix:
+   - overflow-y: auto (nu hidden) pe panel
+   - min-height și bottom:0 explicit
+   - padding-bottom generos (88px) — spațiu pentru ultimul item
+   - fără max-height fix — se adaptează la conținut
+   - scroll-indicator gradient jos
+*/
+
+@media (max-width: 900px) {
+
+  /* Panel — scroll intern dacă nu încape */
+  .nav__panel,
+  .nav__panel.open {
+    /* Acoperă tot ecranul de sub nav */
+    position: fixed !important;
+    top: var(--nav-h) !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;         /* explicit bottom:0 — nu se mai taie */
+    height: auto !important;      /* nu height fix */
+    max-height: none !important;  /* fără limită */
+
+    background: rgba(248, 245, 240, 0.99) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: var(--s-md) var(--gut) 0 var(--gut) !important;
+    gap: 0 !important;
+    z-index: 999 !important;
+    border-top: 1px solid var(--sand) !important;
+
+    /* Scroll intern — dacă itemele depășesc înălțimea */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .nav__panel {
+    display: none !important;
+    opacity: 0 !important;
+    transform: translateY(-6px) !important;
+    pointer-events: none !important;
+    transition: opacity 0.28s ease, transform 0.28s ease !important;
+  }
+
+  .nav__panel.open {
+    display: flex !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: all !important;
+  }
+
+  /* Fiecare item — padding vertical confortabil */
+  .nav__item {
+    font-family: var(--serif) !important;
+    font-size: clamp(26px, 6.5vw, 42px) !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.01em !important;
+    text-transform: none !important;
+    color: #1A1816 !important;
+    padding: 13px 0 !important;
+    border-bottom: 1px solid rgba(217, 209, 197, 0.50) !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  .nav__item::after { display: none !important; }
+
+  /* Ultimul item vizibil — padding-bottom generos
+     ca să nu fie tăiat de marginea ecranului */
+  .nav__item:last-child {
+    margin-bottom: 48px !important;
+  }
+
+  /* Scroll hint — gradient fade jos
+     sugereaza ca există mai mult conținut de scroll */
+  .nav__panel.open::after {
+    content: '';
+    position: sticky;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(
+      to top,
+      rgba(248, 245, 240, 0.98) 0%,
+      transparent 100%
+    );
+    display: block;
+    pointer-events: none;
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+}
