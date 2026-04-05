@@ -4225,3 +4225,182 @@ button {
 @media (min-width: 901px) {
   .nav__backdrop { display: none !important; }
 }
+/* ════════════════════════════════════════════════════════════
+   MOBILE NAV SIDEBAR v3
+   Adaugă la SFÂRȘITUL style.css
+   ════════════════════════════════════════════════════════════ */
+
+.nav__backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(8, 7, 6, 0.22);
+  opacity: 0;
+  transition: opacity 0.30s ease;
+  pointer-events: none;
+}
+.nav__backdrop.open {
+  display: block;
+  opacity: 1;
+  pointer-events: all;
+}
+
+@media (max-width: 900px) {
+
+  .nav__panel,
+  .nav__panel.open {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: 62vw !important;
+    max-width: 280px !important;
+    height: auto !important;
+    max-height: calc(var(--nav-h) + 210px) !important;
+    background: rgba(255, 255, 255, 0.28) !important;
+    backdrop-filter: blur(24px) saturate(1.8) brightness(1.05) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(1.8) brightness(1.05) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.45) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35) !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-radius: 0 0 0 16px !important;
+    box-shadow: -4px 4px 28px rgba(8, 7, 6, 0.10) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    justify-content: flex-start !important;
+    padding: calc(var(--nav-h) + 20px) 28px 24px 16px !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+    z-index: 9999 !important;
+    transform: translateX(110%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease !important;
+  }
+
+  .nav__panel.open {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+  }
+
+  .nav__panel.open::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 64px !important;
+    background: linear-gradient(to top, rgba(255,255,255,0.55) 0%, transparent 100%) !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+
+  .nav__item {
+    font-family: var(--serif) !important;
+    font-weight: 300 !important;
+    font-size: clamp(20px, 5vw, 26px) !important;
+    letter-spacing: 0.01em !important;
+    text-transform: none !important;
+    text-align: right !important;
+    width: 100% !important;
+    display: block !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid rgba(138, 129, 120, 0.12) !important;
+    color: #1A1816 !important;
+    line-height: 1.2 !important;
+    background: transparent !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    pointer-events: all !important;
+    position: relative !important;
+    z-index: 10 !important;
+    transition: opacity 0.18s ease, color 0.18s ease !important;
+  }
+  .nav__item::after  { display: none !important; }
+  .nav__item::before { display: none !important; }
+
+  .nav__item:nth-child(1) { opacity: 1.00 !important; }
+  .nav__item:nth-child(2) { opacity: 0.52 !important; }
+  .nav__item:nth-child(3) { opacity: 0.28 !important; }
+  .nav__item:nth-child(4) { opacity: 0.14 !important; }
+  .nav__item:nth-child(5) { opacity: 0.08 !important; }
+  .nav__item:nth-child(6) { opacity: 0.05 !important; }
+  .nav__item:nth-child(7) { opacity: 0.03 !important; }
+
+  .nav__item:hover,
+  .nav__item:active,
+  .nav__item:focus {
+    opacity: 1 !important;
+    color: #0A0908 !important;
+  }
+
+  .nav__item--contact {
+    font-family: var(--sans) !important;
+    font-size: 9px !important;
+    letter-spacing: 0.30em !important;
+    text-transform: uppercase !important;
+    color: rgba(122, 115, 106, 0.80) !important;
+    padding: 10px 0 4px !important;
+    border-top: 1px solid rgba(138, 129, 120, 0.10) !important;
+    border-bottom: none !important;
+    margin-top: 4px !important;
+    opacity: 0.85 !important;
+    pointer-events: all !important;
+    z-index: 10 !important;
+    position: relative !important;
+  }
+  .nav__item--contact::after { display: none !important; }
+  .nav__item--contact:hover  { opacity: 1 !important; color: #1A1816 !important; }
+
+  .nav__item--sig {
+    font-family: var(--serif) !important;
+    font-style: italic !important;
+    font-size: clamp(15px, 3.8vw, 20px) !important;
+    font-weight: 400 !important;
+    text-transform: none !important;
+    color: #7A5F3A !important;
+    background: transparent !important;
+    border: none !important;
+    border-top: 1px solid rgba(183, 158, 110, 0.20) !important;
+    border-bottom: none !important;
+    padding: 10px 0 0 !important;
+    margin-top: 4px !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+    z-index: 10 !important;
+    position: relative !important;
+  }
+  .nav__item--sig::before { display: none !important; }
+  .nav__item--sig:hover   { color: #5A4028 !important; }
+
+  body:not(.light-body) .nav__panel,
+  body:not(.light-body) .nav__panel.open {
+    background: rgba(10, 9, 8, 0.55) !important;
+    border-left-color: rgba(255,255,255,0.08) !important;
+    border-bottom-color: rgba(255,255,255,0.06) !important;
+  }
+  body:not(.light-body) .nav__item {
+    color: rgba(236, 230, 221, 0.95) !important;
+    border-bottom-color: rgba(183,174,163,0.08) !important;
+  }
+  body:not(.light-body) .nav__item:hover { color: #fff !important; }
+  body:not(.light-body) .nav__item--contact { color: rgba(183,174,163,0.55) !important; }
+  body:not(.light-body) .nav__item--sig { color: rgba(214,196,150,0.88) !important; }
+  body:not(.light-body) .nav__panel.open::after {
+    background: linear-gradient(to top, rgba(10,9,8,0.65) 0%, transparent 100%) !important;
+  }
+
+  .nav__burger {
+    position: relative !important;
+    z-index: 10000 !important;
+  }
+}
+
+@media (min-width: 901px) {
+  .nav__backdrop { display: none !important; }
+}
