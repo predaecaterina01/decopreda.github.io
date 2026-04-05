@@ -10,18 +10,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ── Testimonials page styles ── */
-
-    /* Override dark body default din style.css */
     body { background: var(--ivory-2); color: var(--ink); }
 
-    /* Forțăm nav pe light imediat — fără așteptare scroll */
-    .nav { background: rgba(246, 243, 238, 0.96) !important; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--sand) !important; }
+    /* Nav forțat pe light imediat */
+    .nav {
+      background: rgba(246, 243, 238, 0.96) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--sand) !important;
+    }
     .nav__wordmark { color: var(--ink) !important; }
     .nav__item { color: var(--stone) !important; }
     .nav__item:hover { color: var(--ink) !important; }
-    .nav__item--sig { color: var(--taupe-d) !important; border-color: var(--sand) !important; }
-    .nav__item--cta { border-color: var(--sand) !important; color: var(--ink) !important; }
     .nav__burger span { background: var(--ink) !important; }
 
     /* Loader ascuns pe pagini secundare */
@@ -36,11 +36,9 @@
       max-width: var(--max);
       margin-inline: auto;
     }
-
     .testi-hero .section-head {
       margin-bottom: clamp(32px, 4vw, 48px);
     }
-
     .testi-hero__h {
       font-family: var(--serif);
       font-weight: 200;
@@ -49,7 +47,6 @@
       color: var(--ink);
       max-width: 700px;
     }
-
     .testi-hero__h em {
       font-style: italic;
       color: var(--stone);
@@ -60,7 +57,6 @@
       background: var(--ivory);
       padding-block: clamp(48px, 6vw, 80px);
     }
-
     .testi-list__inner {
       max-width: var(--max);
       margin-inline: auto;
@@ -72,17 +68,11 @@
       padding-block: clamp(44px, 5vw, 64px);
       border-bottom: 1px solid var(--ivory-3);
       max-width: 860px;
-      /* reveal */
       opacity: 0;
       transform: translateY(24px);
       transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
     }
-
-    .testi-item.in {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    .testi-item.in { opacity: 1; transform: translateY(0); }
     .testi-item:last-child { border-bottom: none; }
 
     .testi-item__category {
@@ -96,7 +86,6 @@
     }
 
     .testi-item blockquote { margin: 0; padding: 0; }
-
     .testi-item blockquote p {
       font-family: var(--serif);
       font-weight: 200;
@@ -107,8 +96,6 @@
       margin: 0 0 clamp(20px, 2.5vw, 32px);
       letter-spacing: 0.005em;
     }
-
-    /* Ghilimea deschizătoare */
     .testi-item blockquote p::before {
       content: '\201C';
       font-family: var(--serif);
@@ -132,12 +119,10 @@
       color: var(--stone-l);
       font-style: normal;
     }
-
     .testi-item cite::before {
       content: '';
       display: inline-block;
-      width: 28px;
-      height: 1px;
+      width: 28px; height: 1px;
       background: var(--taupe-d);
       flex-shrink: 0;
     }
@@ -150,7 +135,6 @@
       text-align: center;
       padding-inline: var(--gut);
     }
-
     .testi-cta__line {
       font-family: var(--serif);
       font-weight: 200;
@@ -160,39 +144,33 @@
       margin-bottom: clamp(24px, 3vw, 36px);
       letter-spacing: 0.01em;
     }
-
-    .testi-cta .link-arrow {
-      /* link-arrow deja definit în style.css */
-      margin-top: 0;
-    }
+    .testi-cta .link-arrow { margin-top: 0; }
   </style>
 </head>
 <body>
 
-  <!-- Fără loader pe pagini secundare -->
   <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true">
     <div class="cursor__ring"></div>
     <div class="cursor__dot"></div>
   </div>
 
-  <!-- ══ NAV — identic cu index.html (Task 1+3) ══ -->
-  <nav class="nav" id="nav" aria-label="Primary">
-    <a href="index.html" class="nav__wordmark" aria-label="Deco Preda home">
+  <!-- ══ NAV — ordine corecta: fara Who We Are, Contact penultimul, Signature ultimul ══ -->
+  <nav class="nav on-light" id="nav" aria-label="Primary">
+    <a href="index.html#who-we-are" class="nav__wordmark" aria-label="Deco Preda home">
       DECO<span class="nav__wordmark-thin">PREDA</span>
     </a>
     <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navPanel">
       <span></span><span></span>
     </button>
     <div class="nav__panel" id="navPanel" aria-hidden="true">
-      <a href="index.html#who-we-are"  class="nav__item" data-cursor="link">Who We Are</a>
-      <a href="index.html#systems"     class="nav__item" data-cursor="link">Systems</a>
-      <a href="index.html#projects"    class="nav__item" data-cursor="link">Projects</a>
-      <a href="index.html#craft"       class="nav__item" data-cursor="link">Craft</a>
-      <a href="gallery.html"           class="nav__item" data-cursor="link">Gallery</a>
-      <a href="testimonials.html"      class="nav__item" data-cursor="link" aria-current="page">Testimonials</a>
-      <a href="signature-series.html"  class="nav__item nav__item--sig" data-cursor="link" aria-label="Signature Series — exclusive commissions only">Signature Series</a>
-      <a href="index.html#contact"     class="nav__item nav__item--cta" data-cursor="link">Contact</a>
+      <a href="index.html#systems"    class="nav__item" data-cursor="link">Systems</a>
+      <a href="index.html#projects"   class="nav__item" data-cursor="link">Projects</a>
+      <a href="index.html#craft"      class="nav__item" data-cursor="link">Craft</a>
+      <a href="gallery.html"          class="nav__item" data-cursor="link">Gallery</a>
+      <a href="testimonials.html"     class="nav__item" data-cursor="link" aria-current="page">Testimonials</a>
+      <a href="index.html#contact"    class="nav__item nav__item--contact" data-cursor="link">Contact</a>
+      <a href="signature-series.html" class="nav__item nav__item--sig" data-cursor="link" aria-label="Signature Series — exclusive commissions only">Signature Series</a>
     </div>
   </nav>
 
@@ -212,7 +190,6 @@
     <div class="testi-list">
       <div class="testi-list__inner">
 
-        <!-- 1 — Arhitect rezidențial -->
         <article class="testi-item">
           <p class="testi-item__category">Residential Architect · Dublin</p>
           <blockquote>
@@ -221,7 +198,6 @@
           </blockquote>
         </article>
 
-        <!-- 2 — Developer -->
         <article class="testi-item">
           <p class="testi-item__category">Property Developer · Cork</p>
           <blockquote>
@@ -230,7 +206,6 @@
           </blockquote>
         </article>
 
-        <!-- 3 — Client privat -->
         <article class="testi-item">
           <p class="testi-item__category">Private Residence · South Dublin</p>
           <blockquote>
@@ -239,7 +214,6 @@
           </blockquote>
         </article>
 
-        <!-- 4 — Main contractor -->
         <article class="testi-item">
           <p class="testi-item__category">Main Contractor · Ireland</p>
           <blockquote>
@@ -248,7 +222,6 @@
           </blockquote>
         </article>
 
-        <!-- 5 — Interior architect -->
         <article class="testi-item">
           <p class="testi-item__category">Interior Architect · London</p>
           <blockquote>
@@ -257,7 +230,6 @@
           </blockquote>
         </article>
 
-        <!-- 6 — Hospitality developer -->
         <article class="testi-item">
           <p class="testi-item__category">Hospitality Developer · Galway</p>
           <blockquote>
@@ -266,7 +238,6 @@
           </blockquote>
         </article>
 
-        <!-- 7 — Client privat, Signature Series -->
         <article class="testi-item">
           <p class="testi-item__category">Signature Commission · Edinburgh</p>
           <blockquote>
@@ -275,7 +246,6 @@
           </blockquote>
         </article>
 
-        <!-- 8 — Arhitect comercial -->
         <article class="testi-item">
           <p class="testi-item__category">Commercial Architect · Belfast</p>
           <blockquote>
@@ -310,8 +280,8 @@
           <a href="index.html#craft">Craft</a>
           <a href="gallery.html">Gallery</a>
           <a href="testimonials.html" aria-current="page">Testimonials</a>
-          <a href="signature-series.html">Signature Series</a>
           <a href="index.html#contact">Contact</a>
+          <a href="signature-series.html">Signature Series</a>
         </nav>
         <p class="foot__copy">&copy; <span id="yr"></span> Deco Preda Ltd. Dublin · Ireland &amp; Europe.</p>
       </div>
@@ -322,12 +292,9 @@
   <script>
   (function() {
     'use strict';
-
-    // Year
     const yr = document.getElementById('yr');
     if (yr) yr.textContent = new Date().getFullYear();
 
-    // Scroll progress
     const prog = document.getElementById('progress');
     function updateProg() {
       if (!prog) return;
@@ -336,10 +303,6 @@
     }
     window.addEventListener('scroll', updateProg, { passive: true });
 
-    // Cursor — reutilizăm logica din script.js (deja inițializat)
-    // nav__burger — reutilizăm logica din script.js (deja inițializat prin #navBurger / #navPanel)
-
-    // Scroll reveal pentru testimoniale
     const items = document.querySelectorAll('.testi-item');
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
