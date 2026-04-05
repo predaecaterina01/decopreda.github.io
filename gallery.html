@@ -19,14 +19,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ══════════════════════════════════════════════════════
-       FIX 1 — CURSOR
-       NU suprascriem cursor-ul custom din script.js
-       Scoatem cursor:auto de pe body și butoane
-       ══════════════════════════════════════════════════════ */
-    /* body { cursor: auto; }   ← ȘTERS — cauza problemei */
-    /* a, button { cursor: auto; } ← ȘTERS */
-
     /* ── Gallery page ── */
     .gal-page {
       background: var(--ivory);
@@ -130,26 +122,14 @@
     .gal-item__over {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(8, 7, 6, 0.82) 0%,
-        rgba(8, 7, 6, 0.44) 28%,
-        rgba(8, 7, 6, 0.10) 55%,
-        transparent 80%
-      );
+      background: linear-gradient(to top, rgba(8,7,6,0.82) 0%, rgba(8,7,6,0.44) 28%, rgba(8,7,6,0.10) 55%, transparent 80%);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       padding: 18px 20px 20px;
     }
     .gal-item:hover .gal-item__over {
-      background: linear-gradient(
-        to top,
-        rgba(8, 7, 6, 0.90) 0%,
-        rgba(8, 7, 6, 0.56) 35%,
-        rgba(8, 7, 6, 0.18) 65%,
-        transparent 86%
-      );
+      background: linear-gradient(to top, rgba(8,7,6,0.90) 0%, rgba(8,7,6,0.56) 35%, rgba(8,7,6,0.18) 65%, transparent 86%);
     }
     .gal-item__name {
       font-family: var(--sans);
@@ -157,7 +137,7 @@
       font-size: 11px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(236, 230, 221, 0.96);
+      color: rgba(236,230,221,0.96);
       text-shadow: 0 1px 5px rgba(0,0,0,0.95), 0 2px 14px rgba(0,0,0,0.75);
       line-height: 1.4;
     }
@@ -167,7 +147,7 @@
       font-size: 10px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(214, 204, 192, 0.90);
+      color: rgba(214,204,192,0.90);
       text-shadow: 0 1px 4px rgba(0,0,0,0.90), 0 2px 10px rgba(0,0,0,0.70);
       margin-top: 3px;
       line-height: 1.4;
@@ -176,20 +156,20 @@
       position: absolute;
       top: 12px; right: 12px;
       width: 26px; height: 26px;
-      border: 1px solid rgba(236, 230, 221, 0.50);
+      border: 1px solid rgba(236,230,221,0.50);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(236, 230, 221, 0.75);
-      background: rgba(0, 0, 0, 0.32);
+      color: rgba(236,230,221,0.75);
+      background: rgba(0,0,0,0.32);
       opacity: 0.60;
       transition: opacity 0.25s ease, background 0.25s ease;
     }
     .gal-item:hover .gal-item__expand {
       opacity: 1;
-      background: rgba(0, 0, 0, 0.55);
-      border-color: rgba(236, 230, 221, 0.85);
+      background: rgba(0,0,0,0.55);
+      border-color: rgba(236,230,221,0.85);
     }
     .gal-loading {
       text-align: center;
@@ -204,286 +184,64 @@
     @media (max-width: 900px) { .gal-grid { columns: 2; } }
     @media (max-width: 500px) { .gal-grid { columns: 1; } }
 
-    /* ══ NAV MOBIL ══ */
-    @media (max-width: 900px) {
-      .nav__panel {
-        position: fixed !important;
-        top: 0 !important; right: 0 !important;
-        left: auto !important; bottom: auto !important;
-        width: 65vw !important; max-width: 300px !important;
-        height: auto !important;
-        max-height: calc(var(--nav-h, 64px) + 160px) !important;
-        background: rgba(18, 16, 13, 0.82) !important;
-        backdrop-filter: blur(20px) saturate(1.4) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(1.4) !important;
-        border-left: 1px solid rgba(255,255,255,0.10) !important;
-        border-bottom: 1px solid rgba(255,255,255,0.08) !important;
-        border-top: none !important; border-right: none !important;
-        border-radius: 0 0 0 18px !important;
-        box-shadow: -6px 6px 40px rgba(0,0,0,0.55), inset 1px 0 0 rgba(255,255,255,0.04) !important;
-        overflow: hidden !important;
-        z-index: 9999 !important;
-        pointer-events: none !important;
-        transform: translateX(102%) !important;
-        opacity: 0 !important;
-        transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease !important;
-      }
-      .nav__panel.open {
-        transform: translateX(0) !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-      }
-      .menu-scroll {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-end !important;
-        height: 100% !important;
-        padding-top: calc(var(--nav-h, 64px) + 16px) !important;
-        padding-right: 28px !important;
-        padding-bottom: 20px !important;
-        padding-left: 12px !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-        -webkit-overflow-scrolling: touch !important;
-        touch-action: pan-y !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-        box-sizing: border-box !important;
-      }
-      .menu-scroll::-webkit-scrollbar { display: none !important; }
-      .nav__panel::after {
-        content: '' !important;
-        position: absolute !important;
-        bottom: 0 !important; left: 0 !important; right: 0 !important;
-        height: 52px !important;
-        background: linear-gradient(to top, rgba(18,16,13,0.90) 0%, transparent 100%) !important;
-        pointer-events: none !important;
-        z-index: 2 !important;
-      }
-      .nav__item {
-        font-family: var(--serif) !important;
-        font-weight: 300 !important;
-        font-size: clamp(22px, 5.5vw, 28px) !important;
-        letter-spacing: 0.01em !important;
-        text-transform: none !important;
-        text-align: right !important;
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
-        min-height: 52px !important;
-        padding: 12px 0 !important;
-        border-bottom: 1px solid rgba(255,255,255,0.07) !important;
-        color: rgba(236, 230, 221, 0.96) !important;
-        text-decoration: none !important;
-        background: transparent !important;
-        cursor: pointer !important;
-        pointer-events: auto !important;
-        position: relative !important;
-        z-index: 5 !important;
-        -webkit-tap-highlight-color: rgba(255,255,255,0.08) !important;
-        transition: opacity 0.15s ease !important;
-        white-space: nowrap !important;
-      }
-      .nav__item::after, .nav__item::before { display: none !important; }
-      .nav__item:nth-child(1) { opacity: 1.00 !important; }
-      .nav__item:nth-child(2) { opacity: 0.40 !important; }
-      .nav__item:nth-child(3) { opacity: 0.10 !important; }
-      .nav__item:nth-child(4) { opacity: 0.10 !important; }
-      .nav__item:nth-child(5) { opacity: 0.10 !important; }
-      .nav__item:nth-child(6) { opacity: 0.10 !important; }
-      .nav__item:nth-child(7) { opacity: 0.10 !important; }
-      .nav__item:hover, .nav__item:active, .nav__item:focus {
-        opacity: 1 !important; color: #fff !important;
-      }
-      .nav__item:active {
-        background: rgba(255,255,255,0.06) !important; border-radius: 6px !important;
-      }
-      .nav__item--cta, .nav__item--contact {
-        font-family: var(--sans) !important;
-        font-size: 9px !important; letter-spacing: 0.30em !important;
-        text-transform: uppercase !important;
-        color: rgba(200, 192, 182, 0.80) !important;
-        padding: 10px 0 !important;
-        border-top: 1px solid rgba(255,255,255,0.07) !important;
-        border-bottom: none !important; margin-top: 6px !important;
-        opacity: 0.10 !important; min-height: 44px !important;
-      }
-      .nav__item--cta::after, .nav__item--contact::after { display: none !important; }
-      .nav__item--sig {
-        font-style: italic !important;
-        color: rgba(214,196,150,0.95) !important;
-        border-top: 1px solid rgba(183,158,110,0.20) !important;
-        border-bottom: none !important; margin-top: 4px !important;
-        opacity: 1 !important;
-      }
-      .nav__item--sig::before { display: none !important; }
-      /* Light variant */
-      body.light-body .nav__panel {
-        background: rgba(240, 235, 226, 0.88) !important;
-        backdrop-filter: blur(20px) saturate(1.6) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(1.6) !important;
-        border-left-color: rgba(0,0,0,0.08) !important;
-        border-bottom-color: rgba(0,0,0,0.06) !important;
-        box-shadow: -6px 6px 40px rgba(0,0,0,0.18) !important;
-      }
-      body.light-body .nav__panel::after {
-        background: linear-gradient(to top, rgba(240,235,226,0.92) 0%, transparent 100%) !important;
-      }
-      body.light-body .nav__item {
-        color: rgba(30, 26, 20, 0.96) !important;
-        border-bottom-color: rgba(0,0,0,0.07) !important;
-      }
-      body.light-body .nav__item:hover, body.light-body .nav__item:active {
-        color: #0A0908 !important;
-      }
-      body.light-body .nav__item--cta, body.light-body .nav__item--contact {
-        color: rgba(80, 72, 60, 0.80) !important;
-        border-top-color: rgba(0,0,0,0.07) !important;
-      }
-      body.light-body .nav__item--sig { color: #7A5F3A !important; }
-      body.light-body .nav__panel::after {
-        background: linear-gradient(to top, rgba(240,235,226,0.92) 0%, transparent 100%) !important;
-      }
-      .nav__burger { position: relative !important; z-index: 10000 !important; }
-    }
-
-
     /* ══ LIGHTBOX ══ */
     .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 9500;
-      background: rgba(10, 9, 8, 0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: fixed; inset: 0; z-index: 9500;
+      background: rgba(10,9,8,0);
+      display: flex; align-items: center; justify-content: center;
       pointer-events: none;
       transition: background 0.4s ease;
       padding: 0 68px;
     }
-    .lightbox.open {
-      background: rgba(10, 9, 8, 0.95);
-      pointer-events: all;
-    }
+    .lightbox.open { background: rgba(10,9,8,0.95); pointer-events: all; }
     .lb-stage {
-      position: relative;
-      max-width: min(860px, 100%);
-      width: 100%;
-      opacity: 0;
-      transform: scale(0.96);
+      position: relative; max-width: min(860px,100%); width: 100%;
+      opacity: 0; transform: scale(0.96);
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
     .lightbox.open .lb-stage { opacity: 1; transform: scale(1); }
-    .lb-img-wrap {
-      position: relative;
-      width: 100%;
-      line-height: 0;
-    }
-    .lb-surface {
-      display: block;
-      width: 100%;
-      max-height: 75vh;
-      object-fit: contain;
-      border: none;
-    }
+    .lb-img-wrap { position: relative; width: 100%; line-height: 0; }
+    .lb-surface { display: block; width: 100%; max-height: 75vh; object-fit: contain; }
     .lb-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(10, 9, 8, 0.72);
-      border: 1px solid rgba(236, 230, 221, 0.45);
+      position: absolute; top: 10px; right: 10px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(10,9,8,0.72);
+      border: 1px solid rgba(236,230,221,0.45);
       border-radius: 50%;
-      color: rgba(236, 230, 221, 0.95);
-      cursor: pointer;
-      z-index: 10;
+      color: rgba(236,230,221,0.95);
+      cursor: pointer; z-index: 10;
       transition: background 0.2s, border-color 0.2s, color 0.2s;
       -webkit-tap-highlight-color: transparent;
     }
-    .lb-close:hover,
-    .lb-close:active {
-      background: rgba(236, 230, 221, 0.18);
-      border-color: rgba(236, 230, 221, 0.80);
-      color: #fff;
-    }
-    .lb-meta {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0 0;
-    }
-    .lb-name {
-      font-family: var(--serif);
-      font-weight: 300;
-      font-size: clamp(18px, 2.2vw, 26px);
-      color: rgba(236, 230, 221, 0.96);
-      line-height: 1.2;
-    }
-    .lb-mat {
-      font-family: var(--sans);
-      font-weight: 300;
-      font-size: clamp(10px, 1.1vw, 12px);
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(214, 204, 192, 0.88);
-      flex-shrink: 0;
-      line-height: 1.4;
-    }
-    .lb-counter {
-      display: block;
-      text-align: center;
-      margin-top: 10px;
-      font-family: var(--sans);
-      font-weight: 200;
-      font-size: 10px;
-      letter-spacing: 0.28em;
-      color: rgba(183, 174, 163, 0.50);
-    }
+    .lb-close:hover, .lb-close:active { background: rgba(236,230,221,0.18); border-color: rgba(236,230,221,0.80); color: #fff; }
+    .lb-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 14px 0 0; }
+    .lb-name { font-family: var(--serif); font-weight: 300; font-size: clamp(18px,2.2vw,26px); color: rgba(236,230,221,0.96); line-height: 1.2; }
+    .lb-mat { font-family: var(--sans); font-weight: 300; font-size: clamp(10px,1.1vw,12px); letter-spacing: 0.28em; text-transform: uppercase; color: rgba(214,204,192,0.88); flex-shrink: 0; line-height: 1.4; }
+    .lb-counter { display: block; text-align: center; margin-top: 10px; font-family: var(--sans); font-weight: 200; font-size: 10px; letter-spacing: 0.28em; color: rgba(183,174,163,0.50); }
     .lb-nav {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(10, 9, 8, 0.70);
-      border: 1px solid rgba(183, 174, 163, 0.55);
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(10,9,8,0.70);
+      border: 1px solid rgba(183,174,163,0.55);
       border-radius: 50%;
-      color: rgba(236, 230, 221, 0.95);
-      cursor: pointer;
-      z-index: 9600;
-      opacity: 0;
-      pointer-events: none;
+      color: rgba(236,230,221,0.95);
+      cursor: pointer; z-index: 9600;
+      opacity: 0; pointer-events: none;
       transition: opacity 0.3s ease, background 0.2s, border-color 0.2s;
       -webkit-tap-highlight-color: transparent;
     }
-    .lightbox.open .lb-nav {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .lb-nav:hover,
-    .lb-nav:active {
-      background: rgba(183, 174, 163, 0.22);
-      border-color: rgba(236, 230, 221, 0.85);
-      color: #fff;
-    }
+    .lightbox.open .lb-nav { opacity: 1; pointer-events: all; }
+    .lb-nav:hover, .lb-nav:active { background: rgba(183,174,163,0.22); border-color: rgba(236,230,221,0.85); color: #fff; }
     .lb-prev { left: 12px; }
     .lb-next { right: 12px; }
     @media (max-width: 600px) {
       .lightbox { padding: 0 52px; }
       .lb-nav { width: 40px; height: 40px; }
-      .lb-prev { left: 6px; }
-      .lb-next { right: 6px; }
+      .lb-prev { left: 6px; } .lb-next { right: 6px; }
       .lb-close { top: 8px; right: 8px; width: 36px; height: 36px; }
-      .lb-name { font-size: clamp(16px, 4vw, 20px); }
+      .lb-name { font-size: clamp(16px,4vw,20px); }
       .lb-mat { font-size: 9px; letter-spacing: 0.20em; }
     }
   </style>
@@ -495,7 +253,6 @@
     <div class="cursor__dot"></div>
   </div>
 
-
   <!-- ══ NAV ══ -->
   <nav class="nav on-light" id="nav" aria-label="Primary">
     <a href="index.html" class="nav__wordmark" aria-label="Deco Preda home">
@@ -505,15 +262,20 @@
       <span></span><span></span>
     </button>
     <div class="nav__panel" id="navPanel" aria-hidden="true">
-      <a href="index.html#systems"    class="nav__item" data-cursor="link">Systems</a>
-      <a href="index.html#projects"   class="nav__item" data-cursor="link">Projects</a>
-      <a href="index.html#craft"      class="nav__item" data-cursor="link">Craft</a>
-      <a href="gallery.html"          class="nav__item" data-cursor="link">Gallery</a>
-      <a href="testimonials.html"     class="nav__item" data-cursor="link">Testimonials</a>
-      <a href="index.html#contact"    class="nav__item nav__item--contact" data-cursor="link">Contact</a>
-      <a href="signature-series.html" class="nav__item nav__item--sig" data-cursor="link" aria-label="Signature Series — exclusive commissions only">Signature Series</a>
+      <div class="menu-scroll" id="menuScroll">
+        <a href="index.html#systems"    class="nav__item" data-cursor="link">Systems</a>
+        <a href="index.html#projects"   class="nav__item" data-cursor="link">Projects</a>
+        <a href="index.html#craft"      class="nav__item" data-cursor="link">Craft</a>
+        <a href="gallery.html"          class="nav__item" data-cursor="link" aria-current="page">Gallery</a>
+        <a href="testimonials.html"     class="nav__item" data-cursor="link">Testimonials</a>
+        <a href="index.html#contact"    class="nav__item nav__item--contact" data-cursor="link">Contact</a>
+        <a href="signature-series.html" class="nav__item nav__item--sig" data-cursor="link" aria-label="Signature Series — exclusive commissions only">✦ Signature Series ✦</a>
+      </div>
     </div>
   </nav>
+
+  <!-- ══ BACKDROP NAV ══ -->
+  <div class="nav__backdrop" id="navBackdrop" aria-hidden="true"></div>
 
   <!-- ══ GALLERY PAGE ══ -->
   <main class="gal-page">
@@ -547,21 +309,15 @@
   <!-- ══ LIGHTBOX ══ -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image detail view" aria-hidden="true">
     <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <button class="lb-nav lb-next" id="lbNext" aria-label="Next image">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <path d="M7 4L12 9L7 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4L12 9L7 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <div class="lb-stage" id="lbStage">
       <div class="lb-img-wrap" id="lbImgWrap">
         <button class="lb-close" id="lbClose" aria-label="Close">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         </button>
         <img class="lb-surface" id="lbSurface" src="" alt="" />
       </div>
@@ -572,10 +328,6 @@
       <span class="lb-counter" id="lbCounter"></span>
     </div>
   </div>
-
-  <!-- ══ BACKDROP NAV ══ -->
-  <div class="nav__backdrop" id="navBackdrop" aria-hidden="true"></div>
-
 
   <script>
   'use strict';
@@ -589,13 +341,7 @@
     const items = [];
     function addItems(arr, filter) {
       if (!Array.isArray(arr)) return;
-      arr.forEach(img => items.push({
-        src:      img.src,
-        name:     img.name     || '',
-        material: img.material || '',
-        location: img.location || '',
-        filter
-      }));
+      arr.forEach(img => items.push({ src: img.src, name: img.name || '', material: img.material || '', location: img.location || '', filter }));
     }
     if (data.residential) Object.values(data.residential).forEach(a => addItems(a, 'residential'));
     if (data.commercial)  Object.values(data.commercial).forEach(a => addItems(a, 'commercial'));
@@ -608,15 +354,10 @@
   /* ── Build card ── */
   function buildCard(img) {
     const div = document.createElement('div');
-    div.className        = 'gal-item';
-    div.role             = 'listitem';
-    div.tabIndex         = 0;
-    div.dataset.filter   = img.filter;
-    div.dataset.hidden   = 'false';
-    div.dataset.name     = img.name;
-    div.dataset.material = img.material;
-    div.dataset.location = img.location;
-    div.dataset.src      = img.src;
+    div.className = 'gal-item'; div.role = 'listitem'; div.tabIndex = 0;
+    div.dataset.filter = img.filter; div.dataset.hidden = 'false';
+    div.dataset.name = img.name; div.dataset.material = img.material;
+    div.dataset.location = img.location; div.dataset.src = img.src;
     div.innerHTML = `
       <img class="gal-swatch" src="images/${img.src}" alt="${img.name}" loading="lazy" decoding="async" />
       <div class="gal-item__over">
@@ -645,7 +386,9 @@
       });
       updateCount();
     } catch (err) {
-      console.error('[Gallery]', err); loading.textContent = 'Gallery unavailable — ' + err.message; loading.style.color='rgba(220,100,100,0.8)';
+      console.error('[Gallery]', err);
+      loading.textContent = 'Gallery unavailable — ' + err.message;
+      loading.style.color = 'rgba(220,100,100,0.8)';
     }
   }
 
@@ -676,89 +419,63 @@
   const lbPrev  = document.getElementById('lbPrev');
   const lbNext  = document.getElementById('lbNext');
   const lbCnt   = document.getElementById('lbCounter');
-
-  let visibleItems = [];
-  let lbCurrent    = 0;
+  let visibleItems = [], lbCurrent = 0;
 
   function getVisible() { return getItems().filter(i => i.dataset.hidden !== 'true'); }
-
   function openLightbox(item) {
-    visibleItems = getVisible();
-    lbCurrent    = visibleItems.indexOf(item);
-    renderLb();
-    lb.classList.add('open');
-    lb.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+    visibleItems = getVisible(); lbCurrent = visibleItems.indexOf(item);
+    renderLb(); lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
   }
-
   function closeLightbox() {
-    lb.classList.remove('open');
-    lb.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
+    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = '';
   }
-
   function renderLb() {
-    const item = visibleItems[lbCurrent];
-    if (!item) return;
-    lbSurf.src = 'images/' + item.dataset.src;
-    lbSurf.alt = item.dataset.name;
+    const item = visibleItems[lbCurrent]; if (!item) return;
+    lbSurf.src = 'images/' + item.dataset.src; lbSurf.alt = item.dataset.name;
     lbName.textContent = item.dataset.name;
-    lbMat.textContent  = item.dataset.material
-      + (item.dataset.location ? ' · ' + item.dataset.location : '');
+    lbMat.textContent  = item.dataset.material + (item.dataset.location ? ' · ' + item.dataset.location : '');
     lbCnt.textContent  = (lbCurrent + 1) + ' / ' + visibleItems.length;
   }
-
   function prevImg() { lbCurrent = (lbCurrent - 1 + visibleItems.length) % visibleItems.length; renderLb(); }
   function nextImg() { lbCurrent = (lbCurrent + 1) % visibleItems.length; renderLb(); }
-
   lbClose.addEventListener('click', closeLightbox);
-  lbPrev.addEventListener('click',  prevImg);
-  lbNext.addEventListener('click',  nextImg);
+  lbPrev.addEventListener('click', prevImg);
+  lbNext.addEventListener('click', nextImg);
   lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
-
   document.addEventListener('keydown', e => {
     if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape')     closeLightbox();
-    if (e.key === 'ArrowLeft')  prevImg();
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') prevImg();
     if (e.key === 'ArrowRight') nextImg();
   });
-
   let tsX = 0;
   lb.addEventListener('touchstart', e => { tsX = e.changedTouches[0].clientX; }, { passive: true });
-  lb.addEventListener('touchend',   e => {
-    const dx = e.changedTouches[0].clientX - tsX;
-    if (Math.abs(dx) > 45) { dx < 0 ? nextImg() : prevImg(); }
-  }, { passive: true });
+  lb.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tsX; if (Math.abs(dx) > 45) { dx < 0 ? nextImg() : prevImg(); } }, { passive: true });
 
-  /* ══════════════════════════════════════════════════════
-     FIX 3 — NAV MOBIL: script corect cu backdrop
-     Reproduce exact logica din script.js (index.html)
-     ══════════════════════════════════════════════════════ */
+  /* ══ NAV MOBIL ══ */
   (function() {
-    'use strict';
-    const burger   = document.getElementById('navBurger');
-    const panel    = document.getElementById('navPanel');
-    const backdrop = document.getElementById('navBackdrop');
+    var burger   = document.getElementById('navBurger');
+    var panel    = document.getElementById('navPanel');
+    var scroll   = document.getElementById('menuScroll');
+    var backdrop = document.getElementById('navBackdrop');
     if (!burger || !panel) return;
-    const btn = burger.cloneNode(true);
+
+    var btn = burger.cloneNode(true);
     burger.parentNode.replaceChild(btn, burger);
 
-    const scroll   = document.getElementById('menuScroll');
-    const items = panel ? Array.from(panel.querySelectorAll('.nav__item')) : [];
-    const opacities = [1, 0.40, 0.10];
+    var items = scroll ? Array.from(scroll.querySelectorAll('.nav__item')) : [];
+    var ops = [1, 0.40, 0.10];
 
-    function updateFade() {
+    function fade() {
       if (!scroll) return;
-      const containerTop = scroll.getBoundingClientRect().top;
-      let closestIdx = 0, closestDist = Infinity;
-      items.forEach((item, i) => {
-        const dist = Math.abs(item.getBoundingClientRect().top - containerTop);
-        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+      var top = scroll.getBoundingClientRect().top;
+      var ci = 0, cd = Infinity;
+      items.forEach(function(el, i) {
+        var d = Math.abs(el.getBoundingClientRect().top - top);
+        if (d < cd) { cd = d; ci = i; }
       });
-      items.forEach((item, i) => {
-        const delta = i - closestIdx;
-        const op = opacities[Math.min(Math.abs(delta), opacities.length - 1)];
-        item.style.opacity = op;
+      items.forEach(function(el, i) {
+        el.style.opacity = ops[Math.min(Math.abs(i - ci), ops.length - 1)];
       });
     }
 
@@ -770,8 +487,9 @@
       if (backdrop) backdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
       if (scroll) scroll.scrollTop = 0;
-      setTimeout(updateFade, 50);
+      setTimeout(fade, 50);
     }
+
     function closeNav() {
       panel.classList.remove('open');
       panel.setAttribute('aria-hidden', 'true');
@@ -781,18 +499,16 @@
       document.body.style.overflow = '';
     }
 
-    btn.addEventListener('click', () =>
-      panel.classList.contains('open') ? closeNav() : openNav()
-    );
-    if (backdrop) backdrop.addEventListener('click', closeNav);
-    if (scroll) scroll.addEventListener('scroll', updateFade, { passive: true });
-    items.forEach(a => { if (a.tagName === 'A') a.addEventListener('click', closeNav); });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && panel.classList.contains('open')) { closeNav(); btn.focus(); }
+    btn.addEventListener('click', function() {
+      panel.classList.contains('open') ? closeNav() : openNav();
     });
 
-    const yr = document.getElementById('yr');
-    if (yr) yr.textContent = new Date().getFullYear();
+    if (backdrop) backdrop.addEventListener('click', closeNav);
+    if (scroll) scroll.addEventListener('scroll', fade, { passive: true });
+    items.forEach(function(a) { a.addEventListener('click', closeNav); });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && panel.classList.contains('open')) { closeNav(); btn.focus(); }
+    });
   })();
 
   /* ── URL filter param ── */
@@ -804,10 +520,7 @@
     if (btn) btn.click();
   })();
 
-  const yrEl = document.getElementById('yr');
-  if (yrEl) yrEl.textContent = new Date().getFullYear();
-
-  /* ── Cursor custom inline ── */
+  /* ── Cursor custom ── */
   (function() {
     const cur  = document.getElementById('cursor');
     if (!cur || 'ontouchstart' in window) { if (cur) cur.style.display = 'none'; return; }
@@ -825,17 +538,13 @@
       cx = e.clientX; cy = e.clientY;
       if (!visible) { cur.style.opacity = '1'; visible = true; if (!raf) tick(); }
     });
-    document.addEventListener('mouseover', e => {
-      if (e.target.closest('a,button,[data-cursor="link"]')) cur.classList.add('hovering');
-    });
-    document.addEventListener('mouseout', e => {
-      if (e.target.closest('a,button,[data-cursor="link"]')) cur.classList.remove('hovering');
-    });
+    document.addEventListener('mouseover', e => { if (e.target.closest('a,button,[data-cursor="link"]')) cur.classList.add('hovering'); });
+    document.addEventListener('mouseout',  e => { if (e.target.closest('a,button,[data-cursor="link"]')) cur.classList.remove('hovering'); });
     document.addEventListener('mouseleave', () => { cur.style.opacity = '0'; });
     document.addEventListener('mouseenter', () => { cur.style.opacity = '1'; });
   })();
 
-  /* ── Progress bar inline ── */
+  /* ── Progress bar ── */
   (function() {
     const prog = document.getElementById('progress');
     if (!prog) return;
@@ -844,6 +553,9 @@
       prog.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0).toFixed(2) + '%';
     }, { passive: true });
   })();
+
+  const yrEl = document.getElementById('yr');
+  if (yrEl) yrEl.textContent = new Date().getFullYear();
 
   initGallery();
   </script>
