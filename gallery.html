@@ -204,84 +204,66 @@
     @media (max-width: 900px) { .gal-grid { columns: 2; } }
     @media (max-width: 500px) { .gal-grid { columns: 1; } }
 
-    /* ══════════════════════════════════════════════════════
-       FIX 2 — NAV MOBIL: fundal aproape transparent
-       Panelul = complet transparent
-       Zona de text = pseudo-element opac doar în spate
-       ══════════════════════════════════════════════════════ */
+    /* ══ NAV MOBIL ══ */
     @media (max-width: 900px) {
-
-      /* Panel: sticlă ultra-fină, aproape invizibilă */
-      .nav__panel,
-      .nav__panel.open {
-        /* FIX SCROLL + CLICK — reproduce fix-urile din nav-mobile-fix.css */
+      .nav__panel {
         position: fixed !important;
-        top: 0 !important;
-        right: 0 !important;
-        left: auto !important;
-        bottom: auto !important;
-        width: 62vw !important;
-        max-width: 280px !important;
+        top: 0 !important; right: 0 !important;
+        left: auto !important; bottom: auto !important;
+        width: 65vw !important; max-width: 300px !important;
         height: auto !important;
-        max-height: 72vh !important;
-
-        /* Fundal aproape transparent — doar un blur subtil */
-        background: rgba(255, 255, 255, 0.06) !important;
-        backdrop-filter: blur(2px) !important;
-        -webkit-backdrop-filter: blur(2px) !important;
-
-        border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
-        border-top: none !important;
-        border-right: none !important;
-        border-radius: 0 0 0 16px !important;
-        box-shadow: -4px 8px 32px rgba(8, 7, 6, 0.18) !important;
-
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-end !important;
-        justify-content: flex-start !important;
-        padding: calc(var(--nav-h, 64px) + 20px) 28px 32px 16px !important;
-        gap: 0 !important;
+        max-height: calc(var(--nav-h, 64px) + 160px) !important;
+        background: rgba(18, 16, 13, 0.82) !important;
+        backdrop-filter: blur(20px) saturate(1.4) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(1.4) !important;
+        border-left: 1px solid rgba(255,255,255,0.10) !important;
+        border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+        border-top: none !important; border-right: none !important;
+        border-radius: 0 0 0 18px !important;
+        box-shadow: -6px 6px 40px rgba(0,0,0,0.55), inset 1px 0 0 rgba(255,255,255,0.04) !important;
         overflow: hidden !important;
         z-index: 9999 !important;
-
         pointer-events: none !important;
-        transform: translateX(110%) !important;
+        transform: translateX(102%) !important;
         opacity: 0 !important;
-        transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1),
-                    opacity 0.22s ease !important;
+        transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease !important;
       }
-
       .nav__panel.open {
         transform: translateX(0) !important;
         opacity: 1 !important;
-        pointer-events: all !important;
+        pointer-events: auto !important;
+      }
+      .menu-scroll {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-end !important;
+        height: 100% !important;
+        padding-top: calc(var(--nav-h, 64px) + 16px) !important;
+        padding-right: 28px !important;
+        padding-bottom: 20px !important;
+        padding-left: 12px !important;
         overflow-y: auto !important;
         overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-y !important;
         scrollbar-width: none !important;
         -ms-overflow-style: none !important;
+        box-sizing: border-box !important;
       }
-      .nav__panel.open::-webkit-scrollbar { display: none !important; }
-
-      /* Gradient fade jos — scroll hint */
-      .nav__panel.open::after {
+      .menu-scroll::-webkit-scrollbar { display: none !important; }
+      .nav__panel::after {
         content: '' !important;
-        position: sticky !important;
-        bottom: 0 !important;
-        display: block !important;
-        height: 40px !important;
-        min-height: 40px !important;
-        background: linear-gradient(to top, rgba(255,255,255,0.08) 0%, transparent 100%) !important;
+        position: absolute !important;
+        bottom: 0 !important; left: 0 !important; right: 0 !important;
+        height: 52px !important;
+        background: linear-gradient(to top, rgba(18,16,13,0.90) 0%, transparent 100%) !important;
         pointer-events: none !important;
-        margin-top: auto !important;
+        z-index: 2 !important;
       }
-
-      /* Link-uri: background local opac — "halo" în spatele textului */
       .nav__item {
         font-family: var(--serif) !important;
         font-weight: 300 !important;
-        font-size: clamp(20px, 5vw, 26px) !important;
+        font-size: clamp(22px, 5.5vw, 28px) !important;
         letter-spacing: 0.01em !important;
         text-transform: none !important;
         text-align: right !important;
@@ -289,124 +271,83 @@
         display: flex !important;
         align-items: center !important;
         justify-content: flex-end !important;
-        min-height: 44px !important;
-        padding: 10px 0 !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-        color: #fff !important;
-
-        /* Halo opac LOCAL pe fiecare rând de text */
-        text-shadow:
-          0 0 18px rgba(0,0,0,0.9),
-          0 0 8px  rgba(0,0,0,0.8),
-          0 1px 4px rgba(0,0,0,0.95) !important;
-
-        background: transparent !important;
+        min-height: 52px !important;
+        padding: 12px 0 !important;
+        border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+        color: rgba(236, 230, 221, 0.96) !important;
         text-decoration: none !important;
+        background: transparent !important;
         cursor: pointer !important;
-        pointer-events: all !important;
+        pointer-events: auto !important;
         position: relative !important;
-        z-index: 10 !important;
-        transition: opacity 0.18s ease, color 0.18s ease !important;
+        z-index: 5 !important;
+        -webkit-tap-highlight-color: rgba(255,255,255,0.08) !important;
+        transition: opacity 0.15s ease !important;
+        white-space: nowrap !important;
       }
-      .nav__item::after  { display: none !important; }
-      .nav__item::before { display: none !important; }
-
-      /* Opacitate progresivă */
+      .nav__item::after, .nav__item::before { display: none !important; }
       .nav__item:nth-child(1) { opacity: 1.00 !important; }
-      .nav__item:nth-child(2) { opacity: 0.55 !important; }
-      .nav__item:nth-child(3) { opacity: 0.30 !important; }
-      .nav__item:nth-child(4) { opacity: 0.16 !important; }
+      .nav__item:nth-child(2) { opacity: 0.40 !important; }
+      .nav__item:nth-child(3) { opacity: 0.10 !important; }
+      .nav__item:nth-child(4) { opacity: 0.10 !important; }
       .nav__item:nth-child(5) { opacity: 0.10 !important; }
-      .nav__item:nth-child(6) { opacity: 0.06 !important; }
-      .nav__item:nth-child(7) { opacity: 0.04 !important; }
-
-      .nav__item:hover,
-      .nav__item:active,
-      .nav__item:focus {
-        opacity: 1 !important;
-        color: #fff !important;
+      .nav__item:nth-child(6) { opacity: 0.10 !important; }
+      .nav__item:nth-child(7) { opacity: 0.10 !important; }
+      .nav__item:hover, .nav__item:active, .nav__item:focus {
+        opacity: 1 !important; color: #fff !important;
       }
       .nav__item:active {
-        background: rgba(255,255,255,0.06) !important;
-        border-radius: 4px !important;
+        background: rgba(255,255,255,0.06) !important; border-radius: 6px !important;
       }
-
-      /* Contact */
-      .nav__item--contact {
+      .nav__item--cta, .nav__item--contact {
         font-family: var(--sans) !important;
-        font-size: 9px !important;
-        letter-spacing: 0.30em !important;
+        font-size: 9px !important; letter-spacing: 0.30em !important;
         text-transform: uppercase !important;
-        color: rgba(230, 220, 205, 0.80) !important;
-        padding: 10px 0 4px !important;
-        border-top: 1px solid rgba(255,255,255,0.08) !important;
-        border-bottom: none !important;
-        margin-top: 4px !important;
-        opacity: 0.85 !important;
-        pointer-events: all !important;
-        min-height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
+        color: rgba(200, 192, 182, 0.80) !important;
+        padding: 10px 0 !important;
+        border-top: 1px solid rgba(255,255,255,0.07) !important;
+        border-bottom: none !important; margin-top: 6px !important;
+        opacity: 0.10 !important; min-height: 44px !important;
       }
-      .nav__item--contact::after { display: none !important; }
-      .nav__item--contact:hover,
-      .nav__item--contact:active { opacity: 1 !important; color: #fff !important; }
-
-      /* Signature Series */
+      .nav__item--cta::after, .nav__item--contact::after { display: none !important; }
       .nav__item--sig {
-        font-family: var(--serif) !important;
         font-style: italic !important;
-        font-size: clamp(15px, 3.8vw, 20px) !important;
-        font-weight: 400 !important;
-        text-transform: none !important;
         color: rgba(214,196,150,0.95) !important;
-        background: transparent !important;
-        border: none !important;
         border-top: 1px solid rgba(183,158,110,0.20) !important;
-        border-bottom: none !important;
-        padding: 10px 0 0 !important;
-        margin-top: 4px !important;
+        border-bottom: none !important; margin-top: 4px !important;
         opacity: 1 !important;
-        pointer-events: all !important;
-        min-height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
       }
       .nav__item--sig::before { display: none !important; }
-      .nav__item--sig:hover,
-      .nav__item--sig:active { color: #E8C98A !important; opacity: 1 !important; }
-
-      /* Pe paginile light (.light-body) — text dark cu halo light */
-      body.light-body .nav__item {
-        color: #1A1816 !important;
-        text-shadow:
-          0 0 16px rgba(245,240,232,0.95),
-          0 0 8px  rgba(245,240,232,0.90),
-          0 1px 4px rgba(245,240,232,0.85) !important;
-        border-bottom-color: rgba(0,0,0,0.08) !important;
-      }
-      body.light-body .nav__item:hover,
-      body.light-body .nav__item:active { color: #0A0908 !important; }
-      body.light-body .nav__item--contact {
-        color: rgba(100, 90, 78, 0.80) !important;
-      }
-      body.light-body .nav__item--sig {
-        color: #7A5F3A !important;
-      }
-      body.light-body .nav__panel,
-      body.light-body .nav__panel.open {
-        background: rgba(245,240,232,0.06) !important;
+      /* Light variant */
+      body.light-body .nav__panel {
+        background: rgba(240, 235, 226, 0.88) !important;
+        backdrop-filter: blur(20px) saturate(1.6) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(1.6) !important;
         border-left-color: rgba(0,0,0,0.08) !important;
         border-bottom-color: rgba(0,0,0,0.06) !important;
+        box-shadow: -6px 6px 40px rgba(0,0,0,0.18) !important;
       }
-
-      .nav__burger {
-        position: relative !important;
-        z-index: 10000 !important;
+      body.light-body .nav__panel::after {
+        background: linear-gradient(to top, rgba(240,235,226,0.92) 0%, transparent 100%) !important;
       }
+      body.light-body .nav__item {
+        color: rgba(30, 26, 20, 0.96) !important;
+        border-bottom-color: rgba(0,0,0,0.07) !important;
+      }
+      body.light-body .nav__item:hover, body.light-body .nav__item:active {
+        color: #0A0908 !important;
+      }
+      body.light-body .nav__item--cta, body.light-body .nav__item--contact {
+        color: rgba(80, 72, 60, 0.80) !important;
+        border-top-color: rgba(0,0,0,0.07) !important;
+      }
+      body.light-body .nav__item--sig { color: #7A5F3A !important; }
+      body.light-body .nav__panel::after {
+        background: linear-gradient(to top, rgba(240,235,226,0.92) 0%, transparent 100%) !important;
+      }
+      .nav__burger { position: relative !important; z-index: 10000 !important; }
     }
+
 
     /* ══ LIGHTBOX ══ */
     .lightbox {
@@ -794,45 +735,64 @@
      Reproduce exact logica din script.js (index.html)
      ══════════════════════════════════════════════════════ */
   (function() {
+    'use strict';
     const burger   = document.getElementById('navBurger');
     const panel    = document.getElementById('navPanel');
     const backdrop = document.getElementById('navBackdrop');
     if (!burger || !panel) return;
+    const btn = burger.cloneNode(true);
+    burger.parentNode.replaceChild(btn, burger);
+
+    const scroll   = document.getElementById('menuScroll');
+    const items = panel ? Array.from(panel.querySelectorAll('.nav__item')) : [];
+    const opacities = [1, 0.40, 0.10];
+
+    function updateFade() {
+      if (!scroll) return;
+      const containerTop = scroll.getBoundingClientRect().top;
+      let closestIdx = 0, closestDist = Infinity;
+      items.forEach((item, i) => {
+        const dist = Math.abs(item.getBoundingClientRect().top - containerTop);
+        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+      });
+      items.forEach((item, i) => {
+        const delta = i - closestIdx;
+        const op = opacities[Math.min(Math.abs(delta), opacities.length - 1)];
+        item.style.opacity = op;
+      });
+    }
 
     function openNav() {
       panel.classList.add('open');
       panel.setAttribute('aria-hidden', 'false');
-      burger.setAttribute('aria-expanded', 'true');
-      burger.setAttribute('aria-label', 'Close menu');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Close menu');
       if (backdrop) backdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
+      if (scroll) scroll.scrollTop = 0;
+      setTimeout(updateFade, 50);
     }
-
     function closeNav() {
       panel.classList.remove('open');
       panel.setAttribute('aria-hidden', 'true');
-      burger.setAttribute('aria-expanded', 'false');
-      burger.setAttribute('aria-label', 'Open menu');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
       if (backdrop) backdrop.classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    burger.addEventListener('click', () =>
+    btn.addEventListener('click', () =>
       panel.classList.contains('open') ? closeNav() : openNav()
     );
-
     if (backdrop) backdrop.addEventListener('click', closeNav);
-
-    Array.from(panel.querySelectorAll('a')).forEach(a =>
-      a.addEventListener('click', closeNav)
-    );
-
+    if (scroll) scroll.addEventListener('scroll', updateFade, { passive: true });
+    items.forEach(a => { if (a.tagName === 'A') a.addEventListener('click', closeNav); });
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && panel.classList.contains('open')) {
-        closeNav();
-        burger.focus();
-      }
+      if (e.key === 'Escape' && panel.classList.contains('open')) { closeNav(); btn.focus(); }
     });
+
+    const yr = document.getElementById('yr');
+    if (yr) yr.textContent = new Date().getFullYear();
   })();
 
   /* ── URL filter param ── */
