@@ -3213,18 +3213,16 @@ button {
     pointer-events: none !important;
     transform: translateX(100%) !important;
     opacity: 1 !important;
-    visibility: hidden !important;
-    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-                visibility 0s linear 0.38s !important;
+    visibility: visible !important;
+   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 
   .nav__panel.open {
     transform: translateX(0) !important;
     pointer-events: auto !important;
+    opacity: 1 !important;
     visibility: visible !important;
-    transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-                visibility 0s linear 0s !important;
-  }
+}
 
   /* Gradient fade jos */
   .nav__panel::after {
