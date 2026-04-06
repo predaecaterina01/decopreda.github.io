@@ -118,7 +118,7 @@ $$('[data-magnetic]').forEach(btn => {
   btn.addEventListener('mouseleave', () => { active=false; tx=0; ty=0; if (!rAF) rAF=requestAnimationFrame(tick); });
 });
 
-/* 11. MOBILE NAV — Logică Completă */
+/* 11. MOBILE NAV — Logică Completă (Final Fix) */
 (function() {
   const burgerBtn  = document.getElementById('navBurger');
   const navPanelEl = document.getElementById('navPanel');
@@ -126,6 +126,22 @@ $$('[data-magnetic]').forEach(btn => {
   const menuScroll = document.getElementById('menuScroll');
 
   if (!burgerBtn || !navPanelEl || !backdropEl) return;
+
+  // Funcție pentru a preveni scroll-ul pe fundal (iOS fix)
+  function lockScroll() {
+    const scrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+  }
+
+  function unlockScroll() {
+    const scrollY = document.body.style.top;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+  }
 
   function openNav() {
     navPanelEl.classList.add('open');
@@ -135,10 +151,9 @@ $$('[data-magnetic]').forEach(btn => {
     burgerBtn.setAttribute('aria-expanded', 'true');
     navPanelEl.setAttribute('aria-hidden', 'false');
     
-    // Blochează scroll-ul paginii în spate
-    document.body.style.overflow = 'hidden';
+    // Blochează scroll-ul paginii
+    lockScroll();
     
-    // Reset scroll meniu la început
     if (menuScroll) menuScroll.scrollTop = 0;
   }
 
@@ -151,24 +166,24 @@ $$('[data-magnetic]').forEach(btn => {
     navPanelEl.setAttribute('aria-hidden', 'true');
     
     // Deblochează scroll-ul paginii
-    document.body.style.overflow = '';
+    unlockScroll();
   }
 
-  // Toggle la click pe burger
+  // Toggle principal
   burgerBtn.addEventListener('click', (e) => {
     e.preventDefault();
     navPanelEl.classList.contains('open') ? closeNav() : openNav();
   });
 
-  // Închide la click pe fundalul gri
+  // Închide la click pe fundalul blurat
   backdropEl.addEventListener('click', closeNav);
 
-  // Închide automat când dai click pe orice link din meniu
+  // Închide la click pe link-uri (important pentru On-Page anchors)
   const navLinks = navPanelEl.querySelectorAll('.nav__item');
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      // Mic delay pentru a lăsa browserul să proceseze scroll-ul către ancoră
-      setTimeout(closeNav, 100);
+      // Delay scurt pentru a permite începerea scroll-ului către secțiune
+      setTimeout(closeNav, 300);
     });
   });
 
@@ -176,6 +191,14 @@ $$('[data-magnetic]').forEach(btn => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && navPanelEl.classList.contains('open')) closeNav();
   });
+
+  // Prevenire scroll "peste margini" în meniu (Overscroll fix)
+  navPanelEl.addEventListener('touchmove', (e) => {
+    if (navPanelEl.classList.contains('open')) {
+      e.stopPropagation();
+    }
+  }, { passive: true });
+
 })();
 
 /* 12. FORM */
