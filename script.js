@@ -125,7 +125,6 @@ $$('[data-magnetic]').forEach(btn => {
   const menuScroll = document.getElementById('menuScroll');
   if (!burgerBtn || !navPanelEl) return;
 
-  /* Backdrop — creat o singură dată dacă nu există deja în HTML */
   let backdropEl = document.getElementById('navBackdrop');
   if (!backdropEl) {
     backdropEl = document.createElement('div');
@@ -135,40 +134,23 @@ $$('[data-magnetic]').forEach(btn => {
     document.body.appendChild(backdropEl);
   }
 
-  /* Items din menu-scroll (pentru fade) */
   const items = menuScroll ? Array.from(menuScroll.querySelectorAll('.nav__item')) : [];
-  const opacities = [1, 0.40, 0.10];
-
-  /* Actualizează opacitățile în funcție de poziția scroll */
-  function updateFade() {
-    if (!menuScroll) return;
-    const containerTop = menuScroll.getBoundingClientRect().top;
-    let closestIdx = 0, closestDist = Infinity;
-    items.forEach((item, i) => {
-      const dist = Math.abs(item.getBoundingClientRect().top - containerTop);
-      if (dist < closestDist) { closestDist = dist; closestIdx = i; }
-    });
-    items.forEach((item, i) => {
-      const delta = i - closestIdx;
-      item.style.opacity = opacities[Math.min(Math.abs(delta), opacities.length - 1)];
-    });
-  }
 
   function openNav() {
     navPanelEl.classList.add('open');
     backdropEl.classList.add('open');
+    burgerBtn.classList.add('open');
     burgerBtn.setAttribute('aria-expanded', 'true');
     burgerBtn.setAttribute('aria-label', 'Close menu');
     navPanelEl.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    /* Reset scroll și aplică fade la deschidere */
     if (menuScroll) menuScroll.scrollTop = 0;
-    setTimeout(updateFade, 50);
   }
 
   function closeNav() {
     navPanelEl.classList.remove('open');
     backdropEl.classList.remove('open');
+    burgerBtn.classList.remove('open');
     burgerBtn.setAttribute('aria-expanded', 'false');
     burgerBtn.setAttribute('aria-label', 'Open menu');
     navPanelEl.setAttribute('aria-hidden', 'true');
@@ -178,12 +160,13 @@ $$('[data-magnetic]').forEach(btn => {
   burgerBtn.addEventListener('click', () => navPanelEl.classList.contains('open') ? closeNav() : openNav());
   backdropEl.addEventListener('click', closeNav);
 
-  /* Scroll listener pe menu-scroll interior */
   if (menuScroll) {
-    menuScroll.addEventListener('scroll', updateFade, { passive: true });
+    menuScroll.addEventListener('scroll', function() {}, { passive: true });
+    menuScroll.addEventListener('touchmove', function(e) {
+      e.stopPropagation();
+    }, { passive: true });
   }
 
-  /* Click pe link → închide */
   items.forEach(a => { if (a.tagName === 'A') a.addEventListener('click', closeNav); });
 
   document.addEventListener('keydown', (e) => {
