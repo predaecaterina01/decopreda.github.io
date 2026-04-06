@@ -353,6 +353,13 @@ button {
   border-color: var(--ink);
   color: var(--ivory);
 }
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 7px;
+  padding: var(--s-xs);
+  z-index: 10;
+}
 
 .nav__burger span {
   display: block;
@@ -3112,7 +3119,6 @@ button {
   color: rgba(236, 224, 200, 1) !important;
   border-color: rgba(183, 158, 110, 0.85) !important;
 }
-
 /* ══════════════════════════════════════════════════════════
    38. MOBILE NAV — FIX FINAL IOS & VIZIBILITATE
    ══════════════════════════════════════════════════════════ */
@@ -3174,6 +3180,27 @@ button {
 
 /* ── Mobile ── */
 @media (max-width: 900px) {
+  .nav__burger {
+    display: flex !important;
+    z-index: 10001 !important;
+    color: #F5F0E8 !important;
+    transition: color 0.3s ease;
+  }
+  .nav__burger.open {
+    color: #1A1714 !important;
+  }
+  .nav__burger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.3s ease;
+    transform-origin: center center;
+  }
+  .nav__burger span:nth-child(1) { margin-bottom: 6px; }
+  .nav__burger.open span:nth-child(1) { transform: translateY(3.75px) rotate(45deg); }
+  .nav__burger.open span:nth-child(2) { transform: translateY(-3.75px) rotate(-45deg); }
+
   .nav__panel {
     position: fixed !important;
     top: 0 !important;
@@ -3181,9 +3208,9 @@ button {
     width: 80vw !important;
     max-width: 300px !important;
     height: 100dvh !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
+    background: rgba(245, 240, 232, 0.96) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
     transform: translateX(100%) !important;
     display: flex !important;
     flex-direction: column !important;
@@ -3197,16 +3224,19 @@ button {
     transform: translateX(0) !important;
     pointer-events: auto !important;
   }
+
   .menu-scroll {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-end !important;
     padding: 100px 30px 60px !important;
     height: 100% !important;
-    overflow-y: auto !important;
+    overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior-y: contain !important;
     box-sizing: border-box !important;
   }
+
   .nav__item {
     font-size: 20px !important;
     font-family: var(--serif) !important;
@@ -3219,13 +3249,17 @@ button {
     touch-action: manipulation !important;
     transition: opacity 0.3s ease !important;
     width: 100% !important;
+    display: block !important;
   }
+
   .nav__item:nth-child(1) { opacity: 1 !important; }
   .nav__item:nth-child(2) { opacity: 0.6 !important; }
   .nav__item:nth-child(3) { opacity: 0.3 !important; }
   .nav__item:nth-child(n+4) { opacity: 0.1 !important; }
+
   .nav__item:active,
   .nav__item:hover { opacity: 1 !important; }
+
   .nav__item--contact {
     font-family: var(--sans) !important;
     font-size: 11px !important;
@@ -3242,10 +3276,8 @@ button {
     margin-top: 4px !important;
     opacity: 0.8 !important;
   }
-  .nav__burger {
-    display: flex !important;
-    z-index: 10001 !important;
-    color: #F5F0E8 !important;
+  .nav__item--contact:active,
+  .nav__item--sig:active {
+    opacity: 1 !important;
   }
-  .nav__burger.open { color: #1A1714 !important; }
 }
