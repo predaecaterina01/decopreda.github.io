@@ -3307,3 +3307,24 @@ button {
   }
 
 } /* end desktop */
+/* ── NAV MOBILE FIX — z-index + touch ── */
+@media (max-width: 900px) {
+  .nav__panel::after {
+    z-index: 1 !important;
+    pointer-events: none !important;
+  }
+
+  .menu-scroll {
+    position: relative;
+    z-index: 5 !important;
+  }
+
+  .nav__item {
+    z-index: 10 !important;
+    position: relative !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    cursor: auto !important;
+    transition: opacity 0.15s ease !important;
+  }
+}
