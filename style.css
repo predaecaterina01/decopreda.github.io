@@ -2999,7 +2999,7 @@ button {
 }
 
 /* ════════════════════════════════════════════════════════════
-   DECO PREDA — NAV MOBILE — v8 FINAL
+   DECO PREDA — NAV MOBILE — v9 FINAL
    Înlocuiește TOT blocul nav de la finalul style.css
    ════════════════════════════════════════════════════════════ */
 
@@ -3009,21 +3009,14 @@ button {
   width: 24px;
   height: 2px;
   border-radius: 2px;
-  background: #ECE6DD;
+  background: #2B2826;
   transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.25s ease;
 }
 
-/* Pe fond deschis — închis */
-.nav.on-light .nav__burger-line {
-  background: #2B2826;
-}
-
-/* Când meniul e închis pe hero dark */
 .nav:not(.on-light) .nav__burger-line {
   background: #ECE6DD;
 }
 
-/* X la deschidere — mereu întunecat pe panel ivory */
 .nav__burger.is-open .nav__burger-line {
   background: #2B2826 !important;
 }
@@ -3059,7 +3052,6 @@ button {
 /* ══ MOBIL ════════════════════════════════════════════════ */
 @media (max-width: 900px) {
 
-  /* Nav-bar */
   .nav {
     height: 100px !important;
     background: rgba(246, 243, 238, 0.98) !important;
@@ -3071,7 +3063,6 @@ button {
     background: rgba(246, 243, 238, 0.98) !important;
   }
 
-  /* Burger */
   .nav__burger {
     display: flex !important;
     flex-direction: column !important;
@@ -3083,12 +3074,6 @@ button {
     z-index: 2100 !important;
   }
 
-  /* ── PANEL ────────────────────────────────────────────────
-     Fundal SOLID — nu transparent, nu rgba.
-     z-index 2000 — deasupra oricărui element al paginii.
-     visibility rezolvă accesibilitatea dar NU blochează
-     tranziția pentru că e sincronizat cu delay 0 la deschidere.
-  ──────────────────────────────────────────────────────── */
   .nav__panel {
     display: flex !important;
     flex-direction: column !important;
@@ -3104,33 +3089,32 @@ button {
     margin: 0 !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
-
-    /* SOLID — nu lasă hero-ul să treacă prin panel */
     background: #F6F3EE !important;
-    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15) !important;
-    border-left: 1px solid rgba(43, 40, 38, 0.08) !important;
-
-    /* Starea ÎNCHISĂ */
+    box-shadow: -10px 0 40px rgba(0,0,0,0.15) !important;
+    border-left: 1px solid rgba(43,40,38,0.08) !important;
     transform: translateX(102%) !important;
     visibility: hidden !important;
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                visibility 0s linear 0.5s !important;
+    pointer-events: none !important;
+    transition: transform 0.5s cubic-bezier(0.22,1,0.36,1),
+                visibility 0s linear 0.5s,
+                pointer-events 0s linear 0.5s !important;
   }
 
-  /* Starea DESCHISĂ */
   .nav__panel.is-active {
     transform: translateX(0) !important;
     visibility: visible !important;
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                visibility 0s linear 0s !important;
+    pointer-events: auto !important;
+    transition: transform 0.5s cubic-bezier(0.22,1,0.36,1),
+                visibility 0s linear 0s,
+                pointer-events 0s linear 0s !important;
   }
 
-  /* Mist effect la bază */
+  /* Mist effect */
   .nav__panel::after {
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 30%;
+    height: 25%;
     background: linear-gradient(to bottom, transparent 0%, #F6F3EE 100%);
     pointer-events: none;
     z-index: 2;
@@ -3146,6 +3130,7 @@ button {
     box-sizing: border-box !important;
     opacity: 1 !important;
     visibility: visible !important;
+    pointer-events: auto !important;
 
     padding-top: 120px !important;
     padding-bottom: 100px !important;
@@ -3161,10 +3146,7 @@ button {
     mask-image: none !important;
   }
 
-  /* ── NAV ITEMS ────────────────────────────────────────────
-     opacity:1 pe toți — vizibili garantat.
-     Stagger aplicat după confirmare că link-urile apar.
-  ──────────────────────────────────────────────────────── */
+  /* ── NAV ITEMS ────────────────────────────────────────────*/
   .nav__item {
     font-family: 'Cormorant Garamond', Georgia, serif !important;
     font-size: 30px !important;
@@ -3178,19 +3160,19 @@ button {
     padding: 14px 0 !important;
     margin: 0 !important;
     border: none !important;
-    border-bottom: 1px solid rgba(43, 40, 38, 0.10) !important;
+    border-bottom: 1px solid rgba(43,40,38,0.10) !important;
     background: transparent !important;
-    opacity: 1 !important;
-    visibility: visible !important;
     position: relative !important;
     z-index: 1 !important;
     box-shadow: none !important;
-    transition: color 0.2s ease !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    transition: opacity 0.2s ease !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.05) !important;
   }
 
   .nav__item::after { display: none !important; }
 
-  /* Stagger vizual */
   .menu-scroll .nav__item:nth-child(1) { opacity: 1    !important; }
   .menu-scroll .nav__item:nth-child(2) { opacity: 0.85 !important; }
   .menu-scroll .nav__item:nth-child(3) { opacity: 0.65 !important; }
@@ -3200,7 +3182,6 @@ button {
   .nav__item:active,
   .nav__item:focus {
     opacity: 1 !important;
-    color: #2B2826 !important;
     outline: none !important;
   }
 
@@ -3241,6 +3222,7 @@ button {
     position: static !important;
     transform: none !important;
     visibility: visible !important;
+    pointer-events: auto !important;
     width: auto !important;
     max-width: none !important;
     height: auto !important;
@@ -3272,6 +3254,7 @@ button {
     background: transparent !important;
     opacity: 1 !important;
     visibility: visible !important;
+    pointer-events: auto !important;
     -webkit-mask-image: none !important;
     mask-image: none !important;
   }
@@ -3294,6 +3277,8 @@ button {
     position: relative !important;
     transition: color 0.25s ease !important;
     text-decoration: none !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
   }
 
   .nav__item::after {
