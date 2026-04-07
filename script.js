@@ -146,45 +146,37 @@ $$('[data-magnetic]').forEach(btn => {
     burger.classList.add('is-open');
     burger.setAttribute('aria-expanded', 'true');
     panel.setAttribute('aria-hidden', 'false');
-    
-    // Blochează atât html cât și body — fix iOS Safari
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
-    
     if (scroll) {
       scroll.scrollTop = 0;
-      // "Trezește" scroll-ul intern după animație
       setTimeout(function() {
         if (scroll) scroll.style.overflowY = 'auto';
       }, 100);
     }
- }
+  }
 
-function close() {
+  function close() {
     panel.classList.remove('is-active');
     backdrop.classList.remove('is-active');
     burger.classList.remove('is-open');
     burger.setAttribute('aria-expanded', 'false');
     panel.setAttribute('aria-hidden', 'true');
-    
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
-    if (scroll) scroll.style.overflowY = ''; // resetează ce a setat open()
+    if (scroll) scroll.style.overflowY = '';
     window.scrollTo(0, savedY);
-}
+  }
 
   function isOpen() { return panel.classList.contains('is-active'); }
 
-  // Burger
   burger.addEventListener('click', function (e) {
     e.stopPropagation();
     isOpen() ? close() : open();
   });
 
-  // Event delegation pe document — trece peste orice bug iOS
   document.addEventListener('click', function (e) {
     if (!isOpen()) return;
-
     var link = e.target.closest('.nav__item');
     if (link) {
       var href = link.getAttribute('href') || '';
@@ -196,35 +188,30 @@ function close() {
           if (target) target.scrollIntoView({ behavior: 'smooth' });
         }, 400);
       } else {
-        close(); // pentru gallery.html, testimonials.html — lasă navigarea default
+        close();
       }
       return;
     }
-
-    // Backdrop
-    if (e.target === backdrop || e.target.id === 'navBackdrop') {
-      close();
-    }
+    if (e.target === backdrop || e.target.id === 'navBackdrop') close();
   });
 
-  // Touchend fallback — Safari < 15
   if (scroll) {
-    var tx = 0, ty = 0;
+    var tx = 0, ty = 0, tsY = 0;
+
     scroll.addEventListener('touchstart', function (e) {
       tx = e.touches[0].clientX;
       ty = e.touches[0].clientY;
+      tsY = e.touches[0].clientY;
     }, { passive: true });
 
     scroll.addEventListener('touchend', function (e) {
       if (!isOpen()) return;
       var dx = Math.abs(e.changedTouches[0].clientX - tx);
       var dy = Math.abs(e.changedTouches[0].clientY - ty);
-      if (dx > 10 || dy > 20) return; // ignoră swipe
-
+      if (dx > 10 || dy > 20) return;
       var link = e.target.closest('.nav__item');
       if (!link) return;
       e.preventDefault();
-
       var href = link.getAttribute('href') || '';
       close();
       setTimeout(function () {
@@ -237,9 +224,6 @@ function close() {
       }, 400);
     }, { passive: false });
 
-    // Overscroll prevention Safari
-    var tsY = 0;
-    scroll.addEventListener('touchstart', function (e) { tsY = e.touches[0].clientY; }, { passive: true });
     scroll.addEventListener('touchmove', function (e) {
       var delta = tsY - e.touches[0].clientY;
       if ((this.scrollTop <= 0 && delta < 0) ||
@@ -249,11 +233,15 @@ function close() {
     }, { passive: false });
   }
 
-  // ESC + resize
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen()) close(); });
-  window.addEventListener('resize', function () { if (window.innerWidth > 900 && isOpen()) close(); });
-})();
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isOpen()) close();
+  });
 
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 900 && isOpen()) close();
+  });
+
+})();
 /* 12. FORM */
 const FORMSPREE = 'https://formspree.io/f/mkoqvqbw';
 const commissionForm = $('#commissionForm');
