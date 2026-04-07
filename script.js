@@ -145,23 +145,17 @@ $$('[data-magnetic]').forEach(btn => {
      Metoda position:fixed previne scroll chaining pe iOS Safari.
      Salvăm scrollY și îl restaurăm la închidere fără salt vizual.
   ──────────────────────────────────────────────────────── */
-  function lockBody() {
-    savedScrollY = window.pageYOffset;
-    body.style.overflow = 'hidden';
-    body.style.position = 'fixed';
-    body.style.top      = '-' + savedScrollY + 'px';
-    body.style.width    = '100%';
-    body.classList.add('nav-open');
-  }
+function lockBody() {
+  savedScrollY = window.pageYOffset;
+  body.style.overflow = 'hidden';
+  body.classList.add('nav-open');
+}
 
-  function unlockBody() {
-    body.style.overflow = '';
-    body.style.position = '';
-    body.style.top      = '';
-    body.style.width    = '';
-    body.classList.remove('nav-open');
-    window.scrollTo(0, savedScrollY);
-  }
+function unlockBody() {
+  body.style.overflow = '';
+  body.classList.remove('nav-open');
+  window.scrollTo(0, savedScrollY);
+}
 
   /* ── Open / Close ─────────────────────────────────────── */
   function openNav() {
