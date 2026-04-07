@@ -152,7 +152,7 @@ $$('[data-magnetic]').forEach(btn => {
     navPanelEl.setAttribute('aria-hidden', 'false');
     
     // Blochează scroll-ul paginii
-    lockScroll();
+    document.body.style.overflow = 'hidden';
     
     if (menuScroll) menuScroll.scrollTop = 0;
   }
@@ -166,7 +166,7 @@ $$('[data-magnetic]').forEach(btn => {
     navPanelEl.setAttribute('aria-hidden', 'true');
     
     // Deblochează scroll-ul paginii
-    unlockScroll();
+   document.body.style.overflow = '';
   }
 
   // Toggle principal
