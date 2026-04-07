@@ -146,19 +146,32 @@ $$('[data-magnetic]').forEach(btn => {
     burger.classList.add('is-open');
     burger.setAttribute('aria-expanded', 'true');
     panel.setAttribute('aria-hidden', 'false');
+    
+    // Blochează atât html cât și body — fix iOS Safari
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
-    if (scroll) scroll.scrollTop = 0;
-  }
+    
+    if (scroll) {
+      scroll.scrollTop = 0;
+      // "Trezește" scroll-ul intern după animație
+      setTimeout(function() {
+        if (scroll) scroll.style.overflowY = 'auto';
+      }, 100);
+    }
+ }
 
-  function close() {
+function close() {
     panel.classList.remove('is-active');
     backdrop.classList.remove('is-active');
     burger.classList.remove('is-open');
     burger.setAttribute('aria-expanded', 'false');
     panel.setAttribute('aria-hidden', 'true');
+    
+    document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
+    if (scroll) scroll.style.overflowY = ''; // resetează ce a setat open()
     window.scrollTo(0, savedY);
-  }
+}
 
   function isOpen() { return panel.classList.contains('is-active'); }
 
