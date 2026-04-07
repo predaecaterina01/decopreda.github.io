@@ -248,6 +248,7 @@
 </head>
 <body class="light-body">
 
+  <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true">
     <div class="cursor__ring"></div>
     <div class="cursor__dot"></div>
@@ -259,7 +260,9 @@
       DECO<span class="nav__wordmark-thin">PREDA</span>
     </a>
     <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navPanel">
-      <span></span><span></span>
+      <span class="nav__burger-line"></span>
+      <span class="nav__burger-line"></span>
+      <span class="nav__burger-line"></span>
     </button>
     <div class="nav__panel" id="navPanel" aria-hidden="true">
       <div class="menu-scroll" id="menuScroll">
@@ -329,6 +332,10 @@
     </div>
   </div>
 
+  <!-- script.js gestionează: nav, cursor, progress, yr -->
+  <script src="script.js"></script>
+
+  <!-- Cod specific galeriei -->
   <script>
   'use strict';
 
@@ -450,66 +457,10 @@
   });
   let tsX = 0;
   lb.addEventListener('touchstart', e => { tsX = e.changedTouches[0].clientX; }, { passive: true });
-  lb.addEventListener('touchend',   e => { const dx = e.changedTouches[0].clientX - tsX; if (Math.abs(dx) > 45) { dx < 0 ? nextImg() : prevImg(); } }, { passive: true });
-
-  /* ══ NAV MOBIL ══ */
-  (function() {
-    var burger   = document.getElementById('navBurger');
-    var panel    = document.getElementById('navPanel');
-    var scroll   = document.getElementById('menuScroll');
-    var backdrop = document.getElementById('navBackdrop');
-    if (!burger || !panel) return;
-
-    var btn = burger.cloneNode(true);
-    burger.parentNode.replaceChild(btn, burger);
-
-    var items = scroll ? Array.from(scroll.querySelectorAll('.nav__item')) : [];
-    var ops = [1, 0.40, 0.10];
-
-    function fade() {
-      if (!scroll) return;
-      var top = scroll.getBoundingClientRect().top;
-      var ci = 0, cd = Infinity;
-      items.forEach(function(el, i) {
-        var d = Math.abs(el.getBoundingClientRect().top - top);
-        if (d < cd) { cd = d; ci = i; }
-      });
-      items.forEach(function(el, i) {
-        el.style.opacity = ops[Math.min(Math.abs(i - ci), ops.length - 1)];
-      });
-    }
-
-    function openNav() {
-      panel.classList.add('open');
-      panel.setAttribute('aria-hidden', 'false');
-      btn.setAttribute('aria-expanded', 'true');
-      btn.setAttribute('aria-label', 'Close menu');
-      if (backdrop) backdrop.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      if (scroll) scroll.scrollTop = 0;
-      setTimeout(fade, 50);
-    }
-
-    function closeNav() {
-      panel.classList.remove('open');
-      panel.setAttribute('aria-hidden', 'true');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-label', 'Open menu');
-      if (backdrop) backdrop.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    btn.addEventListener('click', function() {
-      panel.classList.contains('open') ? closeNav() : openNav();
-    });
-
-    if (backdrop) backdrop.addEventListener('click', closeNav);
-    if (scroll) scroll.addEventListener('scroll', fade, { passive: true });
-    items.forEach(function(a) { a.addEventListener('click', closeNav); });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && panel.classList.contains('open')) { closeNav(); btn.focus(); }
-    });
-  })();
+  lb.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tsX;
+    if (Math.abs(dx) > 45) { dx < 0 ? nextImg() : prevImg(); }
+  }, { passive: true });
 
   /* ── URL filter param ── */
   (function() {
@@ -519,43 +470,6 @@
     const btn = document.querySelector(`.gal-filter[data-filter="${f}"]`);
     if (btn) btn.click();
   })();
-
-  /* ── Cursor custom ── */
-  (function() {
-    const cur  = document.getElementById('cursor');
-    if (!cur || 'ontouchstart' in window) { if (cur) cur.style.display = 'none'; return; }
-    const ring = cur.querySelector('.cursor__ring');
-    const dot  = cur.querySelector('.cursor__dot');
-    let cx = 0, cy = 0, rx = 0, ry = 0, raf = null, visible = false;
-    const lerp = (a, b, t) => a + (b - a) * t;
-    function tick() {
-      rx = lerp(rx, cx, 0.1); ry = lerp(ry, cy, 0.1);
-      if (dot)  { dot.style.left  = cx + 'px'; dot.style.top  = cy + 'px'; }
-      if (ring) { ring.style.left = rx.toFixed(2) + 'px'; ring.style.top = ry.toFixed(2) + 'px'; }
-      raf = requestAnimationFrame(tick);
-    }
-    document.addEventListener('mousemove', e => {
-      cx = e.clientX; cy = e.clientY;
-      if (!visible) { cur.style.opacity = '1'; visible = true; if (!raf) tick(); }
-    });
-    document.addEventListener('mouseover', e => { if (e.target.closest('a,button,[data-cursor="link"]')) cur.classList.add('hovering'); });
-    document.addEventListener('mouseout',  e => { if (e.target.closest('a,button,[data-cursor="link"]')) cur.classList.remove('hovering'); });
-    document.addEventListener('mouseleave', () => { cur.style.opacity = '0'; });
-    document.addEventListener('mouseenter', () => { cur.style.opacity = '1'; });
-  })();
-
-  /* ── Progress bar ── */
-  (function() {
-    const prog = document.getElementById('progress');
-    if (!prog) return;
-    window.addEventListener('scroll', function() {
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      prog.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0).toFixed(2) + '%';
-    }, { passive: true });
-  })();
-
-  const yrEl = document.getElementById('yr');
-  if (yrEl) yrEl.textContent = new Date().getFullYear();
 
   initGallery();
   </script>
