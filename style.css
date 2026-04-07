@@ -2997,49 +2997,54 @@ button {
   .systems__h { margin-bottom: clamp(32px, 6vw, 48px); }
   .projects__h { margin-bottom: clamp(32px, 6vw, 48px); }
 }
+
 /* ════════════════════════════════════════════════════════════
-   DECO PREDA — NAV MOBILE — VERSIUNEA DEFINITIVĂ
-   
-   INSTRUCȚIUNE UNICĂ:
-   Șterge TOT ce ai adăugat anterior la finalul style.css
-   (blocurile nav mobile v2, v3 etc.) și lipește DOAR acesta.
+   DECO PREDA — NAV MOBILE — v4 FINAL
+   Înlocuiește TOT ce ai la finalul style.css pentru nav mobil.
    ════════════════════════════════════════════════════════════ */
 
-/* ── Burger lines ──────────────────────────────────────────── */
+/* ── Burger lines ─────────────────────────────────────────── */
 .nav__burger-line {
   display: block;
   width: 24px;
   height: 1.5px;
-  background: #ECE6DD;
+  background: #ECE6DD; /* alb-crem, vizibil pe dark hero */
   border-radius: 2px;
   transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
-              opacity 0.25s ease;
+              opacity   0.25s ease;
 }
 
+/* Pe fond deschis — întunecat */
 .nav.on-light .nav__burger-line {
   background: #2B2826;
 }
 
+/* X la deschidere — culoare fixă indiferent de context */
+.nav__burger.is-open .nav__burger-line {
+  background: #2B2826 !important; /* X mereu întunecat pe panelul ivory */
+}
 .nav__burger.is-open .nav__burger-line:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
 .nav__burger.is-open .nav__burger-line:nth-child(2) {
   opacity: 0;
+  transform: scaleX(0);
 }
 .nav__burger.is-open .nav__burger-line:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* ── Backdrop ──────────────────────────────────────────────── */
+/* ── Backdrop ─────────────────────────────────────────────── */
 .nav__backdrop {
   position: fixed;
   inset: 0;
   z-index: 998;
-  background: rgba(10, 9, 8, 0.55);
+  background: rgba(10, 9, 8, 0.50);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+  /* Fără backdrop-filter — blur e DOAR pe panel */
 }
 .nav__backdrop.is-active {
   opacity: 1;
@@ -3048,28 +3053,32 @@ button {
   transition: opacity 0.35s ease, visibility 0s linear 0s;
 }
 
-/* ── MOBIL ─────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════
+   MOBIL ≤ 900px
+══════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
 
-  /* Burger */
+  /* Burger vizibil */
   .nav__burger {
     display: flex !important;
-    flex-direction: column;
-    gap: 6px;
-    padding: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1001;
-    position: relative;
+    flex-direction: column !important;
+    gap: 6px !important;
+    padding: 10px !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    z-index: 1001 !important;
   }
 
-  /* Panel — mereu display:flex, slide din dreapta */
-  .nav__panel {
-    /* Resetează orice stil desktop sau vechi */
-    all: unset !important;
+  /* ── PANEL ────────────────────────────────────────────────
+     Slide din dreapta. display:flex constant (nu display:none)
+     pentru ca tranzițiile să funcționeze și menu-scroll
+     să primească flex:1 corect.
 
-    /* Poziționare */
+     FUNDAL: solid ivory sus → complet transparent jos.
+     NU folosim all:unset — sparge backdrop-filter pe iOS.
+  ──────────────────────────────────────────────────────── */
+  .nav__panel {
     display: flex !important;
     flex-direction: column !important;
     position: fixed !important;
@@ -3077,130 +3086,214 @@ button {
     right: 0 !important;
     bottom: 0 !important;
     left: auto !important;
-    width: 75vw !important;
+    width: 78vw !important;
     max-width: 340px !important;
     z-index: 1000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-left: 1px solid rgba(210, 200, 188, 0.5) !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
 
-    /* Fundal glassmorphism */
-    background: rgba(246, 243, 238, 0.93) !important;
+    /* Fundal: solid sus → transparent jos */
+    background: linear-gradient(
+      to bottom,
+      rgba(246, 243, 238, 0.97) 0%,
+      rgba(246, 243, 238, 0.92) 40%,
+      rgba(246, 243, 238, 0.60) 70%,
+      rgba(246, 243, 238, 0.00) 100%
+    ) !important;
+
+    /* Glassmorphism */
     -webkit-backdrop-filter: blur(20px) !important;
     backdrop-filter: blur(20px) !important;
-    border-left: 1px solid rgba(210, 200, 188, 0.7) !important;
-    box-shadow: -8px 0 32px rgba(10,9,8,0.18) !important;
 
     /* Starea ÎNCHISĂ */
     transform: translateX(110%) !important;
     visibility: hidden !important;
-    transition: transform 0.42s cubic-bezier(0.22,1,0.36,1),
-                visibility 0s linear 0.42s !important;
+    opacity: 1 !important;
+    transition: transform 0.44s cubic-bezier(0.22,1,0.36,1),
+                visibility 0s linear 0.44s !important;
   }
 
   /* Starea DESCHISĂ */
   .nav__panel.is-active {
     transform: translateX(0) !important;
     visibility: visible !important;
-    transition: transform 0.42s cubic-bezier(0.22,1,0.36,1),
+    transition: transform 0.44s cubic-bezier(0.22,1,0.36,1),
                 visibility 0s linear 0s !important;
   }
 
-  /* menu-scroll — zona care scrollează */
+  /* ── MENU-SCROLL ──────────────────────────────────────────
+     flex:1 = umple tot panelul.
+     Scroll fluid iOS. Fără background propriu — moștenește
+     gradientul de pe panel.
+  ──────────────────────────────────────────────────────── */
   .menu-scroll {
     display: flex !important;
     flex-direction: column !important;
     flex: 1 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+
+    /* Padding mic sus — prima opțiune aproape de top */
+    padding-top: calc(var(--nav-h) + 16px) !important;
+    padding-bottom: 80px !important;
+    padding-left: 28px !important;
+    padding-right: 20px !important;
+
     overflow-y: auto !important;
     overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
     overscroll-behavior-y: contain !important;
 
-    padding-top: calc(var(--nav-h) + 36px) !important;
-    padding-bottom: 48px !important;
-    padding-left: 28px !important;
-    padding-right: 24px !important;
-    box-sizing: border-box !important;
-    width: 100% !important;
-    height: 100% !important;
+    background: transparent !important;
   }
 
-  /* Nav items */
+  /* ── NAV ITEMS ────────────────────────────────────────────
+     Fără all:unset — resetăm manual ce e necesar.
+     Opacitate progresivă: 1 → 0.5 → 0.18 → 0
+     sugerând că meniul continuă și se dizolvă.
+  ──────────────────────────────────────────────────────── */
   .nav__item {
-    all: unset !important;
-    display: block !important;
     font-family: 'Cormorant Garamond', Georgia, serif !important;
-    font-size: clamp(22px, 6vw, 34px) !important;
+    font-size: clamp(24px, 6.5vw, 36px) !important;
     font-weight: 300 !important;
+    letter-spacing: 0.01em !important;
+    text-transform: none !important;
     color: #1E1B18 !important;
-    padding: 15px 0 !important;
-    border-bottom: 1px solid rgba(200, 190, 178, 0.5) !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    cursor: pointer !important;
     text-decoration: none !important;
-    transition: opacity 0.2s ease !important;
+
+    display: block !important;
+    width: 100% !important;
+    padding: 13px 0 !important;
+    margin: 0 !important;
+    border-bottom: 1px solid rgba(200, 190, 178, 0.45) !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+
+    transition: opacity 0.22s ease !important;
+    position: relative !important;
+    z-index: 1 !important;
   }
 
-  /* Opacitate progresivă */
-  .menu-scroll .nav__item:nth-child(1) { opacity: 1 !important; }
-  .menu-scroll .nav__item:nth-child(2) { opacity: 0.65 !important; }
-  .menu-scroll .nav__item:nth-child(3) { opacity: 0.35 !important; }
-  .menu-scroll .nav__item:nth-child(n+4) { opacity: 0.15 !important; }
+  /* Sublinierea desktop ascunsă */
+  .nav__item::after {
+    display: none !important;
+  }
 
+  /* Dispersie progresivă — sugerează scroll */
+  .menu-scroll .nav__item:nth-child(1) { opacity: 1    !important; }
+  .menu-scroll .nav__item:nth-child(2) { opacity: 0.50 !important; }
+  .menu-scroll .nav__item:nth-child(3) { opacity: 0.18 !important; }
+  .menu-scroll .nav__item:nth-child(n+4) { opacity: 0  !important; }
+
+  /* Touch/hover — tot meniul vizibil */
   .nav__item:hover,
-  .nav__item:active,
-  .nav__item:focus {
+  .nav__item:focus,
+  .nav__item:active {
     opacity: 1 !important;
-    color: #1E1B18 !important;
     outline: none !important;
   }
 
+  /* Când userul scrollează, toate devin vizibile */
+  .menu-scroll:hover .nav__item,
+  .menu-scroll:active .nav__item {
+    opacity: 1 !important;
+    transition: opacity 0.35s ease !important;
+  }
+
+  /* Variantele speciale */
   .nav__item--contact {
     color: #7A736A !important;
   }
 
   .nav__item--sig {
     font-family: 'Jost', system-ui, sans-serif !important;
-    font-size: 11px !important;
-    letter-spacing: 0.26em !important;
+    font-size: 10px !important;
+    letter-spacing: 0.30em !important;
     text-transform: uppercase !important;
     color: #7A756F !important;
     border-bottom: none !important;
-    margin-top: 12px !important;
-    opacity: 0.75 !important;
+    padding-top: 16px !important;
+    opacity: 0 !important; /* în dispersia normală */
   }
 
-} /* end mobile */
+  /* CTA */
+  .nav__item--cta {
+    border: none !important;
+    background: transparent !important;
+    color: #7A736A !important;
+  }
 
-/* ── DESKTOP ≥ 901px — reset complet ─────────────────────── */
+} /* end @media ≤ 900px */
+
+
+/* ══════════════════════════════════════════════════════════
+   DESKTOP ≥ 901px — reset complet la stilul original
+══════════════════════════════════════════════════════════ */
 @media (min-width: 901px) {
 
-  .nav__burger { display: none !important; }
+  .nav__burger  { display: none !important; }
   .nav__backdrop { display: none !important; }
 
   .nav__panel {
-    all: unset !important;
     display: flex !important;
+    position: static !important;
+    transform: none !important;
+    visibility: visible !important;
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    background: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    flex-direction: row !important;
     align-items: center !important;
     gap: var(--s-lg) !important;
+    transition: none !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
   }
 
   .menu-scroll {
-    all: unset !important;
     display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
     gap: var(--s-lg) !important;
+    flex: none !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    overscroll-behavior-y: auto !important;
   }
 
   .nav__item {
-    all: unset !important;
     font-family: 'Jost', system-ui, sans-serif !important;
     font-size: clamp(11px, 1vw, 13px) !important;
     font-weight: 300 !important;
     letter-spacing: 0.18em !important;
     text-transform: uppercase !important;
     color: rgba(214, 204, 192, 0.85) !important;
-    cursor: pointer !important;
+    display: inline !important;
+    width: auto !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    opacity: 1 !important;
+    margin: 0 !important;
     position: relative !important;
     transition: color 0.25s ease !important;
+    text-decoration: none !important;
   }
 
   .nav__item::after {
@@ -3212,6 +3305,7 @@ button {
     height: 1px !important;
     background: #7A736A !important;
     transition: width 0.5s cubic-bezier(0.22,1,0.36,1) !important;
+    display: block !important;
   }
 
   .nav__item:hover { color: #ECE6DD !important; }
@@ -3221,6 +3315,19 @@ button {
   .nav.on-light .nav__item:hover { color: #2B2826 !important; }
 
   .nav__item--sig {
+    opacity: 1 !important;
     color: rgba(214, 204, 192, 0.85) !important;
+    font-size: clamp(11px, 1vw, 13px) !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
-}
+
+  /* Burger lines pe desktop — ascuns oricum prin display:none pe burger */
+  .nav__burger-line {
+    background: #ECE6DD;
+  }
+
+} /* end desktop */
