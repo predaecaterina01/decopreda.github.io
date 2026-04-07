@@ -2998,83 +2998,78 @@ button {
   .projects__h { margin-bottom: clamp(32px, 6vw, 48px); }
 }
 /* ════════════════════════════════════════════════════════════
-   DECO PREDA — NAV MOBILE FIX — VERSIUNEA 3 FINALĂ
-   Lipește la SFÂRȘITUL lui style.css (înlocuiește orice
-   bloc nav mobil anterior).
+   DECO PREDA — NAV MOBILE — VERSIUNEA DEFINITIVĂ
+   
+   INSTRUCȚIUNE UNICĂ:
+   Șterge TOT ce ai adăugat anterior la finalul style.css
+   (blocurile nav mobile v2, v3 etc.) și lipește DOAR acesta.
    ════════════════════════════════════════════════════════════ */
 
-/* ─── BACKDROP ─────────────────────────────────────────────
-   Overlay întunecat. FĂRĂ backdrop-filter — blur e doar pe panel.
-──────────────────────────────────────────────────────────── */
-.nav__backdrop {
-  position: fixed !important;
-  inset: 0 !important;
-  background: rgba(10, 9, 8, 0.60) !important;
-  z-index: 998 !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-  transition: opacity 0.35s ease, visibility 0s linear 0.35s !important;
-}
-
-.nav__backdrop.is-active {
-  opacity: 1 !important;
-  visibility: visible !important;
-  pointer-events: auto !important;
-  transition: opacity 0.35s ease, visibility 0s linear 0s !important;
-}
-
-/* ─── BURGER LINES ─────────────────────────────────────────
-   .nav__burger-line e clasa nouă pe cele 3 <span>-uri.
-──────────────────────────────────────────────────────────── */
+/* ── Burger lines ──────────────────────────────────────────── */
 .nav__burger-line {
-  display: block !important;
-  width: 24px !important;
-  height: 1px !important;
-  background: #1E1B18 !important;
-  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity   0.22s ease !important;
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: #ECE6DD;
+  border-radius: 2px;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
+              opacity 0.25s ease;
 }
 
 .nav.on-light .nav__burger-line {
-  background: var(--ink) !important;
+  background: #2B2826;
 }
 
-/* X la deschidere */
 .nav__burger.is-open .nav__burger-line:nth-child(1) {
-  transform: translateY(8px) rotate(45deg) !important;
+  transform: translateY(8px) rotate(45deg);
 }
 .nav__burger.is-open .nav__burger-line:nth-child(2) {
-  opacity: 0 !important;
-  transform: scaleX(0) !important;
+  opacity: 0;
 }
 .nav__burger.is-open .nav__burger-line:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg) !important;
+  transform: translateY(-8px) rotate(-45deg);
 }
 
-/* ─── MOBIL ≤ 900px ────────────────────────────────────────
-──────────────────────────────────────────────────────────── */
+/* ── Backdrop ──────────────────────────────────────────────── */
+.nav__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  background: rgba(10, 9, 8, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+}
+.nav__backdrop.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.35s ease, visibility 0s linear 0s;
+}
+
+/* ── MOBIL ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
 
-  /* Burger vizibil */
+  /* Burger */
   .nav__burger {
     display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    gap: 7px !important;
-    padding: 8px !important;
-    background: none !important;
-    border: none !important;
-    cursor: pointer !important;
-    z-index: 1001 !important;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    position: relative;
   }
 
-  /* ── PANEL ─────────────────────────────────────────────
-     Folosim position:fixed + width pe întreaga înălțime.
-     display:flex + flex-direction:column = menu-scroll umple tot.
-     Tranziție: translateX(100%) → translateX(0).
-  ──────────────────────────────────────────────────────── */
+  /* Panel — mereu display:flex, slide din dreapta */
   .nav__panel {
+    /* Resetează orice stil desktop sau vechi */
+    all: unset !important;
+
+    /* Poziționare */
     display: flex !important;
     flex-direction: column !important;
     position: fixed !important;
@@ -3082,235 +3077,150 @@ button {
     right: 0 !important;
     bottom: 0 !important;
     left: auto !important;
-    width: 80vw !important;
-    max-width: 360px !important;
-    min-width: 280px !important;
+    width: 75vw !important;
+    max-width: 340px !important;
     z-index: 1000 !important;
 
-    /* Glassmorphism — blur EXCLUSIV pe panel */
-    background: rgba(246, 243, 238, 0.92) !important;
-    backdrop-filter: blur(20px) !important;
+    /* Fundal glassmorphism */
+    background: rgba(246, 243, 238, 0.93) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-
-    border-left: 1px solid rgba(217, 209, 197, 0.6) !important;
-    border-top: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
+    backdrop-filter: blur(20px) !important;
+    border-left: 1px solid rgba(210, 200, 188, 0.7) !important;
+    box-shadow: -8px 0 32px rgba(10,9,8,0.18) !important;
 
     /* Starea ÎNCHISĂ */
-    transform: translateX(100%) !important;
+    transform: translateX(110%) !important;
     visibility: hidden !important;
-    opacity: 0 !important;
-    transition:
-      transform   0.44s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity     0.30s ease,
-      visibility  0s   linear 0.44s !important;
+    transition: transform 0.42s cubic-bezier(0.22,1,0.36,1),
+                visibility 0s linear 0.42s !important;
   }
 
   /* Starea DESCHISĂ */
   .nav__panel.is-active {
     transform: translateX(0) !important;
     visibility: visible !important;
-    opacity: 1 !important;
-    transition:
-      transform   0.44s cubic-bezier(0.22, 1, 0.36, 1),
-      opacity     0.30s ease,
-      visibility  0s   linear 0s !important;
+    transition: transform 0.42s cubic-bezier(0.22,1,0.36,1),
+                visibility 0s linear 0s !important;
   }
 
-  /* ── MENU-SCROLL ───────────────────────────────────────
-     flex:1 = umple tot spațiul rămas în panel.
-     overflow-y:auto = scroll doar în panel.
-  ──────────────────────────────────────────────────────── */
+  /* menu-scroll — zona care scrollează */
   .menu-scroll {
     display: flex !important;
     flex-direction: column !important;
     flex: 1 !important;
-    width: 100% !important;
-
-    /* Padding sus = nav-bar height + breathing room */
-    padding-top: calc(var(--nav-h) + 32px) !important;
-    padding-bottom: 48px !important;
-    padding-left: 32px !important;
-    padding-right: 32px !important;
-    box-sizing: border-box !important;
-
-    /* Scroll fluid iOS */
     overflow-y: auto !important;
     overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
     overscroll-behavior-y: contain !important;
-  }
 
-  /* ── NAV ITEMS ──────────────────────────────────────────
-     Font serif mare, pe fond ivory deschis.
-     Opacitate progresivă: 1 → 0.55 → 0.25 → 0.12
-     Touch/hover = opacity 1.
-  ──────────────────────────────────────────────────────── */
-  .nav__item {
-    font-family: var(--serif) !important;
-    font-size: clamp(22px, 5.5vw, 36px) !important;
-    font-weight: 300 !important;
-    letter-spacing: 0.01em !important;
-    text-transform: none !important;
-    color: #1E1B18 !important;
-
-    display: block !important;
+    padding-top: calc(var(--nav-h) + 36px) !important;
+    padding-bottom: 48px !important;
+    padding-left: 28px !important;
+    padding-right: 24px !important;
+    box-sizing: border-box !important;
     width: 100% !important;
-    padding: 14px 0 !important;
-    margin: 0 !important;
-    border-bottom: 1px solid rgba(200, 192, 182, 0.55) !important;
-    background: transparent !important;
-
-    transition: opacity 0.2s ease, color 0.2s ease !important;
-    text-decoration: none !important;
+    height: 100% !important;
   }
 
-  .nav__item::after {
-    display: none !important;
+  /* Nav items */
+  .nav__item {
+    all: unset !important;
+    display: block !important;
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: clamp(22px, 6vw, 34px) !important;
+    font-weight: 300 !important;
+    color: #1E1B18 !important;
+    padding: 15px 0 !important;
+    border-bottom: 1px solid rgba(200, 190, 178, 0.5) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    transition: opacity 0.2s ease !important;
   }
 
   /* Opacitate progresivă */
-  .nav__item:nth-child(1) { opacity: 1 !important; }
-  .nav__item:nth-child(2) { opacity: 0.55 !important; }
-  .nav__item:nth-child(3) { opacity: 0.28 !important; }
-  .nav__item:nth-child(n+4) { opacity: 0.12 !important; }
+  .menu-scroll .nav__item:nth-child(1) { opacity: 1 !important; }
+  .menu-scroll .nav__item:nth-child(2) { opacity: 0.65 !important; }
+  .menu-scroll .nav__item:nth-child(3) { opacity: 0.35 !important; }
+  .menu-scroll .nav__item:nth-child(n+4) { opacity: 0.15 !important; }
 
-  /* Touch / hover / focus */
   .nav__item:hover,
-  .nav__item:focus,
-  .nav__item:active {
+  .nav__item:active,
+  .nav__item:focus {
     opacity: 1 !important;
     color: #1E1B18 !important;
+    outline: none !important;
   }
 
-  /* Contact */
   .nav__item--contact {
-    color: var(--taupe-d) !important;
+    color: #7A736A !important;
   }
 
-  /* Signature Series */
   .nav__item--sig {
-    font-family: var(--sans) !important;
+    font-family: 'Jost', system-ui, sans-serif !important;
     font-size: 11px !important;
-    letter-spacing: 0.28em !important;
+    letter-spacing: 0.26em !important;
     text-transform: uppercase !important;
-    color: var(--stone) !important;
+    color: #7A756F !important;
     border-bottom: none !important;
-    margin-top: 16px !important;
-    padding-top: 4px !important;
-    opacity: 0.7 !important;
+    margin-top: 12px !important;
+    opacity: 0.75 !important;
   }
 
-  .nav__item--sig:hover,
-  .nav__item--sig:active {
-    opacity: 1 !important;
-  }
+} /* end mobile */
 
-  /* CTA reset */
-  .nav__item--cta {
-    border: none !important;
-    background: transparent !important;
-    padding: 14px 0 !important;
-    color: var(--taupe-d) !important;
-  }
-
-  .nav__item--cta:hover {
-    background: none !important;
-    color: #1E1B18 !important;
-  }
-
-} /* end @media ≤ 900px */
-
-
-/* ─── DESKTOP ≥ 901px — reset complet ──────────────────────
-   Previne orice scurgere de stiluri mobile.
-──────────────────────────────────────────────────────────── */
+/* ── DESKTOP ≥ 901px — reset complet ─────────────────────── */
 @media (min-width: 901px) {
 
-  .nav__burger {
-    display: none !important;
-  }
-
-  .nav__backdrop {
-    display: none !important;
-  }
+  .nav__burger { display: none !important; }
+  .nav__backdrop { display: none !important; }
 
   .nav__panel {
+    all: unset !important;
     display: flex !important;
-    position: static !important;
-    transform: none !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: auto !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    height: auto !important;
-    background: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border: none !important;
-    overflow: visible !important;
-    padding: 0 !important;
-    flex-direction: row !important;
     align-items: center !important;
     gap: var(--s-lg) !important;
-    transition: none !important;
   }
 
   .menu-scroll {
+    all: unset !important;
     display: flex !important;
-    flex-direction: row !important;
     align-items: center !important;
     gap: var(--s-lg) !important;
-    flex: none !important;
-    width: auto !important;
-    height: auto !important;
-    padding: 0 !important;
-    overflow: visible !important;
-    overscroll-behavior-y: auto !important;
-    -webkit-overflow-scrolling: auto !important;
   }
 
   .nav__item {
-    font-family: var(--sans) !important;
-    font-size: var(--t-xs) !important;
+    all: unset !important;
+    font-family: 'Jost', system-ui, sans-serif !important;
+    font-size: clamp(11px, 1vw, 13px) !important;
     font-weight: 300 !important;
     letter-spacing: 0.18em !important;
     text-transform: uppercase !important;
     color: rgba(214, 204, 192, 0.85) !important;
-    display: inline !important;
-    width: auto !important;
-    padding: 0 !important;
-    border: none !important;
-    opacity: 1 !important;
-    margin: 0 !important;
-    transition: color var(--dur-fast) !important;
+    cursor: pointer !important;
+    position: relative !important;
+    transition: color 0.25s ease !important;
   }
 
   .nav__item::after {
-    display: block !important;
+    content: '' !important;
+    position: absolute !important;
+    bottom: -2px !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 1px !important;
+    background: #7A736A !important;
+    transition: width 0.5s cubic-bezier(0.22,1,0.36,1) !important;
   }
 
-  .nav.on-light .nav__item {
-    color: var(--stone) !important;
-  }
+  .nav__item:hover { color: #ECE6DD !important; }
+  .nav__item:hover::after { width: 100% !important; }
 
-  .nav.on-light .nav__item:hover {
-    color: var(--ink) !important;
-  }
+  .nav.on-light .nav__item { color: #7A756F !important; }
+  .nav.on-light .nav__item:hover { color: #2B2826 !important; }
 
   .nav__item--sig {
-    font-family: var(--sans) !important;
-    font-size: var(--t-xs) !important;
-    letter-spacing: 0.18em !important;
-    text-transform: uppercase !important;
     color: rgba(214, 204, 192, 0.85) !important;
-    border: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    opacity: 1 !important;
   }
-
-} /* end @media ≥ 901px */
+}
