@@ -3031,7 +3031,7 @@ button {
   display: block !important;
   width: 24px !important;
   height: 1px !important;
-  background: var(--dark-text) !important;
+  background: #1E1B18 !important;
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
               opacity   0.22s ease !important;
 }
