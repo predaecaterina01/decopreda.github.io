@@ -241,14 +241,6 @@ $$('[data-magnetic]').forEach(btn => {
 
 /* ─────────────────────────────────────────
    11. MOBILE NAV
-   ─────────────────────────────────────────
-   Fix complet iOS Safari:
-   - translateZ(0) forțează GPU compositing layer (fix visibility înghețat)
-   - document.documentElement + body overflow lock
-   - event delegation pe document (trece peste orice bug pointer-events)
-   - touchend fallback pentru Safari < 15
-   - overscroll prevention pentru Safari < 16
-   - clasa nav-open pe body ca flag shared cu loader
 ───────────────────────────────────────── */
 (function () {
   var burger   = document.getElementById('navBurger');
@@ -258,15 +250,15 @@ $$('[data-magnetic]').forEach(btn => {
 
   if (!burger || !panel || !backdrop) return;
 
-  var savedY    = 0;
-  var _navOpen  = false; /* flag intern — sursa de adevăr */
+  var savedY   = 0;
+  var _navOpen = false;
 
   /* ── Scroll Lock ─────────────────────────────────────── */
   function lockBody() {
     savedY = window.pageYOffset;
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
-    document.body.classList.add('nav-open'); /* flag pentru loader */
+    document.body.classList.add('nav-open');
   }
 
   function unlockBody() {
@@ -291,8 +283,16 @@ $$('[data-magnetic]').forEach(btn => {
 
     if (scroll) {
       scroll.scrollTop = 0;
-      /* Micro-delay: lasă tranziția CSS să înceapă,
-         apoi activează scroll intern — fix Safari */
+      scroll.addEventListener('scroll', function () {
+        var items = scroll.querySelectorAll('.nav__item');
+        var scrollTop = scroll.scrollTop;
+        items.forEach(function (item) {
+          var itemTop = item.offsetTop - scrollTop;
+          var fade = Math.max(0.15, Math.min(1, 1 - (itemTop - 80) / 200));
+          item.style.opacity = fade;
+        });
+      }, { passive: true });
+
       setTimeout(function () {
         if (scroll && _navOpen) scroll.style.overflowY = 'auto';
       }, 80);
@@ -301,7 +301,7 @@ $$('[data-magnetic]').forEach(btn => {
 
   /* ── Close ───────────────────────────────────────────── */
   function close() {
-    if (!_navOpen) return; /* guard: nu apela de două ori */
+    if (!_navOpen) return;
     _navOpen = false;
 
     panel.classList.remove('is-active');
@@ -317,24 +317,18 @@ $$('[data-magnetic]').forEach(btn => {
   /* ── Burger toggle ───────────────────────────────────── */
   burger.addEventListener('click', function (e) {
     e.preventDefault();
-    e.stopPropagation(); /* previne declanșarea delegation-ului de mai jos */
+    e.stopPropagation();
     _navOpen ? close() : open();
   });
 
-  /* ── Event Delegation pe document ───────────────────────
-     Ascultă pe document — trece peste orice problemă de
-     z-index, pointer-events sau visibility din Safari.
-  ──────────────────────────────────────────────────────── */
+  /* ── Event Delegation pe document ───────────────────── */
   document.addEventListener('click', function (e) {
     if (!_navOpen) return;
 
-    /* Tap pe un link din meniu */
     var link = e.target.closest('.nav__item');
     if (link) {
       var href = link.getAttribute('href') || '';
-
       if (href.charAt(0) === '#') {
-        /* Hash link — scroll smooth după animația de close */
         e.preventDefault();
         close();
         setTimeout(function () {
@@ -342,23 +336,17 @@ $$('[data-magnetic]').forEach(btn => {
           if (target) target.scrollIntoView({ behavior: 'smooth' });
         }, 420);
       } else {
-        /* Pagină externă (gallery.html, testimonials.html etc.) */
         close();
-        /* href-ul acționează natural */
       }
       return;
     }
 
-    /* Tap pe backdrop */
     if (e.target === backdrop || e.target.id === 'navBackdrop') {
       close();
     }
   });
 
-  /* ── TouchEnd fallback — Safari < 15 ────────────────────
-     Pe unele versiuni iOS, click nu se declanșează pe
-     elemente cu overflow:auto. touchend acoperă acest caz.
-  ──────────────────────────────────────────────────────── */
+  /* ── TouchEnd fallback — Safari < 15 ────────────────── */
   if (scroll) {
     var _tx = 0, _ty = 0, _tsY = 0;
 
@@ -373,15 +361,12 @@ $$('[data-magnetic]').forEach(btn => {
 
       var dx = Math.abs(e.changedTouches[0].clientX - _tx);
       var dy = Math.abs(e.changedTouches[0].clientY - _ty);
-
-      /* Ignoră swipe-uri, tratează doar tap-uri */
       if (dx > 10 || dy > 20) return;
 
       var link = e.target.closest('.nav__item');
       if (!link) return;
 
-      e.preventDefault(); /* previne ghost click */
-
+      e.preventDefault();
       var href = link.getAttribute('href') || '';
       close();
 
@@ -398,7 +383,7 @@ $$('[data-magnetic]').forEach(btn => {
 
     /* ── Overscroll prevention — Safari < 16 ──────────── */
     scroll.addEventListener('touchmove', function (e) {
-      var delta = _tsY - e.touches[0].clientY;
+      var delta  = _tsY - e.touches[0].clientY;
       var atTop    = this.scrollTop <= 0 && delta < 0;
       var atBottom = (this.scrollTop + this.clientHeight) >= this.scrollHeight && delta > 0;
       if (atTop || atBottom) e.preventDefault();
@@ -410,7 +395,7 @@ $$('[data-magnetic]').forEach(btn => {
     if (e.key === 'Escape' && _navOpen) close();
   });
 
-  /* ── Resize — închide la trecerea pe desktop ─────────── */
+  /* ── Resize ──────────────────────────────────────────── */
   window.addEventListener('resize', function () {
     if (window.innerWidth > 900 && _navOpen) close();
   });
