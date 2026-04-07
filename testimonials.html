@@ -78,7 +78,9 @@
       DECO<span class="nav__wordmark-thin">PREDA</span>
     </a>
     <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navPanel">
-      <span></span><span></span>
+    <span class="nav__burger-line"></span>
+   <span class="nav__burger-line"></span>
+   <span class="nav__burger-line"></span>
     </button>
     <div class="nav__panel" id="navPanel" aria-hidden="true">
       <div class="menu-scroll" id="menuScroll">
@@ -203,105 +205,28 @@
       </div>
     </div>
   </footer>
+ <script src="script.js"></script>
+<script>
+(function() {
+  'use strict';
 
-  <script src="script.js"></script>
-  <script>
-  (function() {
-    'use strict';
-
-    /* ══ FIX SCROLL — eliberăm overflow blocat de script.js ══ */
-    var _loaderEl = document.getElementById('loader');
-    if (_loaderEl) _loaderEl.classList.add('out');
-    setTimeout(function() {
-      if (document.body.style.overflow === 'hidden') document.body.style.overflow = '';
-    }, 300);
-
-    /* ══ NAV MOBIL ══ */
-    var burger   = document.getElementById('navBurger');
-    var panel    = document.getElementById('navPanel');
-    var scroll   = document.getElementById('menuScroll');
-    var backdrop = document.getElementById('navBackdrop');
-    if (!burger || !panel) return;
-
-    var btn = burger.cloneNode(true);
-    burger.parentNode.replaceChild(btn, burger);
-
-    var items = scroll ? Array.from(scroll.querySelectorAll('.nav__item')) : [];
-    var ops = [1, 0.40, 0.10];
-
-    function fade() {
-      if (!scroll) return;
-      var top = scroll.getBoundingClientRect().top;
-      var ci = 0, cd = Infinity;
-      items.forEach(function(el, i) {
-        var d = Math.abs(el.getBoundingClientRect().top - top);
-        if (d < cd) { cd = d; ci = i; }
+  /* ══ REVEAL TESTIMONIALE ══ */
+  var testiItems = document.querySelectorAll('.testi-item');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
-      items.forEach(function(el, i) {
-        el.style.opacity = ops[Math.min(Math.abs(i - ci), ops.length - 1)];
-      });
-    }
-
-    function openNav() {
-      panel.classList.add('open');
-      panel.setAttribute('aria-hidden', 'false');
-      btn.setAttribute('aria-expanded', 'true');
-      btn.setAttribute('aria-label', 'Close menu');
-      if (backdrop) backdrop.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      if (scroll) scroll.scrollTop = 0;
-      setTimeout(fade, 50);
-    }
-
-    function closeNav() {
-      panel.classList.remove('open');
-      panel.setAttribute('aria-hidden', 'true');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-label', 'Open menu');
-      if (backdrop) backdrop.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    btn.addEventListener('click', function() {
-      panel.classList.contains('open') ? closeNav() : openNav();
+    }, { threshold: 0.10, rootMargin: '0px 0px -32px 0px' });
+    testiItems.forEach(function(el, i) {
+      el.style.transitionDelay = (i * 0.05) + 's';
+      io.observe(el);
     });
-    if (backdrop) backdrop.addEventListener('click', closeNav);
-    if (scroll) scroll.addEventListener('scroll', fade, { passive: true });
-    items.forEach(function(a) { a.addEventListener('click', closeNav); });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && panel.classList.contains('open')) { closeNav(); btn.focus(); }
-    });
+  } else {
+    testiItems.forEach(function(el) { el.classList.add('in'); });
+  }
 
-    /* ══ PROGRESS BAR ══ */
-    var prog = document.getElementById('progress');
-    function updateProg() {
-      if (!prog) return;
-      var total = document.documentElement.scrollHeight - window.innerHeight;
-      prog.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0).toFixed(2) + '%';
-    }
-    window.addEventListener('scroll', updateProg, { passive: true });
-
-    /* ══ REVEAL TESTIMONIALE ══ */
-    var testiItems = document.querySelectorAll('.testi-item');
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.10, rootMargin: '0px 0px -32px 0px' });
-      testiItems.forEach(function(el, i) {
-        el.style.transitionDelay = (i * 0.05) + 's';
-        io.observe(el);
-      });
-    } else {
-      testiItems.forEach(function(el) { el.classList.add('in'); });
-    }
-
-    /* ══ AN FOOTER ══ */
-    var yr = document.getElementById('yr');
-    if (yr) yr.textContent = new Date().getFullYear();
-
-  })();
-  </script>
+})();
+</script>
 </body>
 </html>
