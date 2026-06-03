@@ -58,8 +58,6 @@
       padding-inline: var(--gut);
       max-width: var(--max); margin-inline: auto; width: 100%;
     }
-
-    /* ══ VOAL TEXT — aplicat pe toate elementele de text din hero ══ */
     .ss-hero__eyebrow {
       display: block;
       font-family: var(--sans); font-weight: 200; font-size: var(--t-xs);
@@ -164,41 +162,31 @@
       max-width: var(--max); margin-inline: auto; padding-inline: var(--gut);
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
     }
-    .ss-item { position: relative; overflow: hidden; cursor: none; }
+    .ss-item {
+      position: relative; overflow: hidden;
+      cursor: zoom-in; /* hint vizual că se poate deschide */
+    }
     .ss-item:nth-child(1) { grid-row: span 2; }
     .ss-item:nth-child(4) { grid-column: span 2; }
     .ss-item:nth-child(7) { grid-row: span 2; }
     .ss-swatch {
       display: block; width: 100%; height: 100%; min-height: 280px;
       transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
     }
     .ss-item:hover .ss-swatch { transform: scale(1.04); }
 
-    /* ══ OVERLAY gradient permanent — text mereu vizibil ══ */
     .ss-over {
       position: absolute; inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(8,7,6,0.92) 0%,
-        rgba(8,7,6,0.55) 30%,
-        rgba(8,7,6,0.18) 58%,
-        transparent 82%
-      );
+      background: linear-gradient(to top, rgba(8,7,6,0.92) 0%, rgba(8,7,6,0.55) 30%, rgba(8,7,6,0.18) 58%, transparent 82%);
       display: flex; flex-direction: column;
       justify-content: flex-end; padding: 24px;
       transition: background 0.4s var(--ease);
+      pointer-events: none;
     }
     .ss-item:hover .ss-over {
-      background: linear-gradient(
-        to top,
-        rgba(8,7,6,0.97) 0%,
-        rgba(8,7,6,0.70) 35%,
-        rgba(8,7,6,0.28) 64%,
-        transparent 86%
-      );
+      background: linear-gradient(to top, rgba(8,7,6,0.97) 0%, rgba(8,7,6,0.70) 35%, rgba(8,7,6,0.28) 64%, transparent 86%);
     }
-
-    /* Badge — mereu vizibil */
     .ss-item__badge {
       position: absolute; top: 16px; right: 16px;
       font-family: var(--sans); font-weight: 200; font-size: 8px;
@@ -206,39 +194,28 @@
       color: rgba(214, 206, 194, 0.88);
       border: 0.5px solid rgba(183, 174, 163, 0.38);
       padding: 4px 10px; border-radius: 20px;
-      background: rgba(8,7,6,0.45);
-      backdrop-filter: blur(4px);
+      background: rgba(8,7,6,0.45); backdrop-filter: blur(4px);
       text-shadow: 0 1px 5px rgba(0,0,0,0.95);
       transition: all 0.3s var(--ease);
+      pointer-events: none;
     }
-    .ss-item:hover .ss-item__badge {
-      color: rgba(183, 174, 163, 0.88);
-      border-color: rgba(183, 174, 163, 0.40);
-      background: rgba(8,7,6,0.60);
-    }
-
-    /* Nume — mereu vizibil */
+    .ss-item:hover .ss-item__badge { color: rgba(183,174,163,0.88); border-color: rgba(183,174,163,0.40); background: rgba(8,7,6,0.60); }
     .ss-item__name {
       font-family: var(--serif); font-weight: 300;
       font-size: clamp(18px, 2vw, 26px);
       color: rgba(236, 230, 221, 0.95); line-height: 1.2;
-      text-shadow:
-        0 1px 10px rgba(0,0,0,0.99),
-        0 2px 20px rgba(0,0,0,0.92),
-        0 0 8px  rgba(0,0,0,0.88);
+      text-shadow: 0 1px 10px rgba(0,0,0,0.99), 0 2px 20px rgba(0,0,0,0.92), 0 0 8px rgba(0,0,0,0.88);
       transition: color 0.3s var(--ease);
+      pointer-events: none;
     }
     .ss-item:hover .ss-item__name { color: #fff; }
-
-    /* Descriere — mereu vizibilă */
     .ss-item__desc {
       font-family: var(--sans); font-weight: 200; font-size: 9px;
       letter-spacing: 0.28em; text-transform: uppercase;
       color: rgba(218, 210, 198, 0.95); margin-top: 6px;
-      text-shadow:
-        0 1px 8px rgba(0,0,0,0.99),
-        0 2px 14px rgba(0,0,0,0.90);
+      text-shadow: 0 1px 8px rgba(0,0,0,0.99), 0 2px 14px rgba(0,0,0,0.90);
       transition: color 0.3s var(--ease);
+      pointer-events: none;
     }
     .ss-item:hover .ss-item__desc { color: rgba(230, 222, 210, 1.00); }
 
@@ -315,100 +292,113 @@
       .ss-cta__actions { align-items: flex-start; }
     }
 
-    /* ── Nav overrides desktop — reset minimal ── */
+    /* ── Nav desktop reset ── */
     @media (min-width: 901px) {
-
-      /* .menu-scroll dispare vizual — link-urile se comportă normal */
-      .menu-scroll {
-        display: contents;
-      }
-
-      /* Panel — înapoi la static, exact ca înainte de orice override mobil */
+      .menu-scroll { display: contents; }
       .nav__panel {
-        position: static !important;
-        transform: none !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        overflow: visible !important;
-        max-height: none !important;
-        height: auto !important;
-        background: transparent !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        border: none !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        padding: 0 !important;
+        position: static !important; transform: none !important; opacity: 1 !important;
+        pointer-events: auto !important; overflow: visible !important; max-height: none !important;
+        height: auto !important; background: transparent !important; backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important; border: none !important; box-shadow: none !important;
+        border-radius: 0 !important; padding: 0 !important;
       }
       .nav__panel::after { display: none !important; }
-
-      /* Items — reset complet la valorile din style.css */
       .nav__item {
-        /* Anulăm tot ce am setat pe mobile */
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: auto !important;
-        min-height: auto !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        border: none !important;
-        border-bottom: none !important;
-        border-top: none !important;
-        border-radius: 0 !important;
-        text-align: left !important;
-        white-space: nowrap !important;
-        position: static !important;
-        z-index: auto !important;
-        pointer-events: auto !important;
-        touch-action: auto !important;
-        /* Opacitate resetată — toate vizibile */
-        opacity: 1 !important;
+        display: inline-flex !important; align-items: center !important; justify-content: center !important;
+        width: auto !important; min-height: auto !important; padding: 0 !important; margin: 0 !important;
+        border: none !important; border-bottom: none !important; border-top: none !important;
+        border-radius: 0 !important; text-align: left !important; white-space: nowrap !important;
+        position: static !important; z-index: auto !important; pointer-events: auto !important;
+        touch-action: auto !important; opacity: 1 !important;
       }
-      .nav__item:nth-child(1),
-      .nav__item:nth-child(2),
-      .nav__item:nth-child(3),
-      .nav__item:nth-child(4),
-      .nav__item:nth-child(5),
-      .nav__item:nth-child(6),
-      .nav__item:nth-child(7) { opacity: 1 !important; }
       .nav__item:active { background: transparent !important; border-radius: 0 !important; }
-
-      /* Contact și Signature — resetăm border/padding de pe mobile */
-      .nav__item--cta,
-      .nav__item--contact {
-        border-top: none !important;
-        margin-top: 0 !important;
-        margin-left: 0 !important;
-        min-height: auto !important;
-        padding: 0 !important;
+      .nav__item--contact, .nav__item--sig {
+        border: none !important; padding: 0 !important; background: transparent !important;
+        color: rgba(214, 204, 192, 0.85) !important;
       }
-      .nav__item--sig {
-        border-top: none !important;
-        margin-top: 0 !important;
-        margin-left: 0 !important;
-        min-height: auto !important;
-        padding: 0 !important;
-      }
-
-      /* Dark page overrides */
-      .nav.on-dark .nav__wordmark { color: var(--dark-text); }
-      .nav.on-light { background: rgba(15,14,12,0.96); border-bottom-color: rgba(183,174,163,0.08); }
-      .nav.on-light .nav__wordmark { color: var(--dark-text); }
-      .nav.on-light .nav__item { color: rgba(183,174,163,0.65) !important; opacity: 1 !important; }
-      .nav.on-light .nav__item:hover { color: var(--dark-text) !important; }
+      .nav__item--sig { color: rgba(224, 206, 175, 0.9) !important; }
+      .nav__burger { display: none !important; }
     }
 
-        .ss-back {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--sans); font-weight: 200; font-size: 9px;
-      letter-spacing: 0.32em; text-transform: uppercase;
-      color: rgba(200, 192, 182, 0.72);
-      margin-bottom: clamp(40px, 5vw, 64px);
-      transition: color 0.25s, gap 0.4s var(--ease);
-      text-shadow: 0 0 14px rgba(0,0,0,0.99), 0 0 7px rgba(0,0,0,0.92);
+    /* ══ SS LIGHTBOX ══ */
+    .ss-lightbox {
+      position: fixed; inset: 0; z-index: 9500;
+      background: rgba(8, 7, 6, 0);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+      transition: background 0.35s ease;
+      padding: 0 72px;
     }
-    .ss-back:hover { color: rgba(183, 174, 163, 0.75); gap: 12px; }
+    .ss-lightbox.open {
+      background: rgba(8, 7, 6, 0.97);
+      pointer-events: all;
+    }
+    .ss-lb-stage {
+      position: relative; max-width: min(900px, 100%); width: 100%;
+      opacity: 0; transform: scale(0.96);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .ss-lightbox.open .ss-lb-stage { opacity: 1; transform: scale(1); }
+    .ss-lb-img-wrap { position: relative; width: 100%; line-height: 0; }
+    .ss-lb-surface {
+      display: block; width: 100%; max-height: 76vh; object-fit: contain;
+    }
+    .ss-lb-close {
+      position: absolute; top: 10px; right: 10px;
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(8,7,6,0.72);
+      border: 1px solid rgba(236,230,221,0.40);
+      border-radius: 50%;
+      color: rgba(236,230,221,0.90);
+      cursor: pointer; z-index: 10;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .ss-lb-close:hover { background: rgba(236,230,221,0.15); border-color: rgba(236,230,221,0.75); color: #fff; }
+    .ss-lb-meta {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 16px; padding: 14px 0 0;
+    }
+    .ss-lb-name {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(18px, 2.2vw, 26px);
+      color: rgba(236,230,221,0.95); line-height: 1.2;
+    }
+    .ss-lb-desc {
+      font-family: var(--sans); font-weight: 200;
+      font-size: clamp(9px, 1vw, 11px); letter-spacing: 0.28em;
+      text-transform: uppercase; color: rgba(214,204,192,0.80);
+      flex-shrink: 0; line-height: 1.4;
+    }
+    .ss-lb-counter {
+      display: block; text-align: center; margin-top: 10px;
+      font-family: var(--sans); font-weight: 200; font-size: 10px;
+      letter-spacing: 0.28em; color: rgba(183,174,163,0.45);
+    }
+    .ss-lb-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(8,7,6,0.70);
+      border: 1px solid rgba(183,174,163,0.50);
+      border-radius: 50%;
+      color: rgba(236,230,221,0.90);
+      cursor: pointer; z-index: 9600;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease, background 0.2s, border-color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .ss-lightbox.open .ss-lb-nav { opacity: 1; pointer-events: all; }
+    .ss-lb-nav:hover { background: rgba(183,174,163,0.18); border-color: rgba(236,230,221,0.80); color: #fff; }
+    .ss-lb-prev { left: 12px; }
+    .ss-lb-next { right: 12px; }
+    @media (max-width: 600px) {
+      .ss-lightbox { padding: 0 52px; }
+      .ss-lb-nav { width: 40px; height: 40px; }
+      .ss-lb-prev { left: 6px; } .ss-lb-next { right: 6px; }
+      .ss-lb-close { top: 8px; right: 8px; width: 34px; height: 34px; }
+    }
   </style>
 </head>
 <body>
@@ -418,23 +408,16 @@
     <div class="cursor__ring"></div>
     <div class="cursor__dot"></div>
   </div>
-  <div class="loader" id="loader" aria-hidden="true">
-    <div class="loader__body">
-      <span class="loader__mark">DP</span>
-      <div class="loader__line"><div class="loader__fill"></div></div>
-      <span class="loader__sub">Signature Series</span>
-    </div>
-  </div>
 
-  <!-- ══ NAV — ordine corectă + logo → who-we-are ══ -->
+  <!-- ══ NAV ══ -->
   <nav class="nav on-dark" id="nav" aria-label="Primary">
-    <a href="index.html#who-we-are" class="nav__wordmark" aria-label="Deco Preda — Who We Are">
+    <a href="index.html" class="nav__wordmark" aria-label="Deco Preda home">
       DECO<span class="nav__wordmark-thin">PREDA</span>
     </a>
     <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navPanel">
-    <span class="nav__burger-line"></span>
-   <span class="nav__burger-line"></span>
-   <span class="nav__burger-line"></span>
+      <span class="nav__burger-line"></span>
+      <span class="nav__burger-line"></span>
+      <span class="nav__burger-line"></span>
     </button>
     <div class="nav__panel" id="navPanel" aria-hidden="true">
       <div class="menu-scroll" id="menuScroll">
@@ -443,152 +426,172 @@
         <a href="index.html#craft"      class="nav__item" data-cursor="link">Craft</a>
         <a href="gallery.html"          class="nav__item" data-cursor="link">Gallery</a>
         <a href="testimonials.html"     class="nav__item" data-cursor="link">Testimonials</a>
-        <a href="index.html#contact"    class="nav__item nav__item--cta" data-cursor="link">Contact</a>
-        <a href="signature-series.html" class="nav__item nav__item--sig" data-cursor="link" aria-current="page">✦ Signature Series ✦</a>
+        <a href="index.html#contact"    class="nav__item nav__item--contact" data-cursor="link">Contact</a>
+        <a href="signature-series.html" class="nav__item nav__item--sig" data-cursor="link" aria-current="page" aria-label="Signature Series — exclusive commissions only">✦ Signature Series ✦</a>
       </div>
     </div>
   </nav>
-
   <div class="nav__backdrop" id="navBackdrop" aria-hidden="true"></div>
 
-  <main>
+  <!-- ══ HERO ══ -->
+  <section class="ss-hero" aria-label="Signature Series">
+    <div class="ss-hero__bg" aria-hidden="true"></div>
+    <div class="ss-hero__grain" aria-hidden="true"></div>
+    <div class="ss-hero__ray" aria-hidden="true"></div>
+    <div class="ss-hero__content">
+      <span class="ss-hero__eyebrow">Deco Preda &nbsp;·&nbsp; Signature Series</span>
+      <h1 class="ss-hero__title">
+        Surface as<br>
+        <em>authored work.</em>
+      </h1>
+      <p class="ss-hero__sub">Hybrid compositions at the intersection of material science and design intent. Each piece is developed as a discrete commission — there is no catalogue.</p>
+      <a href="index.html#contact" class="btn-ghost reveal-hero" data-cursor="link">
+        <span class="btn-ghost__label">Enquire about a commission</span>
+        <span class="btn-ghost__icon" aria-hidden="true">↓</span>
+      </a>
+      <p class="ss-hero__note">Available on commission only &nbsp;·&nbsp; Limited annual capacity</p>
+    </div>
+    <div class="ss-hero__scroll" aria-hidden="true">
+      <div class="ss-hero__scroll-line"></div>
+    </div>
+  </section>
 
-    <section class="ss-hero" aria-label="Signature Series">
-      <div class="ss-hero__bg"></div>
-      <div class="ss-hero__grain"></div>
-      <div class="ss-hero__ray"></div>
-      <div class="ss-hero__content">
-        <a href="index.html" class="ss-back">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M8 2L4 6L8 10" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Back to studio
-        </a>
-        <span class="ss-hero__eyebrow reveal-hero">Deco Preda · 05 · Premium Tier</span>
-        <h1 class="ss-hero__title reveal-hero">Signature<br><em>Series</em></h1>
-        <p class="ss-hero__sub reveal-hero">Hybrid compositions at the intersection of material science and design intent. Surfaces that cannot be specified from a catalogue — only commissioned.</p>
-        <a href="#commission" class="btn-ghost reveal-hero" data-cursor="link" data-magnetic>
-          <span class="btn-ghost__label">Begin a Conversation</span>
+  <!-- ══ INTRO ══ -->
+  <section class="ss-intro" aria-label="About the Signature Series">
+    <div class="ss-intro__grid">
+      <h2 class="ss-intro__h reveal">Not a finish.<br><em>A considered material decision.</em></h2>
+      <div>
+        <p class="ss-intro__p reveal">The Signature Series operates outside Deco Preda's standard specification framework. Each commission begins with a material brief — a description of intended environment, light condition, adjacent materials and desired character — and develops through a structured sampling protocol before a single metre of surface is applied.</p>
+        <p class="ss-intro__p reveal">The compositions shown here are documented outcomes of completed commissions. They are presented as reference — not as options. Your commission begins from a blank material specification, not from a selection of existing finishes.</p>
+        <div class="ss-intro__rule reveal" aria-hidden="true"></div>
+        <div class="ss-textures reveal" aria-label="Available techniques">
+          <span class="ss-texture-tag">Metallic resin</span>
+          <span class="ss-texture-tag">Translucent layering</span>
+          <span class="ss-texture-tag">Mineral pigment</span>
+          <span class="ss-texture-tag">Micro-aggregate</span>
+          <span class="ss-texture-tag">Hybrid composite</span>
+          <span class="ss-texture-tag">Custom graphic integration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WORKS GRID ══ -->
+  <section class="ss-works" aria-label="Signature Series commissions">
+    <div class="ss-works__head">
+      <span class="ss-works__label">Completed commissions</span>
+      <h2 class="ss-works__h">Four compositions.<br><em>Each unrepeatable.</em></h2>
+    </div>
+    <div class="ss-grid" id="ssGrid">
+
+      <div class="ss-item reveal"
+           tabindex="0" role="button"
+           aria-label="Open White Gold commission"
+           data-src="images/signature/resin-whitegold-01.webp"
+           data-name="White Gold"
+           data-desc="Metallic resin · Private residence">
+        <img class="ss-swatch" src="images/signature/resin-whitegold-01.webp" alt="White Gold — Metallic resin commission" loading="lazy" />
+        <div class="ss-over" aria-hidden="true">
+          <span class="ss-item__badge">Commission 01</span>
+          <span class="ss-item__name">White Gold</span>
+          <span class="ss-item__desc">Metallic resin · Private residence</span>
+        </div>
+      </div>
+
+      <div class="ss-item reveal"
+           tabindex="0" role="button"
+           aria-label="Open Black Gold commission"
+           data-src="images/signature/resin-blackgold-01.webp"
+           data-name="Black Gold"
+           data-desc="Metallic resin · Commercial interior">
+        <img class="ss-swatch" src="images/signature/resin-blackgold-01.webp" alt="Black Gold — Metallic resin commission" loading="lazy" />
+        <div class="ss-over" aria-hidden="true">
+          <span class="ss-item__badge">Commission 02</span>
+          <span class="ss-item__name">Black Gold</span>
+          <span class="ss-item__desc">Metallic resin · Commercial interior</span>
+        </div>
+      </div>
+
+      <div class="ss-item reveal"
+           tabindex="0" role="button"
+           aria-label="Open Multicolour commission"
+           data-src="images/signature/resin-multicolor-01.webp"
+           data-name="Multicolour"
+           data-desc="Hybrid pigment composition · Hospitality">
+        <img class="ss-swatch" src="images/signature/resin-multicolor-01.webp" alt="Multicolour — Hybrid pigment commission" loading="lazy" />
+        <div class="ss-over" aria-hidden="true">
+          <span class="ss-item__badge">Commission 03</span>
+          <span class="ss-item__name">Multicolour</span>
+          <span class="ss-item__desc">Hybrid pigment · Hospitality</span>
+        </div>
+      </div>
+
+      <div class="ss-item reveal"
+           tabindex="0" role="button"
+           aria-label="Open Green Showroom commission"
+           data-src="images/commercial/showroom/resin-green-showroom-01.webp"
+           data-name="Green Showroom"
+           data-desc="Design resin · Commercial showroom">
+        <img class="ss-swatch" src="images/commercial/showroom/resin-green-showroom-01.webp" alt="Green Showroom — Design resin commission" loading="lazy" />
+        <div class="ss-over" aria-hidden="true">
+          <span class="ss-item__badge">Commission 04</span>
+          <span class="ss-item__name">Green Showroom</span>
+          <span class="ss-item__desc">Design resin · Commercial showroom</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ PROCESS ══ -->
+  <section class="ss-process" aria-label="Commission process">
+    <div class="ss-process__wrap">
+      <h2 class="ss-process__h reveal">The commission<br><em>process.</em></h2>
+      <div class="ss-steps">
+        <div class="ss-step reveal">
+          <span class="ss-step__n">01</span>
+          <h3 class="ss-step__title">Material brief</h3>
+          <p class="ss-step__desc">You describe the space, the light conditions and the character you are after. We translate this into a technical material framework before any sampling begins.</p>
+        </div>
+        <div class="ss-step reveal">
+          <span class="ss-step__n">02</span>
+          <h3 class="ss-step__title">Sampling protocol</h3>
+          <p class="ss-step__desc">We develop physical test panels — typically two to three rounds — until the material matches the brief. Nothing progresses to installation without written approval of an approved sample.</p>
+        </div>
+        <div class="ss-step reveal">
+          <span class="ss-step__n">03</span>
+          <h3 class="ss-step__title">Application</h3>
+          <p class="ss-step__desc">The same team that developed your sample applies your surface. No hand-offs. Application is documented at every stage against the approved specification.</p>
+        </div>
+        <div class="ss-step reveal">
+          <span class="ss-step__n">04</span>
+          <h3 class="ss-step__title">Documentation</h3>
+          <p class="ss-step__desc">At practical completion you receive a full technical handover: material certificates, application records and maintenance specification. The surface is warranted.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA ══ -->
+  <section class="ss-cta" aria-label="Commission enquiry">
+    <div class="ss-cta__inner">
+      <div>
+        <h2 class="ss-cta__h reveal">Begin a<br><em>commission.</em></h2>
+        <p class="ss-cta__p reveal">Signature Series commissions are accepted subject to schedule availability. We take a limited number of bespoke commissions each year to maintain the quality of the development process.</p>
+        <p class="ss-cta__note reveal">Response within 48 hours &nbsp;·&nbsp; Romania &amp; Europe</p>
+      </div>
+      <div class="ss-cta__actions">
+        <a href="index.html#contact" class="btn-ghost reveal" data-cursor="link" data-magnetic>
+          <span class="btn-ghost__label">Enquire about a commission</span>
           <span class="btn-ghost__icon" aria-hidden="true">↓</span>
         </a>
-        <p class="ss-hero__note reveal-hero">Available on commission only — no standard pricing</p>
+        <a href="gallery.html" class="link-arrow reveal" data-cursor="link">View full gallery</a>
       </div>
-      <div class="ss-hero__scroll" aria-hidden="true">
-        <div class="ss-hero__scroll-line"></div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="ss-intro" aria-label="About Signature Series">
-      <div class="ss-intro__grid">
-        <div>
-          <h2 class="ss-intro__h reveal">Where the<br>systems end,<br><em>the work begins.</em></h2>
-        </div>
-        <div>
-          <p class="ss-intro__p reveal">The four surface systems we offer — Microcement, Stone Carpet, Performance Resin and Design Resin — each have defined specifications, tested protocols and predictable outcomes. Signature Series exists beyond those boundaries.</p>
-          <p class="ss-intro__p reveal">These are compositions created at the intersection of multiple systems. Microcement as a base, sealed with a transparent resin topcoat that introduces depth without gloss. Performance resin grounds and mineral aggregate floats within it. Acrylic composites that combine the elasticity of polymer with the warmth of mineral pigment. No two commissions share a formula.</p>
-          <p class="ss-intro__p reveal">Signature Series is specified in direct collaboration with the client and their architect — from initial material research through prototype sampling to final application. The surface delivered is not selected from a range. It is developed for a single space.</p>
-          <div class="ss-intro__rule reveal"></div>
-          <p class="ss-intro__p reveal" style="color:rgba(224,206,175,0.88);font-size:var(--t-sm);letter-spacing:0.05em;">Texture range available within Signature Series:</p>
-          <div class="ss-textures reveal">
-            <span class="ss-texture-tag">Smooth</span><span class="ss-texture-tag">Textured</span>
-            <span class="ss-texture-tag">Structured</span><span class="ss-texture-tag">Rough</span>
-            <span class="ss-texture-tag">Satin</span><span class="ss-texture-tag">Matte</span>
-            <span class="ss-texture-tag">High-gloss</span><span class="ss-texture-tag">Transparent</span>
-            <span class="ss-texture-tag">Opaque</span><span class="ss-texture-tag">Glitter</span>
-            <span class="ss-texture-tag">Metallic</span><span class="ss-texture-tag">Iridescent</span>
-            <span class="ss-texture-tag">Matte + Gloss Combined</span>
-            <span class="ss-texture-tag">Mineral Composite</span>
-            <span class="ss-texture-tag">Acrylic Composite</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="ss-works" aria-label="Signature Series compositions">
-      <div class="ss-works__head">
-        <span class="ss-works__label reveal">Selected Commissions</span>
-        <h2 class="ss-works__h reveal">Each surface<br><em>a single edition.</em></h2>
-      </div>
-      <div class="ss-grid">
-        <div class="ss-item reveal">
-          <div class="ss-swatch" style="background:url('/images/signature/resin-blackgold-01.webp') center/cover;min-height:580px;"></div>
-          <div class="ss-over"><span class="ss-item__badge">Commission Only</span><span class="ss-item__name">Black Gold</span><span class="ss-item__desc">Design Resin · Black & Gold · Showroom</span></div>
-        </div>
-        <div class="ss-item reveal">
-          <div class="ss-swatch" style="background:url('/images/signature/resin-blackgray-01.webp') center/cover;min-height:280px;"></div>
-          <div class="ss-over"><span class="ss-item__badge">Commission Only</span><span class="ss-item__name">Dark Marble</span><span class="ss-item__desc">Design Resin · Marble Effect · Signature</span></div>
-        </div>
-        <div class="ss-item reveal">
-          <div class="ss-swatch" style="background:url('/images/signature/resin-multicolor-01.webp') center/cover;min-height:280px;"></div>
-          <div class="ss-over"><span class="ss-item__badge">Commission Only</span><span class="ss-item__name">Multicolour Field</span><span class="ss-item__desc">Design Resin · Bespoke · Commercial</span></div>
-        </div>
-        <div class="ss-item reveal">
-          <div class="ss-swatch" style="background:url('/images/signature/resin-whitegold-01.webp') center/cover;min-height:280px;"></div>
-          <div class="ss-over"><span class="ss-item__badge">Commission Only</span><span class="ss-item__name">White Gold Vein</span><span class="ss-item__desc">Design Resin · White & Gold · Signature</span></div>
-        </div>
-        <div class="ss-item reveal">
-          <div class="ss-swatch" style="background:linear-gradient(158deg,#f0ece4 0%,#e4ddd3 50%,#d4ccc0 100%);min-height:280px"></div>
-          <div class="ss-over"><span class="ss-item__badge">Commission Only</span><span class="ss-item__name">Pure Light</span><span class="ss-item__desc">Microcement · Transparent Gloss Seal · Surrey Residence</span></div>
-        </div>
-        <div class="ss-item reveal">
-          <div class="ss-swatch" style="background:linear-gradient(135deg,#0a0908 0%,#1a1410 40%,#2a2018 100%);min-height:280px;position:relative;">
-            <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(214,196,170,0.2),transparent 60%);"></div>
-            <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(214,196,170,0.03) 8px,rgba(214,196,170,0.03) 9px);"></div>
-          </div>
-          <div class="ss-over"><span class="ss-item__badge">Commission Only</span><span class="ss-item__name">Nocturne</span><span class="ss-item__desc">Acrylic Composite · Iridescent Layer · Dublin Restaurant</span></div>
-        </div>
-        <div class="ss-item reveal">
-          <div class="ss-swatch" style="background:linear-gradient(200deg,#b8b0a0 0%,#8a8078 30%,#504840 60%,#2a2520 100%);min-height:560px"></div>
-          <div class="ss-over"><span class="ss-item__badge">Commission Only</span><span class="ss-item__name">Sediment</span><span class="ss-item__desc">Mineral Composite · Multi-layer · London Penthouse</span></div>
-        </div>
-        <div class="ss-item reveal">
-          <div class="ss-swatch" style="background:radial-gradient(ellipse at 40% 40%,#c8a06040,#1a1510 60%,#0f0e0c 100%);min-height:280px;position:relative;">
-            <div style="position:absolute;inset:0;background:linear-gradient(135deg,transparent 30%,rgba(214,196,100,0.12) 50%,transparent 70%);"></div>
-          </div>
-          <div class="ss-over"><span class="ss-item__badge">Commission Only</span><span class="ss-item__name">Aureate</span><span class="ss-item__desc">Design Resin · Gold Pigment · Glitter Layer · Kent Residence</span></div>
-        </div>
-        <div class="ss-item reveal">
-          <div class="ss-swatch" style="background:linear-gradient(112deg,#ddd6ca 0%,#1a1714 40%,#cdc4b5 100%);min-height:280px"></div>
-          <div class="ss-over"><span class="ss-item__badge">Commission Only</span><span class="ss-item__name">Duet</span><span class="ss-item__desc">Matte Microcement + Gloss Resin · Single Seamless Surface · Belfast Hotel</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="ss-process" aria-label="Signature Series process">
-      <div class="ss-process__wrap">
-        <h2 class="ss-process__h reveal">From brief<br>to surface.<br><em>The process.</em></h2>
-        <div class="ss-steps">
-          <div class="ss-step reveal"><div class="ss-step__n">01</div><div class="ss-step__title">Material Research</div><div class="ss-step__desc">We review the project brief, spatial requirements and aesthetic intent. System combinations are identified and material samples are sourced from our European suppliers.</div></div>
-          <div class="ss-step reveal"><div class="ss-step__n">02</div><div class="ss-step__title">Prototype Sampling</div><div class="ss-step__desc">A minimum of three physical samples are prepared — each exploring a different system combination, texture or finish. Samples are reviewed on-site or delivered for approval.</div></div>
-          <div class="ss-step reveal"><div class="ss-step__n">03</div><div class="ss-step__title">Specification & Testing</div><div class="ss-step__desc">The approved composition is tested for adhesion, durability and compatibility across all layers. Application protocol is documented before any site work begins.</div></div>
-          <div class="ss-step reveal"><div class="ss-step__n">04</div><div class="ss-step__title">Application & Handover</div><div class="ss-step__desc">Applied by our specialist team to EN-standard protocols. Full technical documentation, care instructions and a system-specific warranty are provided at handover.</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="ss-cta" id="commission" aria-label="Begin a commission">
-      <div class="ss-cta__inner">
-        <div>
-          <h2 class="ss-cta__h reveal">A surface that<br>exists nowhere else.<br><em>Yours to commission.</em></h2>
-          <p class="ss-cta__p reveal">Signature Series commissions begin with a conversation — no catalogue, no pricing sheet. We discuss your project, your space and your intent, then propose a material direction. Lead time is typically 4–8 weeks from specification approval to application.</p>
-          <p class="ss-cta__note reveal">London · Dublin · European projects considered</p>
-        </div>
-        <div class="ss-cta__actions reveal">
-          <a href="index.html#contact" class="btn-ghost" data-cursor="link" data-magnetic>
-            <span class="btn-ghost__label">Begin a Conversation</span>
-            <span class="btn-ghost__icon" aria-hidden="true">→</span>
-          </a>
-          <a href="index.html#systems" class="btn-line" data-cursor="link" style="color:rgba(183,174,163,0.45)">
-            <span class="btn-line__label" style="color:rgba(183,174,163,0.45)">Explore Standard Systems</span>
-            <span class="btn-line__line" style="background:rgba(183,174,163,0.2)" aria-hidden="true"></span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="foot" role="contentinfo" style="background:#070706;border-top:1px solid rgba(183,174,163,0.06)">
+  <!-- ══ FOOTER ══ -->
+  <footer class="foot" role="contentinfo">
     <div class="wrap">
       <div class="foot__inner">
         <div class="foot__brand">
@@ -605,14 +608,129 @@
           <a href="index.html#contact">Contact</a>
           <a href="signature-series.html">Signature Series</a>
         </nav>
-        <p class="foot__copy">&copy; <span id="yr"></span> Deco Preda Ltd. London &amp; Dublin.</p>
+        <p class="foot__copy">&copy; <span id="yr"></span> Deco Preda. Bucharest · Romania &amp; Europe.</p>
       </div>
     </div>
   </footer>
 
+  <!-- ══ LIGHTBOX SIGNATURE ══ -->
+  <div class="ss-lightbox" id="ssLightbox"
+       role="dialog" aria-modal="true"
+       aria-label="Commission image detail"
+       aria-hidden="true">
+    <button class="ss-lb-nav ss-lb-prev" id="ssLbPrev" aria-label="Previous image">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M11 4L6 9L11 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="ss-lb-nav ss-lb-next" id="ssLbNext" aria-label="Next image">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M7 4L12 9L7 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <div class="ss-lb-stage" id="ssLbStage">
+      <div class="ss-lb-img-wrap">
+        <button class="ss-lb-close" id="ssLbClose" aria-label="Close lightbox">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <img class="ss-lb-surface" id="ssLbSurface" src="" alt="" />
+      </div>
+      <div class="ss-lb-meta">
+        <span class="ss-lb-name" id="ssLbName"></span>
+        <span class="ss-lb-desc" id="ssLbDesc"></span>
+      </div>
+      <span class="ss-lb-counter" id="ssLbCounter"></span>
+    </div>
+  </div>
+
   <script src="script.js"></script>
-    const yr = document.getElementById('yr');
-    if (yr) yr.textContent = new Date().getFullYear();
+
+  <script>
+  'use strict';
+  /* ── Signature Series Lightbox ── */
+  (function () {
+    var items   = Array.from(document.querySelectorAll('.ss-item[data-src]'));
+    var lb      = document.getElementById('ssLightbox');
+    var lbImg   = document.getElementById('ssLbSurface');
+    var lbName  = document.getElementById('ssLbName');
+    var lbDesc  = document.getElementById('ssLbDesc');
+    var lbCount = document.getElementById('ssLbCounter');
+    var btnClose = document.getElementById('ssLbClose');
+    var btnPrev  = document.getElementById('ssLbPrev');
+    var btnNext  = document.getElementById('ssLbNext');
+
+    if (!lb || !items.length) return;
+
+    var current = 0;
+    var lastFocus = null;
+
+    function show(idx) {
+      current = (idx + items.length) % items.length;
+      var el  = items[current];
+      lbImg.src          = el.dataset.src || '';
+      lbImg.alt          = el.dataset.name || '';
+      lbName.textContent = el.dataset.name || '';
+      lbDesc.textContent = el.dataset.desc || '';
+      lbCount.textContent = (current + 1) + ' / ' + items.length;
+    }
+
+    function open(idx) {
+      lastFocus = document.activeElement;
+      show(idx);
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(function () { btnClose.focus(); });
+    }
+
+    function close() {
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+      if (lastFocus) lastFocus.focus();
+    }
+
+    /* Attach click & keyboard to each ss-item */
+    items.forEach(function (el, i) {
+      el.addEventListener('click', function () { open(i); });
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
+      });
+      /* Ensure cursor style for whole item including overlays */
+      el.style.cursor = 'zoom-in';
+    });
+
+    btnClose.addEventListener('click', close);
+    btnPrev.addEventListener('click',  function () { show(current - 1); });
+    btnNext.addEventListener('click',  function () { show(current + 1); });
+
+    /* Close on backdrop click */
+    lb.addEventListener('click', function (e) {
+      if (e.target === lb) close();
+    });
+
+    /* Keyboard navigation */
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape')     close();
+      if (e.key === 'ArrowLeft')  show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+
+    /* Touch swipe */
+    var touchStartX = 0;
+    lb.addEventListener('touchstart', function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) show(dx < 0 ? current + 1 : current - 1);
+    });
+  })();
   </script>
+
 </body>
 </html>
