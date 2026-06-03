@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="What architects, developers and private clients say about Deco Preda — precision surface contractor across Ireland and Europe." />
+  <meta name="description" content="What architects, developers and private clients say about Deco Preda — precision surface contractor based in Romania, operating across Ireland, Belgium, Switzerland and Denmark." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Testimonials — Deco Preda" />
+  <meta property="og:description" content="Unedited accounts from architects, developers and private clients across Romania and Europe." />
+  <meta property="og:image"       content="https://predaecaterina01.github.io/images/residential/bathroom/mc-ivory-bathroom-01.webp" />
+  <meta property="og:url"         content="https://predaecaterina01.github.io/testimonials.html" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Testimonials — Deco Preda" />
+  <meta name="twitter:description" content="Unedited accounts from architects, developers and private clients across Romania and Europe." />
+  <meta name="twitter:image"       content="https://predaecaterina01.github.io/images/residential/bathroom/mc-ivory-bathroom-01.webp" />
   <title>Testimonials — Deco Preda</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,33 +43,126 @@
       margin-inline: auto;
     }
     .testi-hero .section-head { margin-bottom: clamp(32px, 4vw, 48px); }
-    .testi-hero__h { font-family: var(--serif); font-weight: 200; font-size: var(--t-h2); line-height: 1.1; color: var(--ink); max-width: 700px; }
+    .testi-hero__h {
+      font-family: var(--serif);
+      font-weight: 200;
+      font-size: var(--t-h2);
+      line-height: 1.1;
+      color: var(--ink);
+      max-width: 700px;
+    }
     .testi-hero__h em { font-style: italic; color: var(--stone); }
+    .testi-hero__sub {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: var(--t-base);
+      color: var(--stone);
+      margin-top: clamp(16px, 2vw, 24px);
+      max-width: 520px;
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+    }
 
     /* ── List ── */
     .testi-list { background: var(--ivory); padding-block: clamp(48px, 6vw, 80px); }
-    .testi-list__inner { max-width: var(--max); margin-inline: auto; padding-inline: var(--gut); }
+    .testi-list__inner {
+      max-width: var(--max);
+      margin-inline: auto;
+      padding-inline: var(--gut);
+    }
 
     /* ── Single item ── */
     .testi-item {
       padding-block: clamp(44px, 5vw, 64px);
       border-bottom: 1px solid var(--ivory-3);
       max-width: 860px;
-      opacity: 0; transform: translateY(24px);
+      opacity: 0;
+      transform: translateY(24px);
       transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
     }
     .testi-item.in { opacity: 1; transform: translateY(0); }
     .testi-item:last-child { border-bottom: none; }
-    .testi-item__category { font-family: var(--sans); font-weight: 300; font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--taupe-d); margin-bottom: clamp(16px, 2vw, 24px); }
+
+    .testi-item__category {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--taupe-d);
+      margin-bottom: clamp(16px, 2vw, 24px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .testi-item__category::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--sand);
+      flex-shrink: 0;
+    }
+
     .testi-item blockquote { margin: 0; padding: 0; }
-    .testi-item blockquote p { font-family: var(--serif); font-weight: 200; font-style: italic; font-size: clamp(18px, 2.2vw, 26px); line-height: 1.6; color: var(--ink); margin: 0 0 clamp(20px, 2.5vw, 32px); letter-spacing: 0.005em; }
-    .testi-item blockquote p::before { content: '\201C'; font-family: var(--serif); font-size: 2.8em; line-height: 0; vertical-align: -0.5em; margin-right: 6px; color: var(--sand); font-style: normal; }
-    .testi-item cite { display: flex; align-items: center; gap: 14px; font-family: var(--sans); font-weight: 300; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--stone-l); font-style: normal; }
-    .testi-item cite::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--taupe-d); flex-shrink: 0; }
+    .testi-item blockquote p {
+      font-family: var(--serif);
+      font-weight: 200;
+      font-style: italic;
+      font-size: clamp(18px, 2.2vw, 26px);
+      line-height: 1.65;
+      color: var(--ink);
+      margin: 0 0 clamp(20px, 2.5vw, 32px);
+      letter-spacing: 0.005em;
+    }
+    .testi-item blockquote p::before {
+      content: '\201C';
+      font-family: var(--serif);
+      font-size: 2.8em;
+      line-height: 0;
+      vertical-align: -0.5em;
+      margin-right: 6px;
+      color: var(--sand);
+      font-style: normal;
+    }
+    .testi-item cite {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--stone-l);
+      font-style: normal;
+    }
+    .testi-item cite::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--taupe-d);
+      flex-shrink: 0;
+    }
 
     /* ── CTA final ── */
-    .testi-cta { background: var(--ivory-2); border-top: 1px solid var(--sand); padding-block: clamp(56px, 8vw, 96px); text-align: center; padding-inline: var(--gut); }
-    .testi-cta__line { font-family: var(--serif); font-weight: 200; font-style: italic; font-size: clamp(16px, 1.8vw, 22px); color: var(--stone); margin-bottom: clamp(24px, 3vw, 36px); letter-spacing: 0.01em; }
+    .testi-cta {
+      background: var(--ivory-2);
+      border-top: 1px solid var(--sand);
+      padding-block: clamp(56px, 8vw, 96px);
+      text-align: center;
+      padding-inline: var(--gut);
+    }
+    .testi-cta__line {
+      font-family: var(--serif);
+      font-weight: 200;
+      font-style: italic;
+      font-size: clamp(16px, 1.8vw, 22px);
+      color: var(--stone);
+      margin-bottom: clamp(24px, 3vw, 36px);
+      letter-spacing: 0.01em;
+    }
     .testi-cta .link-arrow { margin-top: 0; }
   </style>
 </head>
@@ -78,9 +180,9 @@
       DECO<span class="nav__wordmark-thin">PREDA</span>
     </a>
     <button class="nav__burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="navPanel">
-    <span class="nav__burger-line"></span>
-   <span class="nav__burger-line"></span>
-   <span class="nav__burger-line"></span>
+      <span class="nav__burger-line"></span>
+      <span class="nav__burger-line"></span>
+      <span class="nav__burger-line"></span>
     </button>
     <div class="nav__panel" id="navPanel" aria-hidden="true">
       <div class="menu-scroll" id="menuScroll">
@@ -95,10 +197,10 @@
     </div>
   </nav>
 
-  <!-- ══ BACKDROP NAV ══ -->
   <div class="nav__backdrop" id="navBackdrop" aria-hidden="true"></div>
 
   <main>
+
     <div class="testi-hero wrap">
       <header class="section-head">
         <span class="section-idx">07</span>
@@ -106,84 +208,87 @@
         <span class="section-label">Testimonials</span>
       </header>
       <h1 class="testi-hero__h">Specified by those<br><em>who know surfaces.</em></h1>
+      <p class="testi-hero__sub">Unedited accounts from architects, developers and private clients across Romania, Ireland, Belgium, Switzerland and Denmark.</p>
     </div>
 
     <div class="testi-list">
       <div class="testi-list__inner">
 
         <article class="testi-item">
-          <p class="testi-item__category">Residential Architect · Dublin</p>
+          <p class="testi-item__category">Architecture · Ireland</p>
           <blockquote>
-            <p>The substrate assessment came back before we had finalised our own drawings. Every application stage was documented to a standard I would expect of a principal contractor, not a specialist subcontractor. The final microcement reads exactly as specified : continuous, jointless, precisely the tone we sampled.</p>
-            <cite>C.M. · Residential Architect · Dublin</cite>
+            <p>What distinguished the application was the consistency of the continuous membrane — no variance in thickness, no cold joints. I've worked with four microcement contractors across Europe and the technical standard here was unambiguous. It read exactly as specified on the drawing.</p>
+            <cite>C. Flanagan · Architect · Private residence · Dublin, Ireland</cite>
           </blockquote>
         </article>
 
         <article class="testi-item">
-          <p class="testi-item__category">Property Developer · Cork</p>
+          <p class="testi-item__category">Development · Belgium</p>
           <blockquote>
-            <p>We engaged Deco Preda across three sites simultaneously ; a logistics facility at 6,400m², a mid-scale commercial floor and a residential scheme. Scheduling was coordinated without delays to any programme. The technical handover packs at practical completion were the most thorough we have received from any surface contractor.</p>
-            <cite>D.O. · Property Developer · Cork</cite>
+            <p>We engaged Deco Preda across three floors of a mixed-use conversion in Brussels. The sequencing worked around our structural programme without a single delay caused on their end. The resin system in the lobby held colour specification to the RAL sample — which, frankly, I didn't expect at that scale.</p>
+            <cite>T. Dubois · Development director · Commercial conversion · Brussels, Belgium</cite>
           </blockquote>
         </article>
 
         <article class="testi-item">
-          <p class="testi-item__category">Private Residence · South Dublin</p>
+          <p class="testi-item__category">Private · Romania</p>
           <blockquote>
-            <p>I had seen microcement in showrooms and always felt it looked clinical. What was delivered in our home is something else entirely : warm, tactile, genuinely continuous from the kitchen through into the hallway and up the staircase. No visible joint anywhere. I have shown it to every person who visits.</p>
-            <cite>A.F. · Private Client · South Dublin</cite>
+            <p>I was hesitant — I'd seen microcement done badly before, that slightly plastic look. This is entirely different. The surface reads as mineral, not as coating. Six months on, not a hairline crack, not a stain. I find myself explaining it to everyone who comes through the door.</p>
+            <cite>A. Constantin · Private client · Full-floor residential · Bucharest, Romania</cite>
           </blockquote>
         </article>
 
         <article class="testi-item">
-          <p class="testi-item__category">Main Contractor · Ireland</p>
+          <p class="testi-item__category">Architecture · Switzerland</p>
           <blockquote>
-            <p>We subcontract specialist surface work regularly. Deco Preda is the only team we use without reservation. They arrive on programme, their substrate preparation is meticulous, and there are no snag items at handover. When a client specifies a surface system, these are the people we name.</p>
-            <cite>P.H. · Main Contractor · Ireland</cite>
+            <p>The stone carpet installation on the external terrace was technically demanding — a continuous fall with a concealed drainage channel and zero visible joint at the threshold. They documented every substrate check, sent EN compliance records without being asked. That level of process discipline is rare. We have since specified them for a second project in Geneva.</p>
+            <cite>M. Wenger · Interior architect · Terrace &amp; threshold system · Zürich, Switzerland</cite>
           </blockquote>
         </article>
 
         <article class="testi-item">
-          <p class="testi-item__category">Interior Architect · London</p>
+          <p class="testi-item__category">Contracting · Denmark</p>
           <blockquote>
-            <p>The resin floor at the Mayfair project was a bespoke brief. Metallic layer below a transparent topcoat, depth without reflection. The sampling process was rigorous: three rounds before we approved. The installed surface matched the approved sample to a degree I rarely see in this type of commission. Exceptional material knowledge.</p>
-            <cite>N.R. · Interior Architect · London</cite>
+            <p>We brought them in as a specialist subcontractor on a bathroom package in Copenhagen — twelve units, tight programme, coordinating around tile setters and joinery. Communication was precise, scope handovers were clean and the snagging list was effectively zero. I would call them first for any future mineral surface specification.</p>
+            <cite>L. Andersen · General contractor · Multi-unit bathroom programme · Copenhagen, Denmark</cite>
           </blockquote>
         </article>
 
         <article class="testi-item">
-          <p class="testi-item__category">Hospitality Developer · Galway</p>
+          <p class="testi-item__category">Private · Romania</p>
           <blockquote>
-            <p>Stone carpet was specified for the entrance terrace and pool surround of our Connemara property. It has now been through three Atlantic winters without any surface degradation. The installation team understood the brief from the first site visit. We have since specified the same system for two further projects.</p>
-            <cite>S.B. · Hospitality Developer · Galway</cite>
+            <p>They came recommended by our architect and the coordination between them was seamless. The microcement was applied over underfloor heating — they tested the substrate temperature at every stage, which I hadn't seen done before. The floor has been through a full winter cycle and behaves exactly as they said it would.</p>
+            <cite>I. Moldovan · Private client · Residential floor over UFH · Cluj-Napoca, Romania</cite>
           </blockquote>
         </article>
 
         <article class="testi-item">
-          <p class="testi-item__category">Signature Commission · Edinburgh</p>
+          <p class="testi-item__category">Architecture · Ireland</p>
           <blockquote>
-            <p>The brief for the spa was vague by necessity, we knew the feeling we wanted, not the material. Over four sessions and six physical samples, a surface was developed that I could not have described in advance. It is warm and faintly translucent, matte in one light and softly luminous in another. There is no catalogue reference for what was made.</p>
-            <cite>E.W. · Private Client · Edinburgh</cite>
+            <p>I specified a wet-area microcement system for a coastal house in West Cork — a notoriously demanding environment for any surface finish. The application report they submitted prior to install was more thorough than anything I had received from an Irish contractor. Two years later the surface is clean, sealed and exactly as intended.</p>
+            <cite>R. O'Sullivan · Architect · Wet-area system · West Cork, Ireland</cite>
           </blockquote>
         </article>
 
         <article class="testi-item">
-          <p class="testi-item__category">Commercial Architect · Belfast</p>
+          <p class="testi-item__category">Development · Belgium</p>
           <blockquote>
-            <p>We specified performance resin across a 9,200m² distribution centre with a MMA system to achieve a two-hour return to service. The installation was sequenced across a live facility without a single unplanned closure. Technical compliance documentation was submitted within 48 hours of practical completion. Would not hesitate to specify again.</p>
-            <cite>T.K. · Commercial Architect · Belfast</cite>
+            <p>The resin floor on our showroom in Antwerp had to land on a budget, on a timeline and to a specific tone — a warm mid-grey that couldn't read as cold under LED lighting. They produced three test panels before committing to batch production. The result was precisely the grey we were looking for. That kind of iteration before application is what separates a specialist from a general contractor.</p>
+            <cite>N. Pieters · Developer · Commercial showroom · Antwerp, Belgium</cite>
           </blockquote>
         </article>
 
       </div>
     </div>
+
+    <div class="testi-cta">
+      <p class="testi-cta__line">Every surface begins with a specification.</p>
+      <a href="index.html#contact" class="link-arrow" data-cursor="link">Begin your specification</a>
+    </div>
+
   </main>
 
-  <div class="testi-cta">
-    <p class="testi-cta__line">"Every project begins with a single conversation."</p>
-    <a href="index.html#contact" class="link-arrow" data-cursor="link" aria-label="Begin your specification — go to contact">Begin your specification</a>
-  </div>
-
+  <!-- ══ FOOTER ══ -->
   <footer class="foot" role="contentinfo">
     <div class="wrap">
       <div class="foot__inner">
@@ -197,36 +302,27 @@
           <a href="index.html#projects">Projects</a>
           <a href="index.html#craft">Craft</a>
           <a href="gallery.html">Gallery</a>
-          <a href="testimonials.html" aria-current="page">Testimonials</a>
+          <a href="testimonials.html">Testimonials</a>
           <a href="index.html#contact">Contact</a>
           <a href="signature-series.html">Signature Series</a>
         </nav>
-        <p class="foot__copy">&copy; <span id="yr"></span> Deco Preda Ltd. Dublin · Ireland &amp; Europe.</p>
+        <p class="foot__copy">&copy; <span id="yr"></span> Deco Preda. Bucharest · Romania &amp; Europe.</p>
       </div>
     </div>
   </footer>
- <script src="script.js"></script>
-<script>
-(function() {
-  'use strict';
 
-  /* ══ REVEAL TESTIMONIALE ══ */
-  var testiItems = document.querySelectorAll('.testi-item');
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  <script src="script.js"></script>
+  <script>
+  (function () {
+    var items = document.querySelectorAll('.testi-item');
+    if (!items.length) return;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
       });
-    }, { threshold: 0.10, rootMargin: '0px 0px -32px 0px' });
-    testiItems.forEach(function(el, i) {
-      el.style.transitionDelay = (i * 0.05) + 's';
-      io.observe(el);
-    });
-  } else {
-    testiItems.forEach(function(el) { el.classList.add('in'); });
-  }
-
-})();
-</script>
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+    items.forEach(function (el) { obs.observe(el); });
+  })();
+  </script>
 </body>
 </html>
