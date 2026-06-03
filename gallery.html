@@ -110,6 +110,16 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      /* ── Scroll reveal ── */
+      opacity: 0;
+      transform: translateY(14px);
+      transition:
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gal-item.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .gal-item[data-hidden="true"] { display: none; }
     .gal-swatch {
@@ -184,6 +194,12 @@
     @media (max-width: 900px) { .gal-grid { columns: 2; } }
     @media (max-width: 500px) { .gal-grid { columns: 1; } }
 
+    /* ══ SCROLLBAR STILIZAT ══ */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--ivory-2); }
+    ::-webkit-scrollbar-thumb { background: var(--taupe); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--taupe-d); }
+
     /* ══ LIGHTBOX ══ */
     .lightbox {
       position: fixed; inset: 0; z-index: 9500;
@@ -248,7 +264,9 @@
 </head>
 <body class="light-body">
 
+  <!-- ══ SCROLL PROGRESS — bara taupe în vârf ══ -->
   <div class="progress" id="progress" aria-hidden="true"></div>
+
   <div class="cursor" id="cursor" aria-hidden="true">
     <div class="cursor__ring"></div>
     <div class="cursor__dot"></div>
@@ -277,7 +295,6 @@
     </div>
   </nav>
 
-  <!-- ══ BACKDROP NAV ══ -->
   <div class="nav__backdrop" id="navBackdrop" aria-hidden="true"></div>
 
   <!-- ══ GALLERY PAGE ══ -->
@@ -332,28 +349,31 @@
     </div>
   </div>
 
-  <!-- script.js gestionează: nav, cursor, progress, yr -->
   <script src="script.js"></script>
 
-  <!-- Cod specific galeriei -->
   <script>
   'use strict';
 
   const EXPAND_ICON = `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2h3M2 2v3M10 2H7M10 2v3M2 10h3M2 10V7M10 10H7M10 10V7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>`;
 
   let allItems = [];
+  let visibleItems = [];
+  let currentLbIdx = 0;
 
   /* ── Flatten manifest ── */
   function flattenData(data) {
     const items = [];
     function addItems(arr, filter) {
       if (!Array.isArray(arr)) return;
-      arr.forEach(img => items.push({ src: img.src, name: img.name || '', material: img.material || '', location: img.location || '', filter }));
+      arr.forEach(img => items.push({
+        src: img.src, name: img.name || '',
+        material: img.material || '', location: img.location || '', filter
+      }));
     }
     if (data.residential) Object.values(data.residential).forEach(a => addItems(a, 'residential'));
-    if (data.commercial)  Object.values(data.commercial).forEach(a => addItems(a, 'commercial'));
+    if (data.commercial)  Object.values(data.commercial).forEach(a  => addItems(a, 'commercial'));
     if (Array.isArray(data.industrial)) addItems(data.industrial, 'industrial');
-    if (data.exterior)    Object.values(data.exterior).forEach(a => addItems(a, 'exterior'));
+    if (data.exterior)    Object.values(data.exterior).forEach(a    => addItems(a, 'exterior'));
     if (Array.isArray(data.signature))  addItems(data.signature, 'signature');
     return items;
   }
@@ -361,118 +381,180 @@
   /* ── Build card ── */
   function buildCard(img) {
     const div = document.createElement('div');
-    div.className = 'gal-item'; div.role = 'listitem'; div.tabIndex = 0;
-    div.dataset.filter = img.filter; div.dataset.hidden = 'false';
-    div.dataset.name = img.name; div.dataset.material = img.material;
-    div.dataset.location = img.location; div.dataset.src = img.src;
+    div.className = 'gal-item';
+    div.setAttribute('role', 'listitem');
+    div.setAttribute('tabindex', '0');
+    div.dataset.filter   = img.filter;
+    div.dataset.hidden   = 'false';
+    div.dataset.name     = img.name;
+    div.dataset.material = img.material;
+    div.dataset.location = img.location;
+    div.dataset.src      = img.src;
     div.innerHTML = `
       <img class="gal-swatch" src="images/${img.src}" alt="${img.name}" loading="lazy" decoding="async" />
       <div class="gal-item__over">
-        <div class="gal-item__expand">${EXPAND_ICON}</div>
+        <div class="gal-item__expand" aria-hidden="true">${EXPAND_ICON}</div>
         <span class="gal-item__name">${img.name}</span>
         <span class="gal-item__mat">${img.material}</span>
       </div>`;
     return div;
   }
 
+  /* ── Scroll reveal via IntersectionObserver ── */
+  function attachRevealObserver(cards) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+    cards.forEach(c => obs.observe(c));
+  }
+
+  /* ── Lightbox ── */
+  const lbEl      = document.getElementById('lightbox');
+  const lbSurface = document.getElementById('lbSurface');
+  const lbName    = document.getElementById('lbName');
+  const lbMat     = document.getElementById('lbMat');
+  const lbCounter = document.getElementById('lbCounter');
+  const lbClose   = document.getElementById('lbClose');
+  const lbPrev    = document.getElementById('lbPrev');
+  const lbNext    = document.getElementById('lbNext');
+
+  function lbOpen(idx) {
+    visibleItems = Array.from(document.querySelectorAll('.gal-item:not([data-hidden="true"])'));
+    currentLbIdx = Math.max(0, Math.min(idx, visibleItems.length - 1));
+    lbShow(currentLbIdx);
+    lbEl.classList.add('open');
+    lbEl.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+
+  function lbShow(idx) {
+    const card = visibleItems[idx];
+    if (!card) return;
+    lbSurface.src = 'images/' + card.dataset.src;
+    lbSurface.alt = card.dataset.name;
+    lbName.textContent    = card.dataset.name;
+    lbMat.textContent     = card.dataset.material;
+    lbCounter.textContent = (idx + 1) + ' / ' + visibleItems.length;
+  }
+
+  function lbClose_fn() {
+    lbEl.classList.remove('open');
+    lbEl.setAttribute('aria-hidden', 'true');
+    lbSurface.src = '';
+    document.body.style.overflow = '';
+  }
+
+  function lbStep(dir) {
+    currentLbIdx = (currentLbIdx + dir + visibleItems.length) % visibleItems.length;
+    lbShow(currentLbIdx);
+  }
+
+  lbClose && lbClose.addEventListener('click', lbClose_fn);
+  lbPrev  && lbPrev.addEventListener('click',  () => lbStep(-1));
+  lbNext  && lbNext.addEventListener('click',  () => lbStep(1));
+
+  lbEl && lbEl.addEventListener('click', e => { if (e.target === lbEl) lbClose_fn(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lbEl.classList.contains('open')) return;
+    if (e.key === 'Escape')     lbClose_fn();
+    if (e.key === 'ArrowLeft')  lbStep(-1);
+    if (e.key === 'ArrowRight') lbStep(1);
+  });
+
+  /* ── Touch swipe on lightbox ── */
+  let lbTouchX = 0;
+  lbEl && lbEl.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+  lbEl && lbEl.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - lbTouchX;
+    if (Math.abs(dx) > 40) lbStep(dx < 0 ? 1 : -1);
+  });
+
+  /* ── Filter ── */
+  let currentFilter = 'all';
+  const countEl = document.getElementById('galCount');
+
+  function applyFilter(f) {
+    currentFilter = f;
+    const cards = Array.from(document.querySelectorAll('.gal-item'));
+    let shown = 0;
+    cards.forEach(c => {
+      const hide = f !== 'all' && c.dataset.filter !== f;
+      c.dataset.hidden = hide ? 'true' : 'false';
+      if (!hide) shown++;
+    });
+    if (countEl) countEl.textContent = shown + ' works';
+  }
+
+  document.querySelectorAll('.gal-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.gal-filter').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      applyFilter(btn.dataset.filter);
+    });
+  });
+
+  /* ── URL filter param ── */
+  (function () {
+    const p = new URLSearchParams(window.location.search);
+    const f = p.get('filter') || p.get('domain');
+    if (f) {
+      const btn = document.querySelector(`.gal-filter[data-filter="${f}"]`);
+      if (btn) btn.click();
+    }
+  })();
+
   /* ── Init gallery ── */
   async function initGallery() {
     const grid    = document.getElementById('galGrid');
     const loading = document.getElementById('galLoading');
     try {
-      const res  = await fetch("images.json", { cache: "no-cache" });
+      const res  = await fetch('images.json', { cache: 'no-cache' });
       if (!res.ok) throw new Error('images.json not found');
       const data = await res.json();
       allItems   = flattenData(data);
-      loading.remove();
-      allItems.forEach(img => {
+      if (loading) loading.remove();
+
+      const cards = allItems.map(img => {
         const card = buildCard(img);
         grid.appendChild(card);
-        card.addEventListener('click',   () => openLightbox(card));
-        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openLightbox(card); });
+
+        /* click & keyboard open lightbox */
+        card.addEventListener('click', () => {
+          visibleItems = Array.from(document.querySelectorAll('.gal-item:not([data-hidden="true"])'));
+          const idx = visibleItems.indexOf(card);
+          lbOpen(idx >= 0 ? idx : 0);
+        });
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+        });
+
+        return card;
       });
-      updateCount();
+
+      /* Reveal observer after all cards added */
+      attachRevealObserver(cards);
+
+      /* Recount after filter applied */
+      applyFilter(currentFilter);
+
     } catch (err) {
-      console.error('[Gallery]', err);
-      loading.textContent = 'Gallery unavailable — ' + err.message;
-      loading.style.color = 'rgba(220,100,100,0.8)';
+      console.warn('[Gallery]', err);
+      if (loading) loading.textContent = 'Gallery unavailable.';
     }
   }
 
-  /* ── Filter ── */
-  const filterBtns = document.querySelectorAll('.gal-filter');
-  const countEl    = document.getElementById('galCount');
-  function getItems() { return Array.from(document.querySelectorAll('.gal-item')); }
-  function updateCount() {
-    const n = getItems().filter(i => i.dataset.hidden !== 'true').length;
-    countEl.textContent = n + ' project' + (n !== 1 ? 's' : '');
-  }
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-      btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
-      const f = btn.dataset.filter;
-      getItems().forEach(item => { item.dataset.hidden = (f === 'all' || item.dataset.filter === f) ? 'false' : 'true'; });
-      updateCount();
-    });
-  });
-
-  /* ── Lightbox ── */
-  const lb      = document.getElementById('lightbox');
-  const lbSurf  = document.getElementById('lbSurface');
-  const lbName  = document.getElementById('lbName');
-  const lbMat   = document.getElementById('lbMat');
-  const lbClose = document.getElementById('lbClose');
-  const lbPrev  = document.getElementById('lbPrev');
-  const lbNext  = document.getElementById('lbNext');
-  const lbCnt   = document.getElementById('lbCounter');
-  let visibleItems = [], lbCurrent = 0;
-
-  function getVisible() { return getItems().filter(i => i.dataset.hidden !== 'true'); }
-  function openLightbox(item) {
-    visibleItems = getVisible(); lbCurrent = visibleItems.indexOf(item);
-    renderLb(); lb.classList.add('open'); lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
-  }
-  function closeLightbox() {
-    lb.classList.remove('open'); lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = '';
-  }
-  function renderLb() {
-    const item = visibleItems[lbCurrent]; if (!item) return;
-    lbSurf.src = 'images/' + item.dataset.src; lbSurf.alt = item.dataset.name;
-    lbName.textContent = item.dataset.name;
-    lbMat.textContent  = item.dataset.material + (item.dataset.location ? ' · ' + item.dataset.location : '');
-    lbCnt.textContent  = (lbCurrent + 1) + ' / ' + visibleItems.length;
-  }
-  function prevImg() { lbCurrent = (lbCurrent - 1 + visibleItems.length) % visibleItems.length; renderLb(); }
-  function nextImg() { lbCurrent = (lbCurrent + 1) % visibleItems.length; renderLb(); }
-  lbClose.addEventListener('click', closeLightbox);
-  lbPrev.addEventListener('click', prevImg);
-  lbNext.addEventListener('click', nextImg);
-  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
-  document.addEventListener('keydown', e => {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') prevImg();
-    if (e.key === 'ArrowRight') nextImg();
-  });
-  let tsX = 0;
-  lb.addEventListener('touchstart', e => { tsX = e.changedTouches[0].clientX; }, { passive: true });
-  lb.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - tsX;
-    if (Math.abs(dx) > 45) { dx < 0 ? nextImg() : prevImg(); }
-  }, { passive: true });
-
-  /* ── URL filter param ── */
-  (function() {
-    const p = new URLSearchParams(window.location.search);
-    const f = p.get('filter') || p.get('domain');
-    if (!f || f === 'all') return;
-    const btn = document.querySelector(`.gal-filter[data-filter="${f}"]`);
-    if (btn) btn.click();
-  })();
-
   initGallery();
   </script>
-
 </body>
 </html>
