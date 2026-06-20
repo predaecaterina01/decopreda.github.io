@@ -854,3 +854,51 @@ document.querySelectorAll('.panel').forEach(panel => {
     setTimeout(posSeal, 650);
   });
 })();
+/* ════════════════════════════════════════════════════════════
+   CURSOR FIX — adaugă acest bloc la FINALUL fișierului
+   script.js, după tot codul existent.
+   Rezolvă: efectul hover (ring mărit) lipsă pe gal-item,
+   ss-item și pe butoanele din lightbox
+   ════════════════════════════════════════════════════════════ */
+
+(function patchCursorHover() {
+  var cursorEl = document.getElementById('cursor');
+  if (!cursorEl) return;
+
+  /* Selectori suplimentari care trebuie să declanșeze
+     efectul hover al cursorului custom                  */
+  var HOVER_SELECTOR = [
+    '.gal-item',
+    '.ss-item',
+    '.lb-close',
+    '.lb-nav',
+    '.lb-prev',
+    '.lb-next',
+    '.ss-lb-close',
+    '.ss-lb-nav',
+    '.ss-lb-prev',
+    '.ss-lb-next',
+    '.gal-filter',
+    '.gal-back',
+    '.pcs__arrow',
+    '.pcs__explore',
+    '.panel__estimate-btn',
+    '.gal-swatch'
+  ].join(', ');
+
+  document.addEventListener('mouseover', function (e) {
+    if (e.target.closest(HOVER_SELECTOR)) {
+      cursorEl.classList.add('hovering');
+    }
+  });
+
+  document.addEventListener('mouseout', function (e) {
+    if (e.target.closest(HOVER_SELECTOR)) {
+      /* Verifică dacă noul element hovered e tot un target */
+      var to = e.relatedTarget;
+      if (!to || !to.closest(HOVER_SELECTOR)) {
+        cursorEl.classList.remove('hovering');
+      }
+    }
+  });
+})();
