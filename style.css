@@ -3393,4 +3393,42 @@ button {
 /* link-arrow deja definit global — override doar margin-top */
 .testimonial-teaser .link-arrow {
   margin-top: 0;
+} 
+/* ════════════════════════════════════════════════════════════
+   CURSOR FIX — adaugă aceste reguli la FINALUL fișierului
+   style.css, după toate regulile existente.
+   Rezolvă: mânuța default pe gal-item, ss-item, lightbox btns
+   ════════════════════════════════════════════════════════════ */
+
+/* Forțează cursor: none pe ORICE element interactiv,
+   inclusiv cele cu cursor: pointer sau cursor: zoom-in
+   setat inline sau în stiluri locale de pagină            */
+*,
+*:hover,
+a, a:hover,
+button, button:hover,
+[role="button"], [role="button"]:hover,
+[tabindex], [tabindex]:hover,
+.gal-item, .gal-item:hover,
+.ss-item,  .ss-item:hover,
+.lb-close, .lb-close:hover,
+.lb-nav,   .lb-nav:hover,
+.lb-prev,  .lb-prev:hover,
+.lb-next,  .lb-next:hover,
+.ss-lb-close, .ss-lb-close:hover,
+.ss-lb-nav,   .ss-lb-nav:hover,
+.ss-lb-prev,  .ss-lb-prev:hover,
+.ss-lb-next,  .ss-lb-next:hover,
+.gal-filter,  .gal-filter:hover,
+.pcs__arrow,  .pcs__arrow:hover,
+.pcs__explore,.pcs__explore:hover,
+.panel__estimate-btn, .panel__estimate-btn:hover,
+.nav__burger, .nav__burger:hover,
+.nav__item,   .nav__item:hover,
+.btn-ghost,   .btn-ghost:hover,
+.btn-line,    .btn-line:hover,
+.btn-submit,  .btn-submit:hover,
+.link-arrow,  .link-arrow:hover,
+.gal-back,    .gal-back:hover {
+  cursor: none !important;
 }
