@@ -902,3 +902,17 @@ document.querySelectorAll('.panel').forEach(panel => {
     }
   });
 })();
+/* Cursor vizibil în lightbox */
+document.addEventListener('mousemove', function (e) {
+  var lb = document.getElementById('lightbox');
+  var ssLb = document.getElementById('ssLightbox');
+  var inLb = (lb && lb.classList.contains('open')) ||
+             (ssLb && ssLb.classList.contains('open'));
+  if (inLb) {
+    var c = document.getElementById('cursor');
+    if (c) {
+      c.style.left = e.clientX + 'px';
+      c.style.top  = e.clientY + 'px';
+    }
+  }
+});
